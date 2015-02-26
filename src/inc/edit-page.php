@@ -34,37 +34,3 @@ function ttfmake_edit_page_script() {
 endif;
 
 add_action( 'admin_enqueue_scripts', 'ttfmake_edit_page_script' );
-
-/**
- * Add a Make Plus metabox to each qualified post type edit screen
- *
- * @since  1.0.6.
- *
- * @return void
- */
-function ttfmake_add_plus_metabox() {
-	// Post types
-	$post_types = get_post_types(
-		array(
-			'public' => true,
-			'_builtin' => false
-		)
-	);
-	$post_types[] = 'post';
-	$post_types[] = 'page';
-
-	// Add the metabox for each type
-	foreach ( $post_types as $type ) {
-		add_meta_box(
-			'ttfmake-plus-metabox',
-			__( 'Layout Settings', 'make' ),
-			'ttfmake_render_plus_metabox',
-			$type,
-			'side',
-			'default'
-		);
-	}
-}
-
-add_action( 'add_meta_boxes', 'ttfmake_add_plus_metabox' );
-
