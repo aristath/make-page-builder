@@ -1,14 +1,5 @@
 <?php
 /**
- * @package Make
- */
-
-/**
- * The current version of the theme.
- */
-define( 'TTFMAKE_VERSION', '1.5.0' );
-
-/**
  * The suffix to use for scripts.
  */
 if ( ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ) ) {
@@ -17,71 +8,8 @@ if ( ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ) ) {
 	define( 'TTFMAKE_SUFFIX', '.min' );
 }
 
-/**
- * Initial content width.
- */
-if ( ! isset( $content_width ) ) {
-	$content_width = 620;
-}
-
-if ( ! function_exists( 'ttfmake_content_width' ) ) :
-/**
- * Set the content width based on current layout
- *
- * @since  1.0.0.
- *
- * @return void
- */
-function ttfmake_content_width() {
-	global $content_width;
-
-	$new_width = $content_width;
-	$left = ttfmake_has_sidebar( 'left' );
-	$right = ttfmake_has_sidebar( 'right' );
-
-	// No sidebars
-	if ( ! $left && ! $right ) {
-		$new_width = 960;
-	}
-	// Both sidebars
-	else if ( $left && $right ) {
-		$new_width = 464;
-	}
-	// One sidebar
-	else if ( $left || $right ) {
-		$new_width = 620;
-	}
-
-	/**
-	 * Filter to modify the $content_width variable.
-	 *
-	 * @since 1.4.8
-	 *
-	 * @param int     $new_width    The new content width.
-	 * @param bool    $left         True if the current view has a left sidebar.
-	 * @param bool    $right        True if the current view has a right sidebar.
-	 */
-	$content_width = apply_filters( 'make_content_width', $new_width, $left, $right );
-}
-endif;
-
-add_action( 'template_redirect', 'ttfmake_content_width' );
-
-/**
- * Global includes.
- */
-// Compatibility
-require get_template_directory() . '/inc/compatibility.php';
-
 // Custom functions that act independently of the theme templates
 require get_template_directory() . '/inc/extras.php';
-
-// Custom template tags
-require get_template_directory() . '/inc/template-tags.php';
-
-// Customizer additions
-require get_template_directory() . '/inc/customizer/bootstrap.php';
-
 // Gallery slider
 require get_template_directory() . '/inc/gallery-slider/gallery-slider.php';
 
@@ -137,24 +65,6 @@ function ttfmake_setup() {
 	// Featured images
 	add_theme_support( 'post-thumbnails' );
 
-	// Custom background
-	add_theme_support( 'custom-background', array(
-		'default-color'      => ttfmake_get_default( 'background_color' ),
-		'default-image'      => ttfmake_get_default( 'background_image' ),
-		'default-repeat'     => ttfmake_get_default( 'background_repeat' ),
-		'default-position-x' => ttfmake_get_default( 'background_position_x' ),
-		'default-attachment' => ttfmake_get_default( 'background_attachment' ),
-	) );
-
-	// HTML5
-	add_theme_support( 'html5', array(
-		'comment-list',
-		'comment-form',
-		'search-form',
-		'gallery',
-		'caption'
-	) );
-
 	// Title tag
 	add_theme_support( 'title-tag' );
 
@@ -167,10 +77,6 @@ function ttfmake_setup() {
 
 	// Editor styles
 	$editor_styles = array();
-	if ( '' !== $google_request = ttfmake_get_google_font_uri() ) {
-		$editor_styles[] = $google_request;
-	}
-
 	$editor_styles[] = 'css/font-awesome.css';
 	$editor_styles[] = 'css/editor-style.css';
 
@@ -180,109 +86,6 @@ function ttfmake_setup() {
 endif;
 
 add_action( 'after_setup_theme', 'ttfmake_setup' );
-
-if ( ! function_exists( 'ttfmake_widgets_init' ) ) :
-/**
- * Register widget areas
- *
- * @since  1.0.0.
- *
- * @return void
- */
-function ttfmake_widgets_init() {
-	register_sidebar( array(
-		'id'            => 'sidebar-left',
-		'name'          => __( 'Left Sidebar', 'make' ),
-		'description'   => ttfmake_sidebar_description( 'sidebar-left' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h4 class="widget-title">',
-		'after_title'   => '</h4>',
-	) );
-	register_sidebar( array(
-		'id'            => 'sidebar-right',
-		'name'          => __( 'Right Sidebar', 'make' ),
-		'description'   => ttfmake_sidebar_description( 'sidebar-right' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h4 class="widget-title">',
-		'after_title'   => '</h4>',
-	) );
-	register_sidebar( array(
-		'id'            => 'footer-1',
-		'name'          => __( 'Footer 1', 'make' ),
-		'description'   => ttfmake_sidebar_description( 'footer-1' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h4 class="widget-title">',
-		'after_title'   => '</h4>',
-	) );
-	register_sidebar( array(
-		'id'            => 'footer-2',
-		'name'          => __( 'Footer 2', 'make' ),
-		'description'   => ttfmake_sidebar_description( 'footer-2' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h4 class="widget-title">',
-		'after_title'   => '</h4>',
-	) );
-	register_sidebar( array(
-		'id'            => 'footer-3',
-		'name'          => __( 'Footer 3', 'make' ),
-		'description'   => ttfmake_sidebar_description( 'footer-3' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h4 class="widget-title">',
-		'after_title'   => '</h4>',
-	) );
-	register_sidebar( array(
-		'id'            => 'footer-4',
-		'name'          => __( 'Footer 4', 'make' ),
-		'description'   => ttfmake_sidebar_description( 'footer-4' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h4 class="widget-title">',
-		'after_title'   => '</h4>',
-	) );
-}
-endif;
-
-add_action( 'widgets_init', 'ttfmake_widgets_init' );
-
-if ( ! function_exists( 'ttfmake_head_early' ) ) :
-/**
- * Add items to the top of the wp_head section of the document head.
- *
- * @since  1.0.0.
- *
- * @return void
- */
-function ttfmake_head_early() {
-	// Title tag fallback
-	if ( version_compare( $GLOBALS['wp_version'], '4.1', '<' ) ) : ?>
-		<title><?php wp_title( '|', true, 'right' ); ?></title>
-<?php
-	endif;
-
-	// JavaScript detection ?>
-
-		<script type="text/javascript">
-			/* <![CDATA[ */
-			document.documentElement.className = document.documentElement.className.replace(new RegExp('(^|\\s)no-js(\\s|$)'), '$1js$2');
-			/* ]]> */
-		</script>
-
-<?php
-	// Meta tags ?>
-		<meta charset="<?php bloginfo( 'charset' ); ?>">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-<?php
-}
-endif;
-
-add_action( 'wp_head', 'ttfmake_head_early', 1 );
 
 if ( ! function_exists( 'ttfmake_scripts' ) ) :
 /**
@@ -457,159 +260,3 @@ function ttfmake_cycle2_script_setup( $script_dependencies ) {
 	}
 }
 endif;
-
-if ( ! function_exists( 'ttfmake_head_late' ) ) :
-/**
- * Add additional items to the end of the wp_head section of the document head.
- *
- * @since  1.0.0.
- *
- * @return void
- */
-function ttfmake_head_late() {
-	// Pingback link ?>
-		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-<?php
-	// Favicon
-	$logo_favicon = get_theme_mod( 'logo-favicon', ttfmake_get_default( 'logo-favicon' ) );
-	if ( ! empty( $logo_favicon ) ) : ?>
-		<link rel="icon" href="<?php echo esc_url( $logo_favicon ); ?>" />
-	<?php endif;
-
-	// Apple Touch icon
-	$logo_apple_touch = get_theme_mod( 'logo-apple-touch', ttfmake_get_default( 'logo-apple-touch' ) );
-	if ( ! empty( $logo_apple_touch ) ) : ?>
-		<link rel="apple-touch-icon" href="<?php echo esc_url( $logo_apple_touch ); ?>" />
-	<?php endif;
-}
-endif;
-
-add_action( 'wp_head', 'ttfmake_head_late', 99 );
-
-if ( ! function_exists( 'ttfmake_is_preview' ) ) :
-/**
- * Check if the current view is rendering in the Customizer preview pane.
- *
- * @since 1.2.0.
- *
- * @return bool    True if in the preview pane.
- */
-function ttfmake_is_preview() {
-	global $wp_customize;
-	return ( isset( $wp_customize ) && $wp_customize->is_preview() );
-}
-endif;
-
-/**
- * Determine if the companion plugin is installed.
- *
- * @since  1.0.4.
- *
- * @return bool    Whether or not the companion plugin is installed.
- */
-function ttfmake_is_plus() {
-	/**
-	 * Allow for toggling of the Make Plus status.
-	 *
-	 * @since 1.2.3.
-	 *
-	 * @param bool    $is_plus    Whether or not Make Plus is installed.
-	 */
-	return apply_filters( 'make_is_plus', class_exists( 'TTFMP_App' ) );
-}
-
-/**
- * Add styles to admin head for Make Plus
- *
- * @since 1.0.6.
- *
- * @return void
- */
-function ttfmake_plus_styles() {
-	if ( ttfmake_is_plus() ) {
-		return;
-	}
-	?>
-	<style type="text/css">
-	#ttfmake-plus-metabox h3:after,
-	#customize-control-ttfmake_footer-whitelabel-heading span:after,
-	#customize-control-ttfmake_font-typekit-font-heading span:after,
-	.ttfmake-section-text .ttfmake-plus-info p:after,
-	.make-plus-products .ttfmake-menu-list-item-link-icon-wrapper:before,
-	.ttfmp-import-message strong:after,
-	#accordion-section-ttfmake_stylekit h3:before,
-	a.ttfmake-customize-plus {
-		content: "Plus";
-		position: relative;
-		top: -1px;
-		margin-left: 8px;
-		padding: 3px 6px !important;
-		line-height: 1.5 !important;
-		font-size: 9px !important;
-		color: #ffffff !important;
-		background-color: #d54e21;
-		letter-spacing: 1px;
-		text-transform: uppercase;
-		-webkit-font-smoothing: subpixel-antialiased !important;
-	}
-	.ttfmake-plus-info p {
-		margin-top: 0;
-		margin-left: 10px;
-	}
-	.ttfmake-section-text .ttfmake-titlediv {
-		padding-right: 45px;
-	}
-	.edit-text-column-link {
-		right: 0;
-	}
-	a.ttfmake-customize-plus {
-		margin-left: 0;
-	}
-	#accordion-section-ttfmake_stylekit h3:before {
-		float: right;
-		top: 2px;
-		margin-right: 30px;
-	}
-	.ttfmp-import-message strong {
-		display: inline-block;
-		font-size: 14px;
-		margin-bottom: 4px;
-	}
-	.make-plus-products .ttfmake-menu-list-item-link-icon-wrapper:before {
-		position: relative;
-		top: 32px;
-		margin-left: -2px;
-		text-align: center;
-	}
-	.make-plus-products .section-type-description {
-		color: #777777;
-	}
-	.ttfmake-menu-list-item.make-plus-products:hover .ttfmake-menu-list-item-link-icon-wrapper {
-		border-color: #dfdfdf;
-	}
-	.make-plus-products .section-type-description a {
-		color: #0074a2 !important;
-		text-decoration: underline;
-	}
-	.make-plus-products .section-type-description a:hover,
-	.make-plus-products .section-type-description a:focus {
-		color: #2ea2cc !important;
-	}
-	</style>
-<?php }
-
-add_action( 'admin_head', 'ttfmake_plus_styles', 20 );
-add_action( 'customize_controls_print_styles', 'ttfmake_plus_styles', 20 );
-
-/**
- * Generate a link to the Make info page.
- *
- * @since  1.0.6.
- *
- * @param  string    $deprecated    This parameter is no longer used.
- * @return string                   The link.
- */
-function ttfmake_get_plus_link( $deprecated ) {
-	$url = 'https://thethemefoundry.com/make-buy/';
-	return esc_url( $url );
-}

@@ -275,7 +275,7 @@ class TTFMAKE_Formatting {
 				'ttfmakeFormatBuilderVars',
 				array(
 					'userSettings' => array(
-						'fontSizeBody' => get_theme_mod( 'font-size-body', ttfmake_get_default( 'font-size-body' ) )
+						'fontSizeBody' => get_theme_mod( 'font-size-body', 16 )
 					)
 				)
 			);

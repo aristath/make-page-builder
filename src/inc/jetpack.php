@@ -47,42 +47,42 @@ function ttfmake_jetpack_infinite_scroll_footer_callback() {
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_jetpack_infinite_scroll_has_footer_widgets' ) ) :
-/**
- * Determine whether any footer widgets are actually showing.
- *
- * @since  1.0.0.
- *
- * @return bool    Whether or not infinite scroll has footer widgets.
- */
-function ttfmake_jetpack_infinite_scroll_has_footer_widgets() {
-	// Get the view
-	$view = ttfmake_get_view();
+// if ( ! function_exists( 'ttfmake_jetpack_infinite_scroll_has_footer_widgets' ) ) :
+// /**
+//  * Determine whether any footer widgets are actually showing.
+//  *
+//  * @since  1.0.0.
+//  *
+//  * @return bool    Whether or not infinite scroll has footer widgets.
+//  */
+// function ttfmake_jetpack_infinite_scroll_has_footer_widgets() {
+// 	// Get the view
+// 	$view = ttfmake_get_view();
 
-	// Get the relevant options
-	$hide_footer  = (bool) get_theme_mod( 'layout-' . $view . '-hide-footer', ttfmake_get_default( 'layout-' . $view . '-hide-footer' ) );
-	$widget_areas = (int) get_theme_mod( 'footer-widget-areas', ttfmake_get_default( 'footer-widget-areas' ) );
+// 	// Get the relevant options
+// 	$hide_footer  = (bool) get_theme_mod( 'layout-' . $view . '-hide-footer', ttfmake_get_default( 'layout-' . $view . '-hide-footer' ) );
+// 	$widget_areas = (int) get_theme_mod( 'footer-widget-areas', ttfmake_get_default( 'footer-widget-areas' ) );
 
-	// No widget areas are visible
-	if ( true === $hide_footer || $widget_areas < 1 ) {
-		return false;
-	}
+// 	// No widget areas are visible
+// 	if ( true === $hide_footer || $widget_areas < 1 ) {
+// 		return false;
+// 	}
 
-	// Check for active widgets in visible widget areas
-	$i = 1;
-	while ( $i <= $widget_areas ) {
-		if ( is_active_sidebar( 'footer-' . $i ) ) {
-			return true;
-		}
-		$i++;
-	}
+// 	// Check for active widgets in visible widget areas
+// 	$i = 1;
+// 	while ( $i <= $widget_areas ) {
+// 		if ( is_active_sidebar( 'footer-' . $i ) ) {
+// 			return true;
+// 		}
+// 		$i++;
+// 	}
 
-	// Still here? No footer widgets.
-	return false;
-}
-endif;
+// 	// Still here? No footer widgets.
+// 	return false;
+// }
+// endif;
 
-add_filter( 'infinite_scroll_has_footer_widgets', 'ttfmake_jetpack_infinite_scroll_has_footer_widgets' );
+// add_filter( 'infinite_scroll_has_footer_widgets', 'ttfmake_jetpack_infinite_scroll_has_footer_widgets' );
 
 if ( ! function_exists( 'ttfmake_jetpack_infinite_scroll_render' ) ) :
 /**
