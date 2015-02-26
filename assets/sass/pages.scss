@@ -145,14 +145,11 @@
 	text-shadow: 1px 0 8px rgba(0,0,0,0.15);
 	@include rem('padding', $base/2 $gut);
 	@include rem('font-size', 15px);
+	-webkit-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
 	.cycle-slide & {
 		@include rem('padding', $base/2 $gut*3);
-	}
-	&:after {
-		display: inline-block;
-		vertical-align: middle;
-		content: '';
-		height: 100%;
 	}
 	.content-position-none & {
 		@include for(medium-screens) {
@@ -176,10 +173,15 @@
 	}
 }
 .builder-banner-inner-content {
+position: relative;
+	top: 50%;
 	display: inline-block;
 	vertical-align: middle;
-	max-width: 98%;
+	max-width: 100%;
 	width: 100%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
 	*:last-child {
 		margin-bottom: 0;
 	}
@@ -275,6 +277,7 @@
 	position: relative;
 	width: 100%;
 	z-index: 2;
+	overflow: hidden;
 }
 /*---------------------------------------------------------
  Gallery: Captions (_pages.scss)
@@ -319,7 +322,7 @@
 	}
 	.builder-gallery-description {
 		overflow: hidden;
-		height: 60%;
+		height: 100%;
 	}
 	.builder-gallery-title {
 		overflow: hidden;

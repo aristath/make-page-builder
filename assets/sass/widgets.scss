@@ -64,7 +64,8 @@
 	margin-top: 0; //reset
 }
 .widget_search .search-submit {
-	display: none;
+	@extend .visuallyhidden;
+	@extend .focusable;
 }
 .widget_rss {
 	.widget-title a {

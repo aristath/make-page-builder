@@ -12,14 +12,6 @@ body {
 	text-rendering: optimizeLegibility;
 	@include rem('font-size', 17px);
 	&.boxed {
-		.container {
-			@include for(medium-screens) {
-				@include rem('padding', 0 $col);
-			}
-			max-width: 100%;
-			width: 100%;
-			@include rem('padding', 0 $gut);
-		}
 		.site-wrapper {
 			@include for(medium-screens) {
 				 max-width: $width+($col*2);
@@ -49,7 +41,7 @@ select,
 textarea {
 	color: $b;
 	font-family: $sans;
-	line-height: 1.55;
+	line-height: 1.6;
 }
 pre,
 code,
@@ -154,6 +146,7 @@ a {
 	@include rem('font-size', 34px);
 	a {
 		color: $b;
+		font-weight: bold;
 	}
 	.no-site-tagline & {
 		@include rem('margin-bottom', $base);
@@ -307,7 +300,7 @@ a {
 	text-align: center;
 	display: block;
 	@include rem('margin-bottom', $base);
-	@include rem('font-size', 12px);
+	@include rem('font-size', 13px);
 	.header-bar-flipped & {
 		float: right;
 	}
@@ -332,49 +325,40 @@ a {
 			@extend .screen-reader-text;
 		}
 	}
-	&.social-customizer {
-		.facebook a:hover,
-		.facebook a:focus {
+	a:hover .fa,
+	a:focus .fa {
+		color: #808080;
+		&.fa-facebook-official {
 			color: #3B5999;
 		}
-		.twitter a:hover,
-		.twitter a:focus {
+		&.fa-twitter {
 			color: #4099ff;
 		}
-		.google-plus-square a:hover,
-		.google-plus-square a:focus {
+		&.fa-google-plus-square {
 			color: #d34836;
 		}
-		.linkedin a:hover,
-		.linkedin a:focus {
+		&.fa-linkedin {
 			color: #007bb6;
 		}
-		.instagram a:hover,
-		.instagram a:focus {
+		&.fa-instagram {
 			color: #517fa4;
 		}
-		.flickr a:hover,
-		.flickr a:focus {
+		&.fa-flickr {
 			color: #ff0084;
 		}
-		.youtube a:hover,
-		.youtube a:focus {
+		&.fa-youtube {
 			color: #e52d27;
 		}
-		.vimeo-square a:hover,
-		.vimeo-square a:focus {
+		&.fa-vimeo-square {
 			color: #1ab7ea;
 		}
-		.pinterest a:hover,
-		.pinterest a:focus {
+		&.fa-pinterest {
 			color: #c92228;
 		}
-		.email a:hover,
-		.email a:focus {
+		&.fa-envelope {
 			color: #ffae00;
 		}
-		.rss a:hover,
-		.rss a:focus {
+		&.fa-rss {
 			color: #ff6600;
 		}
 	}
@@ -425,9 +409,6 @@ a {
 	.menu,
 	.nav-menu {
 		padding-left: 0; //reset
-		li:first-of-type a {
-			padding-left: 0; //reset
-		}
 		ul,
 		ol {
 			margin-left: 0; //reset
@@ -452,6 +433,7 @@ a {
 				border-bottom: $rule;
 				@include rem('padding', $base/2 0);
 				@include rem('font-size', 14px);
+				text-decoration: none;
 			}
 		}
 		.sub-menu,
@@ -473,8 +455,11 @@ a {
 				z-index: 99999;
 				overflow: hidden;
 				background-color: $d;
-				li:first-of-type a {
-					@include rem('padding', 15px $gut/2);
+				li {
+					width: 100%;
+					&:first-of-type a {
+						@include rem('padding', 15px $gut/2);
+					}
 				}
 				a {
 					border-bottom: 1px solid $e;
@@ -539,6 +524,8 @@ a {
 			color: $e;
 			@include rem('padding-left', 2px);
 			@include rem('font-size', 10px);
+			position: relative;
+			top: -1px;
 		}
 		ul.menu ul a,
 		.menu ul ul a {
@@ -708,12 +695,11 @@ a {
 .footer-text {
 	@include for(medium-screens) {
 		text-align: left;
-		@include rem('font-size', 13px);
 	}
 	clear: both;
 	text-align: center;
 	@include rem('margin-bottom', $base/4);
-	@include rem('font-size', 12px);
+	@include rem('font-size', 13px);
 }
 .footer-social-links {
 	@include for(medium-screens) {

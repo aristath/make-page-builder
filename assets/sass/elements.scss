@@ -20,7 +20,7 @@ h6 {
 }
 h1 {
 	font-weight: normal;
-	line-height: 1.15;
+	line-height: 1.2;
 	@include rem('font-size', 46px);
 
 }
@@ -122,6 +122,9 @@ pre {
 	@include rem('margin', $base 0);
 	@include rem('padding', $base*1.5);
 	@extend .break;
+}
+pre code {
+	padding: 0;
 }
 /*---------------------------------------------------------
 Details (_elements.scss)
@@ -368,28 +371,28 @@ Notices / Alerts (_elements.scss)
 	p:last-of-type {
 		margin-bottom: 0; //reset
 	}
-&.ttfmake-error {
-	color: #d04242;
-	border: 1px solid darken(#f7eeee, 15);
-	background-color: #f7eeee;
-	&:before {
-		content: "\f06a";
-	}
-}
-&.ttfmake-success {
-	color: #339d56;
-	border: 1px solid darken(#eef7f1, 15);
-	background: #eef7f1;
-	&:before {
-		content: "\f058";
-	}
-}
-&.ttfmake-important {
-	color: #f89e01;
-	border: 1px solid darken(#fffde5, 25);
-	background-color: #fffde5;
+	&.ttfmake-error {
+		color: #d04242;
+		border: 1px solid darken(#f7eeee, 15);
+		background-color: #f7eeee;
 		&:before {
 			content: "\f06a";
 		}
+	}
+	&.ttfmake-success {
+		color: #339d56;
+		border: 1px solid darken(#eef7f1, 15);
+		background: #eef7f1;
+		&:before {
+			content: "\f058";
+		}
+	}
+	&.ttfmake-important {
+		color: #f89e01;
+		border: 1px solid darken(#fffde5, 25);
+		background-color: #fffde5;
+			&:before {
+				content: "\f06a";
+			}
 	}
 }

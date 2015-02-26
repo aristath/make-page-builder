@@ -66,6 +66,7 @@
 }
 .entry-content {
 	clear: both;
+	@extend .clear;
 }
 .entry-author-bio {
 	@include rem('margin-top', $base/2);

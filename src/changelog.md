@@ -1,3 +1,78 @@
+## 1.5.0
+
+* Customizer overhaul
+  * Added new typography options: line height, font weight, font style, letter spacing, word spacing, link underlining.
+  * Added new typography option elements: widget title (separate from widget body), footer widget title, footer widget body.
+  * Added font weight option for links.
+  * Added Chosen.js for improved font choice UI.
+  * Improved UI for other typography choices.
+  * Added new color options: global link hover/focus, header bar links, footer links, sidebar color options, main menu color options.
+  * Improved background image positioning options to account for both horizontal and vertical positioning.
+  * Added opacity dimension to background colors.
+  * Added option to customize "Read more" link text.
+  * Added new main menu options: font weight and background color for current item.
+  * Added options to change social icon size in header and footer.
+  * Reorganized files and functions in Make's customizer module.
+  * Reorganized Customizer panels, sections, and controls.
+* Improved social profiles custom menu by enabling email and RSS icons.
+* Improved handling of long content in Gallery section's item descriptions.
+* Improved display of Banner section in narrow view.
+* Fixed differing container widths on narrow view in Boxed mode.
+* Deprecated function ttfmake_display_favicons.
+* Deprecated function ttfmake_body_layout_classes.
+* Added style support for Postmatic.
+* Fixed styling of WooCommerce coupon field.
+* Updated Cycle2 to 2.1.6.
+* Updated FontAwesome to 4.3.0.
+* Added Russian translation.
+* Updated Dutch translation.
+
+## 1.4.9
+
+* Fixed bug that displayed page duplication info on custom post type screens.
+* Fixed undefined function error in WP versions less than 4.0.
+* Fixed doubled content in document title tag.
+* Added formal system for showing/hiding admin notices.
+* Added a notice when Make is installed on a site running a WordPress version older than 3.9.
+* Added notices for when an older version of Make Plus is installed.
+
+## 1.4.8
+
+* Fixed bug preventing Builder section duplication in some cases
+* Fixed line breaks in post comment count in Webkit browsers
+* Fixed content editor in Builder overlay resizable
+* Deprecated unused Builder functions
+* Added new filter hook: `make_content_width`
+* Added theme support for title tag
+* Added Russian translation
+
+## 1.4.7
+
+* Fixed bug where Customizer's font-family options weren't showing correct selected choice
+* Fixed issue with the custom logo not appearing correctly in some server environments
+* Added additional inline documentation for some action and filter hooks
+* Added Estonian translation
+
+## 1.4.6
+
+* Fixed several small compatibility issues in WordPress 4.1
+* Fixed error thrown by Format Builder on some admin screens
+* Fixed entry date layout issue in Chrome caused by excess whitespace in HTML
+
+## 1.4.5
+
+* Fixed raw CSS appearing in rich snippet content in some situations
+* Fixed post meta alignment issues
+* Fixed blurry Page Builder overlays in Safari
+* Updated Google Fonts list
+* Updated documentation links
+* Updated Dutch translation
+
+## 1.4.4
+
+* Fixed inaccessible Attachment Display Settings panel when editing pages
+* Added Dutch translation
+
 ## 1.4.3
 
 * Improved text sanitization in some instances to allow more HTML tags and attributes

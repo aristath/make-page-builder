@@ -107,7 +107,9 @@
  Form (_comments.scss)
 -------------------------------------------------------- */
 .comment-form {
-	input:not(#submit),
+	input[type="text"],
+	input[type="email"],
+	input[type="url"],
 	textarea {
 		width: 100%;
 	}

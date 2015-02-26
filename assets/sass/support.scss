@@ -84,3 +84,32 @@ div.sharedaddy {
 .infinity-end.neverending #site-footer {
 	display: block;
 }
+/*---------------------------------------------------------
+ WooCommerce (_support.scss)
+-------------------------------------------------------- */
+.coupon #coupon_code {
+	width: auto;
+	line-height: 1.5;
+}
+.woocommerce-cart .cart-collaterals .cart_totals table {
+	border: none;
+}
+/*---------------------------------------------------------
+ Postmatic (_support.scss)
+-------------------------------------------------------- */
+.widget_prompt_subscribe_widget {
+	input {
+		display: block;
+	}
+	input,
+	div.subscribe.prompt,
+	div.unsubscribe.prompt {
+		margin-bottom: 1em;
+	}
+	div.unsubscribe.prompt {
+		h5 {
+			margin-bottom: 0;
+			text-transform: none;
+		}
+	}
+}

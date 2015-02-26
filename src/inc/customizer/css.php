@@ -29,7 +29,6 @@ class TTFMAKE_CSS {
 	 *
 	 * @var   array    Holds the data to be printed out.
 	 */
-
 	public $data = array();
 
 	/**
@@ -294,5 +293,3 @@ function ttfmake_get_css() {
 	return TTFMAKE_CSS::instance();
 }
 endif;
-
-add_action( 'init', 'ttfmake_get_css', 1 );
