@@ -447,7 +447,7 @@ class TTFMAKE_Section_Definitions {
 		}
 
 		if ( isset( $data['background-color'] ) ) {
-			$clean_data['background-color'] = maybe_hash_hex_color( $data['background-color'] );
+			$clean_data['background-color'] = $data['background-color'];
 		}
 
 		if ( isset( $data['background-style'] ) ) {
@@ -492,10 +492,6 @@ class TTFMAKE_Section_Definitions {
 	 * @return void
 	 */
 	public function admin_enqueue_scripts( $hook_suffix ) {
-		// Only load resources if they are needed on the current page
-		if ( ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ) ) || ! ttfmake_post_type_supports_builder( get_post_type() ) ) {
-			return;
-		}
 
 		wp_register_script(
 			'ttfmake-sections/js/models/gallery-item.js',
@@ -610,11 +606,6 @@ class TTFMAKE_Section_Definitions {
 	public function print_templates() {
 		global $hook_suffix, $typenow, $ttfmake_is_js_template;
 		$ttfmake_is_js_template = true;
-
-		// Only show when adding/editing pages
-		if ( ! ttfmake_post_type_supports_builder( $typenow ) || ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ) )) {
-			return;
-		}
 
 		// Define the templates to print
 		$templates = array(

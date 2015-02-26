@@ -113,11 +113,6 @@ class TTFMAKE_Builder_Base {
 			return;
 		}
 
-		// Only show the builder toggle for CPTs that support the builder
-		if ( ! ttfmake_post_type_supports_builder( get_post_type() ) ) {
-			return;
-		}
-
 		$using_builder = get_post_meta( get_the_ID(), '_ttfmake-use-builder', true );
 	?>
 		<div class="misc-pub-section">
@@ -231,7 +226,7 @@ class TTFMAKE_Builder_Base {
 	 */
 	public function admin_enqueue_scripts( $hook_suffix ) {
 		// Only load resources if they are needed on the current page
-		if ( ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ) ) || ! ttfmake_post_type_supports_builder( get_post_type() ) ) {
+		if ( ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ) ) ) {
 			return;
 		}
 
@@ -348,10 +343,6 @@ class TTFMAKE_Builder_Base {
 	public function admin_print_styles() {
 		global $pagenow;
 
-		// Do not complete the function if the product template is in use (i.e., the builder needs to be shown)
-		if ( ! ttfmake_post_type_supports_builder( get_post_type() ) ) {
-			return;
-		}
 	?>
 		<style type="text/css">
 			<?php if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && ttfmake_is_builder_page() ) ) : ?>
@@ -387,14 +378,11 @@ class TTFMAKE_Builder_Base {
 	function admin_body_class( $classes ) {
 		global $pagenow;
 
-		// Do not complete the function if the product template is in use (i.e., the builder needs to be shown)
-		if ( ttfmake_post_type_supports_builder( get_post_type() ) ) {
-			if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && ttfmake_is_builder_page() ) ) {
-				$classes .= ' ttfmake-builder-active';
-				$classes .= ' make-plus-disabled';
-			} else {
-				$classes .= ' ttfmake-default-active';
-			}
+		if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && ttfmake_is_builder_page() ) ) {
+			$classes .= ' ttfmake-builder-active';
+			$classes .= ' make-plus-disabled';
+		} else {
+			$classes .= ' ttfmake-default-active';
 		}
 
 		return $classes;
@@ -504,11 +492,6 @@ class TTFMAKE_Builder_Base {
 	public function print_templates() {
 		global $hook_suffix, $typenow, $ttfmake_is_js_template;
 		$ttfmake_is_js_template = true;
-
-		// Only show when adding/editing pages
-		if ( ! ttfmake_post_type_supports_builder( $typenow ) || ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ) )) {
-			return;
-		}
 
 		// Print the templates
 		foreach ( ttfmake_get_sections() as $section ) : ?>
