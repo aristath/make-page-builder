@@ -56,7 +56,7 @@ $overlay_id  = 'make_pb-overlay-' . $combined_id;
 	$make_pb_overlay_id    = $overlay_id;
 	$make_pb_overlay_title = __( 'Configure item', 'make' );
 
-	get_template_part( '/inc/builder/core/templates/overlay', 'header' );
+	Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'header' );
 
 	/**
 	 * Filter the definitions of the Gallery item configuration inputs.
@@ -96,7 +96,7 @@ $overlay_id  = 'make_pb-overlay-' . $combined_id;
 
 	echo $output;
 
-	get_template_part( '/inc/builder/core/templates/overlay', 'footer' );
+	Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'footer' );
 	?>
 
 <?php if ( true !== $make_pb_is_js_template ) : ?>

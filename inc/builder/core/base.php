@@ -139,8 +139,8 @@ class Make_PB_Base {
 		$make_pb_sections = ( is_array( $make_pb_sections ) ) ? $make_pb_sections : array();
 
 		// Load the boilerplate templates
-		get_template_part( 'inc/builder/core/templates/menu' );
-		get_template_part( 'inc/builder/core/templates/stage', 'header' );
+		Make_PB::get_template_part( 'inc/builder/core/templates/menu' );
+		Make_PB::get_template_part( 'inc/builder/core/templates/stage', 'header' );
 
 		$section_data        = make_pb_get_section_data( $post_local->ID );
 		$registered_sections = make_pb_get_sections();
@@ -208,7 +208,7 @@ class Make_PB_Base {
 			}
 		}
 
-		get_template_part( 'inc/builder/core/templates/stage', 'footer' );
+		Make_PB::get_template_part( 'inc/builder/core/templates/stage', 'footer' );
 
 		// Add the sort input
 		$section_order = get_post_meta( $post_local->ID, '_make_pb-section-ids', true );
@@ -508,7 +508,7 @@ class Make_PB_Base {
 		unset( $GLOBALS['make_pb_is_js_template'] );
 
 		// Load the overlay for TinyMCE
-		get_template_part( '/inc/builder/core/templates/overlay', 'tinymce' );
+		Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'tinymce' );
 
 		// Print the template for removing images
 		?>
@@ -684,7 +684,7 @@ if ( ! function_exists( 'make_pb_load_section_header' ) ) :
  */
 function make_pb_load_section_header() {
 	global $make_pb_section_data;
-	get_template_part( 'inc/builder/core/templates/section', 'header' );
+	Make_PB::get_template_part( 'inc/builder/core/templates/section', 'header' );
 
 	/**
 	 * Allow for script execution in the header of a builder section.
@@ -713,7 +713,7 @@ if ( ! function_exists( 'make_pb_load_section_footer' ) ) :
  */
 function make_pb_load_section_footer() {
 	global $make_pb_section_data;
-	get_template_part( 'inc/builder/core/templates/section', 'footer' );
+	Make_PB::get_template_part( 'inc/builder/core/templates/section', 'footer' );
 
 	/**
 	 * Allow for script execution in the footer of a builder section.

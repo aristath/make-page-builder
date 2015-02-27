@@ -3,7 +3,7 @@ global $make_pb_overlay_id, $make_pb_overlay_title;
 $make_pb_overlay_id    = 'make_pb-tinymce-overlay';
 $make_pb_overlay_title = __( 'Edit content', 'make' );
 
-get_template_part( '/inc/builder/core/templates/overlay', 'header' );
+Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'header' );
 
 wp_editor( '', 'make', array(
 	'tinymce'       => array(
@@ -13,4 +13,4 @@ wp_editor( '', 'make', array(
 	'editor_height' => 320
 ) );
 
-get_template_part( '/inc/builder/core/templates/overlay', 'footer' );
+Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'footer' );

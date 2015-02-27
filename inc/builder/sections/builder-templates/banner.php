@@ -22,7 +22,7 @@ $section_order = ( ! empty( $make_pb_section_data['data']['banner-slide-order'] 
 		<?php foreach ( $section_order as $key => $section_id  ) : ?>
 			<?php if ( isset( $make_pb_section_data['data']['banner-slides'][ $section_id ] ) ) : ?>
 				<?php global $make_pb_slide_id; $make_pb_slide_id = $section_id; ?>
-				<?php get_template_part( '/inc/builder/sections/builder-templates/banner', 'slide' ); ?>
+				<?php Make_PB::get_template_part( '/inc/builder/sections/builder-templates/banner', 'slide' ); ?>
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
