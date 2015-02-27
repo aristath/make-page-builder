@@ -7,7 +7,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 	oneApp.TextView = oneApp.SectionView.extend({
 		events: function() {
 			return _.extend({}, oneApp.SectionView.prototype.events, {
-				'change .ttfmake-text-columns' : 'handleColumns'
+				'change .make_pb-text-columns' : 'handleColumns'
 			});
 		},
 
@@ -15,10 +15,10 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			evt.preventDefault();
 
 			var columns = $(evt.target).val(),
-				$stage = $('.ttfmake-text-columns-stage', this.$el);
+				$stage = $('.make_pb-text-columns-stage', this.$el);
 
-			$stage.removeClass('ttfmake-text-columns-1 ttfmake-text-columns-2 ttfmake-text-columns-3 ttfmake-text-columns-4');
-			$stage.addClass('ttfmake-text-columns-' + parseInt(columns, 10));
+			$stage.removeClass('make_pb-text-columns-1 make_pb-text-columns-2 make_pb-text-columns-3 make_pb-text-columns-4');
+			$stage.addClass('make_pb-text-columns-' + parseInt(columns, 10));
 		}
 	});
 
@@ -28,13 +28,13 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 		view = view || '';
 
 		if (view.$el) {
-			$selector = $('.ttfmake-text-columns-stage', view.$el);
+			$selector = $('.make_pb-text-columns-stage', view.$el);
 		} else {
-			$selector = $('.ttfmake-text-columns-stage');
+			$selector = $('.make_pb-text-columns-stage');
 		}
 
 		$selector.sortable({
-			handle: '.ttfmake-sortable-handle',
+			handle: '.make_pb-sortable-handle',
 			placeholder: 'sortable-placeholder',
 			forcePlaceholderSizeType: true,
 			distance: 2,
@@ -43,20 +43,20 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			start: function (event, ui) {
 				// Set the height of the placeholder to that of the sorted item
 				var $item = $(ui.item.get(0)),
-					$stage = $item.parents('.ttfmake-text-columns-stage'),
+					$stage = $item.parents('.make_pb-text-columns-stage'),
 					addClass = '';
 
 				// If text item, potentially add class to stage
-				if ($item.hasClass('ttfmake-text-column')) {
-					if ($item.hasClass('ttfmake-column-width-two-thirds')) {
+				if ($item.hasClass('make_pb-text-column')) {
+					if ($item.hasClass('make_pb-column-width-two-thirds')) {
 						addClass = 'current-item-two-thirds';
-					} else if ($item.hasClass('ttfmake-column-width-one-third')) {
+					} else if ($item.hasClass('make_pb-column-width-one-third')) {
 						addClass = 'current-item-one-third';
-					} else if ($item.hasClass('ttfmake-column-width-one-fourth')) {
+					} else if ($item.hasClass('make_pb-column-width-one-fourth')) {
 						addClass = 'current-item-one-fourth';
-					} else if ($item.hasClass('ttfmake-column-width-three-fourths')) {
+					} else if ($item.hasClass('make_pb-column-width-three-fourths')) {
 						addClass = 'current-item-three-fourths';
-					} else if ($item.hasClass('ttfmake-column-width-one-half')) {
+					} else if ($item.hasClass('make_pb-column-width-one-half')) {
 						addClass = 'current-item-one-half';
 					}
 
@@ -72,10 +72,10 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			},
 			stop: function (event, ui) {
 				var $item = $(ui.item.get(0)),
-					$section = $item.parents('.ttfmake-section'),
-					$stage = $('.ttfmake-section-body', $section),
-					$columnsStage = $item.parents('.ttfmake-text-columns-stage'),
-					$orderInput = $('.ttfmake-text-columns-order', $stage),
+					$section = $item.parents('.make_pb-section'),
+					$stage = $('.make_pb-section-body', $section),
+					$columnsStage = $item.parents('.make_pb-text-columns-stage'),
+					$orderInput = $('.make_pb-text-columns-order', $stage),
 					id = $section.attr('data-id'),
 					column = $item.attr('data-id'),
 					i;
@@ -84,10 +84,10 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 				// Label the columns according to the position they are in
 				i = 1;
-				$('.ttfmake-text-column', $stage).each(function(){
+				$('.make_pb-text-column', $stage).each(function(){
 					$(this)
-						.removeClass('ttfmake-text-column-position-1 ttfmake-text-column-position-2 ttfmake-text-column-position-3 ttfmake-text-column-position-4')
-						.addClass('ttfmake-text-column-position-' + i);
+						.removeClass('make_pb-text-column-position-1 make_pb-text-column-position-2 make_pb-text-column-position-3 make_pb-text-column-position-4')
+						.addClass('make_pb-text-column-position-' + i);
 					i++;
 				});
 
@@ -113,7 +113,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 			$.each($frames, function() {
 				$this = $(this);
-				id = $this.attr('id').replace('ttfmake-iframe-', '');
+				id = $this.attr('id').replace('make_pb-iframe-', '');
 				oneApp.initFrame(id, link);
 			});
 		}

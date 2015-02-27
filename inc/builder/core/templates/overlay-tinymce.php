@@ -1,7 +1,7 @@
 <?php
-global $ttfmake_overlay_id, $ttfmake_overlay_title;
-$ttfmake_overlay_id    = 'ttfmake-tinymce-overlay';
-$ttfmake_overlay_title = __( 'Edit content', 'make' );
+global $make_pb_overlay_id, $make_pb_overlay_title;
+$make_pb_overlay_id    = 'make_pb-tinymce-overlay';
+$make_pb_overlay_title = __( 'Edit content', 'make' );
 
 get_template_part( '/inc/builder/core/templates/overlay', 'header' );
 

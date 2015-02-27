@@ -68,10 +68,10 @@ class TTFMAKE_Section_Definitions {
 	 * @return void
 	 */
 	public function register_text_section() {
-		ttfmake_add_section(
+		make_pb_add_section(
 			'text',
 			_x( 'Columns', 'section name', 'make' ),
-			get_template_directory_uri() . '/inc/builder/sections/css/images/text.png',
+			Make_PB::uri() . '/inc/builder/sections/css/images/text.png',
 			__( 'Create rearrangeable columns of content and images.', 'make' ),
 			array( $this, 'save_text' ),
 			'sections/builder-templates/text',
@@ -83,12 +83,12 @@ class TTFMAKE_Section_Definitions {
 					'type'  => 'section_title',
 					'name'  => 'title',
 					'label' => __( 'Enter section title', 'make' ),
-					'class' => 'ttfmake-configuration-title ttfmake-section-header-title-input',
+					'class' => 'make_pb-configuration-title make_pb-section-header-title-input',
 				),
 				200 => array(
 					'type'    => 'select',
 					'name'    => 'columns-number',
-					'class'   => 'ttfmake-text-columns',
+					'class'   => 'make_pb-text-columns',
 					'label'   => __( 'Columns', 'make' ),
 					'default' => 3,
 					'options' => array(
@@ -122,7 +122,7 @@ class TTFMAKE_Section_Definitions {
 		$clean_data['title'] = $clean_data['label'] = ( isset( $data['title'] ) ) ? apply_filters( 'title_save_pre', $data['title'] ) : '';
 
 		if ( isset( $data['columns-order'] ) ) {
-			$clean_data['columns-order'] = array_map( array( 'TTFMAKE_Builder_Save', 'clean_section_id' ), explode( ',', $data['columns-order'] ) );
+			$clean_data['columns-order'] = array_map( array( 'Make_PB_Save', 'clean_section_id' ), explode( ',', $data['columns-order'] ) );
 		}
 
 		if ( isset( $data['columns'] ) && is_array( $data['columns'] ) ) {
@@ -136,7 +136,7 @@ class TTFMAKE_Section_Definitions {
 				}
 
 				if ( isset( $item['image-id'] ) ) {
-					$clean_data['columns'][ $id ]['image-id'] = ttfmake_sanitize_image_id( $item['image-id'] );
+					$clean_data['columns'][ $id ]['image-id'] = make_pb_sanitize_image_id( $item['image-id'] );
 				}
 
 				if ( isset( $item['content'] ) ) {
@@ -156,10 +156,10 @@ class TTFMAKE_Section_Definitions {
 	 * @return void
 	 */
 	public function register_banner_section() {
-		ttfmake_add_section(
+		make_pb_add_section(
 			'banner',
 			_x( 'Banner', 'section name', 'make' ),
-			get_template_directory_uri() . '/inc/builder/sections/css/images/banner.png',
+			Make_PB::uri() . '/inc/builder/sections/css/images/banner.png',
 			__( 'Display multiple types of content in a banner or a slider.', 'make' ),
 			array( $this, 'save_banner' ),
 			'sections/builder-templates/banner',
@@ -171,7 +171,7 @@ class TTFMAKE_Section_Definitions {
 					'type'  => 'section_title',
 					'name'  => 'title',
 					'label' => __( 'Enter section title', 'make' ),
-					'class' => 'ttfmake-configuration-title ttfmake-section-header-title-input',
+					'class' => 'make_pb-configuration-title make_pb-section-header-title-input',
 				),
 				200 => array(
 					'type'    => 'checkbox',
@@ -262,7 +262,7 @@ class TTFMAKE_Section_Definitions {
 		}
 
 		if ( isset( $data['banner-slide-order'] ) ) {
-			$clean_data['banner-slide-order'] = array_map( array( 'TTFMAKE_Builder_Save', 'clean_section_id' ), explode( ',', $data['banner-slide-order'] ) );
+			$clean_data['banner-slide-order'] = array_map( array( 'Make_PB_Save', 'clean_section_id' ), explode( ',', $data['banner-slide-order'] ) );
 		}
 
 		if ( isset( $data['banner-slides'] ) && is_array( $data['banner-slides'] ) ) {
@@ -273,13 +273,13 @@ class TTFMAKE_Section_Definitions {
 				}
 
 				if ( isset( $slide['background-color'] ) ) {
-					$clean_data['banner-slides'][ $id ]['background-color'] = maybe_hash_hex_color( $slide['background-color'] );
+					$clean_data['banner-slides'][ $id ]['background-color'] = Kirki_Color::sanitize_hex( $slide['background-color'] );
 				}
 
 				$clean_data['banner-slides'][ $id ]['darken'] = ( isset( $slide['darken'] ) && 1 === (int) $slide['darken'] ) ? 1 : 0;
 
 				if ( isset( $slide['image-id'] ) ) {
-					$clean_data['banner-slides'][ $id ]['image-id'] = ttfmake_sanitize_image_id( $slide['image-id'] );
+					$clean_data['banner-slides'][ $id ]['image-id'] = make_pb_sanitize_image_id( $slide['image-id'] );
 				}
 
 				$clean_data['banner-slides'][ $id ]['alignment'] = ( isset( $slide['alignment'] ) && in_array( $slide['alignment'], array( 'none', 'left', 'right' ) ) ) ? $slide['alignment'] : 'none';
@@ -301,10 +301,10 @@ class TTFMAKE_Section_Definitions {
 	 * @return void
 	 */
 	public function register_gallery_section() {
-		ttfmake_add_section(
+		make_pb_add_section(
 			'gallery',
 			_x( 'Gallery', 'section name', 'make' ),
-			get_template_directory_uri() . '/inc/builder/sections/css/images/gallery.png',
+			Make_PB::uri() . '/inc/builder/sections/css/images/gallery.png',
 			__( 'Display your images in various grid combinations.', 'make' ),
 			array( $this, 'save_gallery' ),
 			'sections/builder-templates/gallery',
@@ -316,13 +316,13 @@ class TTFMAKE_Section_Definitions {
 					'type'  => 'section_title',
 					'name'  => 'title',
 					'label' => __( 'Enter section title', 'make' ),
-					'class' => 'ttfmake-configuration-title ttfmake-section-header-title-input',
+					'class' => 'make_pb-configuration-title make_pb-section-header-title-input',
 				),
 				200 => array(
 					'type'    => 'select',
 					'name'    => 'columns',
 					'label'   => __( 'Columns', 'make' ),
-					'class'   => 'ttfmake-gallery-columns',
+					'class'   => 'make_pb-gallery-columns',
 					'default' => 3,
 					'options' => array(
 						1 => 1,
@@ -368,7 +368,7 @@ class TTFMAKE_Section_Definitions {
 					'type'  => 'image',
 					'name'  => 'background-image',
 					'label' => __( 'Background image', 'make' ),
-					'class' => 'ttfmake-configuration-media'
+					'class' => 'make_pb-configuration-media'
 				),
 				700 => array(
 					'type'    => 'checkbox',
@@ -390,7 +390,7 @@ class TTFMAKE_Section_Definitions {
 					'type'    => 'color',
 					'label'   => __( 'Background color', 'make' ),
 					'name'    => 'background-color',
-					'class'   => 'ttfmake-gallery-background-color ttfmake-configuration-color-picker',
+					'class'   => 'make_pb-gallery-background-color make_pb-configuration-color-picker',
 					'default' => '',
 				),
 			)
@@ -433,7 +433,7 @@ class TTFMAKE_Section_Definitions {
 		}
 
 		if ( isset( $data['background-image']['image-id'] ) ) {
-			$clean_data['background-image'] = ttfmake_sanitize_image_id( $data['background-image']['image-id'] );
+			$clean_data['background-image'] = make_pb_sanitize_image_id( $data['background-image']['image-id'] );
 		}
 
 		if ( isset( $data['title'] ) ) {
@@ -457,7 +457,7 @@ class TTFMAKE_Section_Definitions {
 		}
 
 		if ( isset( $data['gallery-item-order'] ) ) {
-			$clean_data['gallery-item-order'] = array_map( array( 'TTFMAKE_Builder_Save', 'clean_section_id' ), explode( ',', $data['gallery-item-order'] ) );
+			$clean_data['gallery-item-order'] = array_map( array( 'Make_PB_Save', 'clean_section_id' ), explode( ',', $data['gallery-item-order'] ) );
 		}
 
 		if ( isset( $data['gallery-items'] ) && is_array( $data['gallery-items'] ) ) {
@@ -475,7 +475,7 @@ class TTFMAKE_Section_Definitions {
 				}
 
 				if ( isset( $item['image-id'] ) ) {
-					$clean_data['gallery-items'][ $id ]['image-id'] = ttfmake_sanitize_image_id( $item['image-id'] );
+					$clean_data['gallery-items'][ $id ]['image-id'] = make_pb_sanitize_image_id( $item['image-id'] );
 				}
 			}
 		}
@@ -494,80 +494,80 @@ class TTFMAKE_Section_Definitions {
 	public function admin_enqueue_scripts( $hook_suffix ) {
 
 		wp_register_script(
-			'ttfmake-sections/js/models/gallery-item.js',
-			get_template_directory_uri() . '/inc/builder/sections/js/models/gallery-item.js',
+			'make_pb-sections/js/models/gallery-item.js',
+			Make_PB::uri() . '/inc/builder/sections/js/models/gallery-item.js',
 			array(),
-			TTFMAKE_VERSION,
+			Make_PB::version(),
 			true
 		);
 
 		wp_register_script(
-			'ttfmake-sections/js/views/gallery-item.js',
-			get_template_directory_uri() . '/inc/builder/sections/js/views/gallery-item.js',
+			'make_pb-sections/js/views/gallery-item.js',
+			Make_PB::uri() . '/inc/builder/sections/js/views/gallery-item.js',
 			array(),
-			TTFMAKE_VERSION,
+			Make_PB::version(),
 			true
 		);
 
 		wp_register_script(
-			'ttfmake-sections/js/views/gallery.js',
-			get_template_directory_uri() . '/inc/builder/sections/js/views/gallery.js',
+			'make_pb-sections/js/views/gallery.js',
+			Make_PB::uri() . '/inc/builder/sections/js/views/gallery.js',
 			array(),
-			TTFMAKE_VERSION,
+			Make_PB::version(),
 			true
 		);
 
 		wp_register_script(
-			'ttfmake-sections/js/views/text.js',
-			get_template_directory_uri() . '/inc/builder/sections/js/views/text.js',
+			'make_pb-sections/js/views/text.js',
+			Make_PB::uri() . '/inc/builder/sections/js/views/text.js',
 			array(),
-			TTFMAKE_VERSION,
+			Make_PB::version(),
 			true
 		);
 
 		wp_register_script(
-			'ttfmake-sections/js/models/banner-slide.js',
-			get_template_directory_uri() . '/inc/builder/sections/js/models/banner-slide.js',
+			'make_pb-sections/js/models/banner-slide.js',
+			Make_PB::uri() . '/inc/builder/sections/js/models/banner-slide.js',
 			array(),
-			TTFMAKE_VERSION,
+			Make_PB::version(),
 			true
 		);
 
 		wp_register_script(
-			'ttfmake-sections/js/views/banner-slide.js',
-			get_template_directory_uri() . '/inc/builder/sections/js/views/banner-slide.js',
+			'make_pb-sections/js/views/banner-slide.js',
+			Make_PB::uri() . '/inc/builder/sections/js/views/banner-slide.js',
 			array(),
-			TTFMAKE_VERSION,
+			Make_PB::version(),
 			true
 		);
 
 		wp_register_script(
-			'ttfmake-sections/js/views/banner.js',
-			get_template_directory_uri() . '/inc/builder/sections/js/views/banner.js',
+			'make_pb-sections/js/views/banner.js',
+			Make_PB::uri() . '/inc/builder/sections/js/views/banner.js',
 			array(),
-			TTFMAKE_VERSION,
+			Make_PB::version(),
 			true
 		);
 
 		wp_enqueue_script(
-			'ttfmake-sections/js/quick-start.js',
-			get_template_directory_uri() . '/inc/builder/sections/js/quick-start.js',
+			'make_pb-sections/js/quick-start.js',
+			Make_PB::uri() . '/inc/builder/sections/js/quick-start.js',
 			array(
-				'ttfmake-builder',
+				'make_pb-builder',
 			),
-			TTFMAKE_VERSION,
+			Make_PB::version(),
 			true
 		);
 
 		// Add additional dependencies to the Builder JS
-		add_filter( 'ttfmake_builder_js_dependencies', array( $this, 'add_js_dependencies' ) );
+		add_filter( 'make_pb_builder_js_dependencies', array( $this, 'add_js_dependencies' ) );
 
 		// Add the section CSS
 		wp_enqueue_style(
-			'ttfmake-sections/css/sections.css',
-			get_template_directory_uri() . '/inc/builder/sections/css/sections.css',
+			'make_pb-sections/css/sections.css',
+			Make_PB::uri() . '/inc/builder/sections/css/sections.css',
 			array(),
-			TTFMAKE_VERSION,
+			Make_PB::version(),
 			'all'
 		);
 	}
@@ -586,13 +586,13 @@ class TTFMAKE_Section_Definitions {
 		}
 
 		return array_merge( $deps, array(
-			'ttfmake-sections/js/models/gallery-item.js',
-			'ttfmake-sections/js/models/banner-slide.js',
-			'ttfmake-sections/js/views/gallery-item.js',
-			'ttfmake-sections/js/views/gallery.js',
-			'ttfmake-sections/js/views/text.js',
-			'ttfmake-sections/js/views/banner-slide.js',
-			'ttfmake-sections/js/views/banner.js',
+			'make_pb-sections/js/models/gallery-item.js',
+			'make_pb-sections/js/models/banner-slide.js',
+			'make_pb-sections/js/views/gallery-item.js',
+			'make_pb-sections/js/views/gallery.js',
+			'make_pb-sections/js/views/text.js',
+			'make_pb-sections/js/views/banner-slide.js',
+			'make_pb-sections/js/views/banner.js',
 		) );
 	}
 
@@ -604,8 +604,8 @@ class TTFMAKE_Section_Definitions {
 	 * @return void
 	 */
 	public function print_templates() {
-		global $hook_suffix, $typenow, $ttfmake_is_js_template;
-		$ttfmake_is_js_template = true;
+		global $hook_suffix, $typenow, $make_pb_is_js_template;
+		$make_pb_is_js_template = true;
 
 		// Define the templates to print
 		$templates = array(
@@ -623,10 +623,10 @@ class TTFMAKE_Section_Definitions {
 
 		// Print the templates
 		foreach ( $templates as $template ) : ?>
-		<script type="text/html" id="tmpl-ttfmake-<?php echo $template['id']; ?>">
+		<script type="text/html" id="tmpl-make_pb-<?php echo $template['id']; ?>">
 			<?php
 			ob_start();
-			ttfmake_get_builder_base()->load_section( $template, array() );
+			make_pb_get_builder_base()->load_section( $template, array() );
 			$html = ob_get_clean();
 			$html = str_replace(
 				array(
@@ -641,7 +641,7 @@ class TTFMAKE_Section_Definitions {
 			?>
 		</script>
 		<?php endforeach;
-		unset( $GLOBALS['ttfmake_is_js_template'] );
+		unset( $GLOBALS['make_pb_is_js_template'] );
 	}
 
 	/**
@@ -696,7 +696,7 @@ class TTFMAKE_Section_Definitions {
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_get_section_default' ) ) :
+if ( ! function_exists( 'make_pb_get_section_default' ) ) :
 /**
  * Return the default value for a particular section setting.
  *
@@ -706,8 +706,8 @@ if ( ! function_exists( 'ttfmake_get_section_default' ) ) :
  * @param  string    $section_type    The section type.
  * @return mixed                      Default value if found; false if not found.
  */
-function ttfmake_get_section_default( $key, $section_type ) {
-	$defaults = ttfmake_get_section_definitions()->get_section_defaults();
+function make_pb_get_section_default( $key, $section_type ) {
+	$defaults = make_pb_get_section_definitions()->get_section_defaults();
 	$id       = "$section_type-$key";
 	$value    = ( isset( $defaults[ $id ] ) ) ? $defaults[ $id ] : false;
 
@@ -724,7 +724,7 @@ function ttfmake_get_section_default( $key, $section_type ) {
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_get_section_choices' ) ) :
+if ( ! function_exists( 'make_pb_get_section_choices' ) ) :
 /**
  * Wrapper function for TTFMAKE_Section_Definitions->get_choices
  *
@@ -734,12 +734,12 @@ if ( ! function_exists( 'ttfmake_get_section_choices' ) ) :
  * @param  string    $section_type    The section type.
  * @return array                      The array of choices for the section setting.
  */
-function ttfmake_get_section_choices( $key, $section_type ) {
-	return ttfmake_get_section_definitions()->get_choices( $key, $section_type );
+function make_pb_get_section_choices( $key, $section_type ) {
+	return make_pb_get_section_definitions()->get_choices( $key, $section_type );
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_sanitize_section_choice' ) ) :
+if ( ! function_exists( 'make_pb_sanitize_section_choice' ) ) :
 /**
  * Sanitize a value from a list of allowed values.
  *
@@ -750,12 +750,12 @@ if ( ! function_exists( 'ttfmake_sanitize_section_choice' ) ) :
  * @param  string        $section_type    The section type.
  * @return mixed                          The sanitized value.
  */
-function ttfmake_sanitize_section_choice( $value, $key, $section_type ) {
-	$choices         = ttfmake_get_section_choices( $key, $section_type );
+function make_pb_sanitize_section_choice( $value, $key, $section_type ) {
+	$choices         = make_pb_get_section_choices( $key, $section_type );
 	$allowed_choices = array_keys( $choices );
 
 	if ( ! in_array( $value, $allowed_choices ) ) {
-		$value = ttfmake_get_section_default( $key, $section_type );
+		$value = make_pb_get_section_default( $key, $section_type );
 	}
 
 	/**
@@ -778,11 +778,11 @@ endif;
  *
  * @return TTFMAKE_Section_Definitions
  */
-function ttfmake_get_section_definitions() {
+function make_pb_get_section_definitions() {
 	return TTFMAKE_Section_Definitions::instance();
 }
 
 // Kick off the section definitions immediately
 if ( is_admin() ) {
-	add_action( 'after_setup_theme', 'ttfmake_get_section_definitions', 11 );
+	add_action( 'after_setup_theme', 'make_pb_get_section_definitions', 11 );
 }

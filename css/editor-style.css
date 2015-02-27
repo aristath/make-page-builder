@@ -79,7 +79,7 @@ blockquote p cite,
 blockquote cite {
     font-size: 75%; /* 12px */
 }
-.ttfmake-testimonial {
+.make_pb-testimonial {
     padding: 10px 20px;
     background-color: #eaecee;
 }
@@ -149,22 +149,22 @@ table td {
 /*---------------------------------------------------------
  Rules (editor-style.css)
 -------------------------------------------------------- */
-hr.ttfmake-hr {
+hr.make_pb-hr {
 	border-color: #eaecee;
 	border-width: 0;
 	height: 1px;
 }
 /* Deprecated in 1.4.1 */
-hr.ttfmake-line-dashed {
+hr.make_pb-line-dashed {
     border-top: 1px dashed #eaecee;
 }
-hr.ttfmake-line-double {
+hr.make_pb-line-double {
     border-top: 6px double #eaecee;
 }
 /*---------------------------------------------------------
  Buttons (editor-style.css)
 -------------------------------------------------------- */
-.ttfmake-button,
+.make_pb-button,
 button,
 input[type="button"],
 input[type="reset"],
@@ -186,16 +186,16 @@ input[type="submit"] {
 .color-secondary-background {
     background-color: #eaecee;
 }
-.ttfmake-success {
+.make_pb-success {
     background-color: #339d56;
 }
-.ttfmake-error {
+.make_pb-error {
     background-color: #d04242;
 }
-.ttfmake-important {
+.make_pb-important {
     background-color: #f89e01;
 }
-.ttfmake-download:after {
+.make_pb-download:after {
     content: "\f0ab";
     padding-left: 6px;
     font-family: FontAwesome;
@@ -203,7 +203,7 @@ input[type="submit"] {
 /*---------------------------------------------------------
  Notices / Alerts (editor-style.css)
 -------------------------------------------------------- */
-.ttfmake-notice {
+.make_pb-notice {
 	background: #e5e5e5;
 	border: 2px solid #808080;
 	color: #808080;
@@ -211,28 +211,28 @@ input[type="submit"] {
 	margin-bottom: 2.2rem;
 	padding: 10px 20px;
 }
-.ttfmake-notice p {
+.make_pb-notice p {
 	margin-top: 0;
 }
-.ttfmake-notice p:last-of-type {
+.make_pb-notice p:last-of-type {
 	margin-bottom: 0; //reset
 }
 /* Deprecated in 1.4.1 */
-.ttfmake-alert {
+.make_pb-alert {
     margin-bottom: 22px;
     padding: 33px 32px;
     font-size: 14px;
     background-color: #eaecee;
 }
-.ttfmake-alert.ttfmake-success {
+.make_pb-alert.make_pb-success {
     color: #339d56;
     background-color: #eef7f1;
 }
-.ttfmake-alert.ttfmake-error {
+.make_pb-alert.make_pb-error {
     color: #d04242;
     background-color: #f7eeee;
 }
-.ttfmake-alert.ttfmake-important {
+.make_pb-alert.make_pb-important {
     color: #f89e01;
     background-color: #fffde5;
 }
@@ -250,34 +250,34 @@ ol {
     margin: 0 0 22px 0;
     padding-left: 20px;
 }
-ul.ttfmake-list,
-ol.ttfmake-list {
+ul.make_pb-list,
+ol.make_pb-list {
     padding-left: 0;
     list-style: none;
 }
-ul.ttfmake-list li:before,
-ol.ttfmake-list li:before {
+ul.make_pb-list li:before,
+ol.make_pb-list li:before {
     padding-right: 10px;
     font-family: FontAwesome;
 }
 /* Deprecated in 1.4.1 */
-ul.ttfmake-list-check li:before,
-ol.ttfmake-list-check li:before {
+ul.make_pb-list-check li:before,
+ol.make_pb-list-check li:before {
     content: "\f14a";
     color: #339d56;
 }
-ul.ttfmake-list-check2 li:before,
-ol.ttfmake-list-check2 li:before {
+ul.make_pb-list-check2 li:before,
+ol.make_pb-list-check2 li:before {
     content: "\f046";
     color: #339d56;
 }
-ul.ttfmake-list-star li:before,
-ol.ttfmake-list-star li:before {
+ul.make_pb-list-star li:before,
+ol.make_pb-list-star li:before {
     content: "\f005";
     color: #f89e01;
 }
-ul.ttfmake-list-dot li:before,
-ol.ttfmake-list-dot li:before {
+ul.make_pb-list-dot li:before,
+ol.make_pb-list-dot li:before {
     content: "\f192";
     color: #0094c5;
 }

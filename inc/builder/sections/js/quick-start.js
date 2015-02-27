@@ -13,7 +13,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			});
 
 			$oneApp.on('afterSectionViewRemoved', function() {
-				if ($('.ttfmake-section').length < 1) {
+				if ($('.make_pb-section').length < 1) {
 					$messageBox.removeClass('ttfmp-import-message-hide');
 				}
 			});

@@ -1,17 +1,17 @@
 ( function( tinymce ) {
-	if ( 'undefined' !== typeof window.ttfmakeIconPicker ) {
-		tinymce.PluginManager.add('ttfmake_icon_picker', function (editor, url) {
+	if ( 'undefined' !== typeof window.make_pbIconPicker ) {
+		tinymce.PluginManager.add('make_pb_icon_picker', function (editor, url) {
 			editor.addCommand('Make_Icon_Picker', function () {
-				window.ttfmakeIconPicker.open(editor, function (value, unicode) {
+				window.make_pbIconPicker.open(editor, function (value, unicode) {
 					if ('undefined' !== unicode) {
-						var icon = ' <span class="ttfmake-icon mceNonEditable fa">&#x' + unicode + ';</span> ';
+						var icon = ' <span class="make_pb-icon mceNonEditable fa">&#x' + unicode + ';</span> ';
 						editor.insertContent(icon);
 					}
 				});
 			});
 
-			editor.addButton('ttfmake_icon_picker', {
-				icon   : 'ttfmake-icon-picker',
+			editor.addButton('make_pb_icon_picker', {
+				icon   : 'make_pb-icon-picker',
 				tooltip: 'Insert Icon',
 				cmd    : 'Make_Icon_Picker'
 			});

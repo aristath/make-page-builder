@@ -3,7 +3,7 @@
  * @package Make
  */
 
-if ( ! function_exists( 'ttfmake_edit_page_script' ) ) :
+if ( ! function_exists( 'make_pb_edit_page_script' ) ) :
 /**
  * Enqueue scripts that run on the Edit Page screen
  *
@@ -11,20 +11,20 @@ if ( ! function_exists( 'ttfmake_edit_page_script' ) ) :
  *
  * @return void
  */
-function ttfmake_edit_page_script() {
+function make_pb_edit_page_script() {
 	global $pagenow;
 
 	wp_enqueue_script(
-		'ttfmake-admin-edit-page',
-		get_template_directory_uri() . '/js/admin/edit-page.js',
+		'make_pb-admin-edit-page',
+		Make_PB::uri() . '/js/admin/edit-page.js',
 		array( 'jquery' ),
-		TTFMAKE_VERSION,
+		Make_PB::version(),
 		true
 	);
 
 	wp_localize_script(
-		'ttfmake-admin-edit-page',
-		'ttfmakeEditPageData',
+		'make_pb-admin-edit-page',
+		'make_pbEditPageData',
 		array(
 			'featuredImage' => __( 'Featured images are not available for this page while using the current page template.', 'make' ),
 			'pageNow'       => esc_js( $pagenow ),
@@ -33,4 +33,4 @@ function ttfmake_edit_page_script() {
 }
 endif;
 
-add_action( 'admin_enqueue_scripts', 'ttfmake_edit_page_script' );
+add_action( 'admin_enqueue_scripts', 'make_pb_edit_page_script' );

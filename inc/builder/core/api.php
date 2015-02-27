@@ -123,7 +123,7 @@ class TTFMAKE_Sections {
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_get_sections_class' ) ) :
+if ( ! function_exists( 'make_pb_get_sections_class' ) ) :
 /**
  * Instantiate or return the one TTFMAKE_Sections instance.
  *
@@ -131,12 +131,12 @@ if ( ! function_exists( 'ttfmake_get_sections_class' ) ) :
  *
  * @return TTFMAKE_Sections
  */
-function ttfmake_get_sections_class() {
+function make_pb_get_sections_class() {
 	return TTFMAKE_Sections::instance();
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_get_sections' ) ) :
+if ( ! function_exists( 'make_pb_get_sections' ) ) :
 /**
  * Get the registered sections.
  *
@@ -144,12 +144,12 @@ if ( ! function_exists( 'ttfmake_get_sections' ) ) :
  *
  * @return array    The list of registered sections.
  */
-function ttfmake_get_sections() {
-	return ttfmake_get_sections_class()->get_sections();
+function make_pb_get_sections() {
+	return make_pb_get_sections_class()->get_sections();
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_get_sections_by_order' ) ) :
+if ( ! function_exists( 'make_pb_get_sections_by_order' ) ) :
 /**
  * Get the registered sections by the order parameter.
  *
@@ -157,14 +157,14 @@ if ( ! function_exists( 'ttfmake_get_sections_by_order' ) ) :
  *
  * @return array    The list of registered sections in the parameter order.
  */
-function ttfmake_get_sections_by_order() {
-	$sections = ttfmake_get_sections_class()->get_sections();
-	usort( $sections, 'ttfmake_sorter' );
+function make_pb_get_sections_by_order() {
+	$sections = make_pb_get_sections_class()->get_sections();
+	usort( $sections, 'make_pb_sorter' );
 	return $sections;
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_sorter' ) ) :
+if ( ! function_exists( 'make_pb_sorter' ) ) :
 /**
  * Callback for `usort()` that sorts sections by order.
  *
@@ -174,12 +174,12 @@ if ( ! function_exists( 'ttfmake_sorter' ) ) :
  * @param  mixed    $b    The second element.
  * @return mixed          The result.
  */
-function ttfmake_sorter( $a, $b ) {
+function make_pb_sorter( $a, $b ) {
 	return $a['order'] - $b['order'];
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_add_section' ) ) :
+if ( ! function_exists( 'make_pb_add_section' ) ) :
 /**
  * Add a section.
  *
@@ -197,12 +197,12 @@ if ( ! function_exists( 'ttfmake_add_section' ) ) :
  * @param  array     $config              Array of configuration options for the section.
  * @return void
  */
-function ttfmake_add_section( $id, $label, $icon, $description, $save_callback, $builder_template, $display_template, $order, $path, $config = array() ) {
-	ttfmake_get_sections_class()->add_section( $id, $label, $icon, $description, $save_callback, $builder_template, $display_template, $order, $path, $config );
+function make_pb_add_section( $id, $label, $icon, $description, $save_callback, $builder_template, $display_template, $order, $path, $config = array() ) {
+	make_pb_get_sections_class()->add_section( $id, $label, $icon, $description, $save_callback, $builder_template, $display_template, $order, $path, $config );
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_remove_section' ) ) :
+if ( ! function_exists( 'make_pb_remove_section' ) ) :
 /**
  * Remove a defined section.
  *
@@ -211,7 +211,7 @@ if ( ! function_exists( 'ttfmake_remove_section' ) ) :
  * @param  string    $id    Unique ID for an existing section. Alphanumeric characters only.
  * @return void
  */
-function ttfmake_remove_section( $id ) {
-	ttfmake_get_sections_class()->remove_section( $id );
+function make_pb_remove_section( $id ) {
+	make_pb_get_sections_class()->remove_section( $id );
 }
 endif;

@@ -7,7 +7,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 	oneApp.OverlayView = Backbone.View.extend({
 		events: function() {
 			return _.extend({}, oneApp.SectionView.prototype.events, {
-				'click .ttfmake-overlay-close-action' : 'closeOnClick'
+				'click .make_pb-overlay-close-action' : 'closeOnClick'
 			});
 		},
 
@@ -56,7 +56,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 	// Initialize available gallery items
 	oneApp.initOverlayViews = function () {
 		oneApp.tinymceOverlay = new oneApp.OverlayView({
-			el: $('#ttfmake-tinymce-overlay')
+			el: $('#make_pb-tinymce-overlay')
 		});
 	};
 

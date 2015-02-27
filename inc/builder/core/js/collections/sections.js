@@ -7,17 +7,17 @@ var oneApp = oneApp || {};
 	var Sections = Backbone.Collection.extend({
 		model: oneApp.SectionModel,
 
-		$stage: $('#ttfmake-stage'),
+		$stage: $('#make_pb-stage'),
 
 		toggleStageClass: function() {
-			var sections = $('.ttfmake-section', this.$stage).length;
+			var sections = $('.make_pb-section', this.$stage).length;
 
 			if (sections > 0) {
-				this.$stage.removeClass('ttfmake-stage-closed');
+				this.$stage.removeClass('make_pb-stage-closed');
 			} else {
-				this.$stage.addClass('ttfmake-stage-closed');
+				this.$stage.addClass('make_pb-stage-closed');
 				$('html, body').animate({
-					scrollTop: $('#ttfmake-menu').offset().top
+					scrollTop: $('#make_pb-menu').offset().top
 				}, oneApp.options.closeSpeed);
 			}
 		}

@@ -2,43 +2,43 @@
  Print (print-style.css)
 -------------------------------------------------------- */
 * {
-	color: #000000 !important;
-	text-shadow: none !important; /*reset*/
-	box-shadow: none !important; /*reset*/
-	font-family: Georgia, Times, "Times New Roman", serif !important;
-	font-size: 12px !important;
-	word-spacing: 0 !important; /*reset*/
-	border-color: #cccccc !important;
+    color: #000000 !important;
+    text-shadow: none !important; /*reset*/
+    box-shadow: none !important; /*reset*/
+    font-family: Georgia, Times, "Times New Roman", serif !important;
+    font-size: 12px !important;
+    word-spacing: 0 !important; /*reset*/
+    border-color: #cccccc !important;
 }
 *:before {
-	content: "" !important; /*reset*/
-	padding: 0 !important; /*reset*/
+    content: "" !important; /*reset*/
+    padding: 0 !important; /*reset*/
 }
 *:after {
-	content: "" !important; /*reset*/
-	padding: 0 !important; /*reset*/
+    content: "" !important; /*reset*/
+    padding: 0 !important; /*reset*/
 }
 button {
-	border: 0 !important; /*reset*/
+    border: 0 !important; /*reset*/
 }
 a {
-	color: blue !important;
-	font-weight: normal !important;
-	text-decoration: underline !important;
+    color: blue !important;
+    font-weight: normal !important;
+    text-decoration: underline !important;
 }
 .entry-content p a[href]:after,
 .entry-content div a[href]:after,
 .social-links a[href]:after {
-	content: " (" attr(href) ")" !important;
+    content: " (" attr(href) ")" !important;
 }
 img {
-	max-width: 100% !important;
+    max-width: 100% !important;
 }
 /*---------------------------------------------------------
  Reset styles (_sidebar.scss)
 -------------------------------------------------------- */
-blockquote.ttfmake-testimonial:after {
-	content: none !important;
+blockquote.make_pb-testimonial:after {
+    content: none !important;
 }
 /*---------------------------------------------------------
  Hide elements (_sidebar.scss)
@@ -53,5 +53,5 @@ blockquote.ttfmake-testimonial:after {
 .cycle-pager,
 .cycle-prev,
 .cycle-next {
-	display: none;
+    display: none;
 }

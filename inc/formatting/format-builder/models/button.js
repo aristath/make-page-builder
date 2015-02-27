@@ -1,7 +1,7 @@
-/* global Backbone, jQuery, _, ttfmakeFormatBuilder, ttfmakeFormatBuilderVars */
-var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
+/* global Backbone, jQuery, _, make_pbFormatBuilder, make_pbFormatBuilderVars */
+var make_pbFormatBuilder = make_pbFormatBuilder || {};
 
-(function (window, Backbone, $, _, ttfmakeFormatBuilder, ttfmakeFormatBuilderVars) {
+(function (window, Backbone, $, _, make_pbFormatBuilder, make_pbFormatBuilderVars) {
 	'use strict';
 
 	/**
@@ -9,9 +9,9 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 	 *
 	 * @since 1.4.1.
 	 */
-	ttfmakeFormatBuilder.definitions.button = {
+	make_pbFormatBuilder.definitions.button = {
 		inline: 'a',
-		classes: 'ttfmake-button'
+		classes: 'make_pb-button'
 	};
 
 	/**
@@ -19,7 +19,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 	 *
 	 * @since 1.4.1.
 	 */
-	ttfmakeFormatBuilder.nodes.button = 'a.ttfmake-button';
+	make_pbFormatBuilder.nodes.button = 'a.make_pb-button';
 
 	/**
 	 * Defines the listbox item in the 'Choose a format' dropdown.
@@ -28,8 +28,8 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 	 *
 	 * @returns object
 	 */
-	ttfmakeFormatBuilder.choices.button = function() {
-		var content = ttfmakeFormatBuilder.currentSelection.getContent(),
+	make_pbFormatBuilder.choices.button = function() {
+		var content = make_pbFormatBuilder.currentSelection.getContent(),
 			choice;
 
 		// This choice is disabled if no content is selected.
@@ -47,8 +47,8 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 	 *
 	 * @since 1.4.1.
 	 */
-	ttfmakeFormatBuilder.formats = ttfmakeFormatBuilder.formats || {};
-	ttfmakeFormatBuilder.formats.button = ttfmakeFormatBuilder.FormatModel.extend({
+	make_pbFormatBuilder.formats = make_pbFormatBuilder.formats || {};
+	make_pbFormatBuilder.formats.button = make_pbFormatBuilder.FormatModel.extend({
 		/**
 		 * Default format option values.
 		 *
@@ -59,7 +59,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 			id: 0,
 			url: '',
 			target: false,
-			fontSize: ttfmakeFormatBuilderVars.userSettings.fontSizeBody,
+			fontSize: make_pbFormatBuilderVars.userSettings.fontSizeBody,
 			fontWeight: 'bold',
 			colorBackground: '#000000',
 			colorBackgroundHover: '#e5e5e5',
@@ -77,7 +77,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 		 * @since 1.4.1.
 		 */
 		initialize: function() {
-			var node = ttfmakeFormatBuilder.getParentNode(ttfmakeFormatBuilder.nodes.button);
+			var node = make_pbFormatBuilder.getParentNode(make_pbFormatBuilder.nodes.button);
 
 			// Create a new element ID.
 			this.set('id', this.createID());
@@ -134,10 +134,10 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 						}
 					]
 				},
-				ttfmakeFormatBuilder.getColorButton( 'colorBackground', 'Background Color' ),
-				ttfmakeFormatBuilder.getColorButton( 'colorBackgroundHover', 'Background Color (hover)' ),
-				ttfmakeFormatBuilder.getColorButton( 'colorText', 'Text Color' ),
-				ttfmakeFormatBuilder.getColorButton( 'colorTextHover', 'Text Color (hover)' ),
+				make_pbFormatBuilder.getColorButton( 'colorBackground', 'Background Color' ),
+				make_pbFormatBuilder.getColorButton( 'colorBackgroundHover', 'Background Color (hover)' ),
+				make_pbFormatBuilder.getColorButton( 'colorText', 'Text Color' ),
+				make_pbFormatBuilder.getColorButton( 'colorTextHover', 'Text Color (hover)' ),
 				{
 					type: 'textbox',
 					name: 'paddingHorz',
@@ -162,7 +162,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 					classes: 'monospace',
 					value: this.escape('borderRadius')
 				},
-				ttfmakeFormatBuilder.getIconButton( 'icon', 'Icon' )
+				make_pbFormatBuilder.getIconButton( 'icon', 'Icon' )
 			];
 
 			return this.wrapOptionFields(items);
@@ -224,7 +224,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 			}
 
 			// Parse the icon.
-			icon = $node.find('i.ttfmake-button-icon');
+			icon = $node.find('i.make_pb-button-icon');
 			if (icon.length > 0) {
 				iconClasses = icon.attr('class').split(/\s+/);
 				// Look for relevant classes on the <i> element.
@@ -247,13 +247,13 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 
 			// If not updating an existing format, apply to the current selection using the Formatter.
 			if (true !== this.get('update')) {
-				ttfmakeFormatBuilder.editor.formatter.apply('button');
+				make_pbFormatBuilder.editor.formatter.apply('button');
 			}
 
 			// Make sure the right node is selected.
-			$node = $(ttfmakeFormatBuilder.currentSelection.getNode());
-			if (! $node.is(ttfmakeFormatBuilder.nodes.button)) {
-				$node = $node.find(ttfmakeFormatBuilder.nodes.button);
+			$node = $(make_pbFormatBuilder.currentSelection.getNode());
+			if (! $node.is(make_pbFormatBuilder.nodes.button)) {
+				$node = $node.find(make_pbFormatBuilder.nodes.button);
 			}
 
 			// Set the element ID, if it doesn't have one yet.
@@ -288,13 +288,13 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 			});
 
 			// Remove any existing icons.
-			$node.find('i.ttfmake-button-icon').remove();
+			$node.find('i.make_pb-button-icon').remove();
 
 			// Add the current icon, if one is set.
 			if ('' !== this.get('icon')) {
 				// Build the icon.
 				$icon = $('<i>');
-				$icon.attr('class', 'ttfmake-button-icon fa ' + this.escape('icon'));
+				$icon.attr('class', 'make_pb-button-icon fa ' + this.escape('icon'));
 
 				// Add the new icon.
 				$node.prepend(' ');
@@ -311,20 +311,20 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 		 * @since 1.4.1.
 		 */
 		remove: function() {
-			var node = ttfmakeFormatBuilder.getParentNode(ttfmakeFormatBuilder.nodes.button),
+			var node = make_pbFormatBuilder.getParentNode(make_pbFormatBuilder.nodes.button),
 				content;
 
 			// Remove the icon if it exists.
-			$(node).find('i.ttfmake-button-icon').remove();
+			$(node).find('i.make_pb-button-icon').remove();
 
 			// Get inner content.
 			content = $(node).html().trim();
 
 			// Set the selection to the whole node.
-			ttfmakeFormatBuilder.currentSelection.select(node);
+			make_pbFormatBuilder.currentSelection.select(node);
 
 			// Replace the current selection with the inner content.
-			ttfmakeFormatBuilder.currentSelection.setContent(content);
+			make_pbFormatBuilder.currentSelection.setContent(content);
 		}
 	});
-})(window, Backbone, jQuery, _, ttfmakeFormatBuilder, ttfmakeFormatBuilderVars);
+})(window, Backbone, jQuery, _, make_pbFormatBuilder, make_pbFormatBuilderVars);

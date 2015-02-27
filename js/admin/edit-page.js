@@ -3,11 +3,11 @@
  *
  * @since 1.0.0
  */
-/* global jQuery, ttfmakeEditPageData */
+/* global jQuery, make_pbEditPageData */
 (function($) {
 	'use strict';
 
-	var ttfmakeEditPage = {
+	var make_pbEditPage = {
 		cache: {
 			$document: $(document)
 		},
@@ -21,9 +21,9 @@
 			this.cache.$pageTemplate = $('#page_template');
 			this.cache.$builderToggle = $('#use-builder');
 			this.cache.$mainEditor = $('#postdivrich');
-			this.cache.$builder = $('#ttfmake-builder');
-			this.cache.$duplicator = $('.ttfmake-duplicator');
-			this.cache.$builderHide = $('#ttfmake-builder-hide');
+			this.cache.$builder = $('#make_pb-builder');
+			this.cache.$duplicator = $('.make_pb-duplicator');
+			this.cache.$builderHide = $('#make_pb-builder-hide');
 			this.cache.$featuredImage = $('#postimagediv');
 			this.cache.$commentstatus = $('#comment_status');
 			this.cache.$pingstatus = $('#ping_status');
@@ -38,7 +38,7 @@
 			self.cache.$builderToggle.on('click', self.templateToggle);
 
 			// Change default settings for new pages
-			if ( typeof ttfmakeEditPageData !== 'undefined' && 'post-new.php' === ttfmakeEditPageData.pageNow && 'page' === pagenow ) {
+			if ( typeof make_pbEditPageData !== 'undefined' && 'post-new.php' === make_pbEditPageData.pageNow && 'page' === pagenow ) {
 				// Builder template is selected by default
 				self.cache.$pageTemplate.val('template-builder.php');
 
@@ -54,7 +54,7 @@
 		},
 
 		templateToggle: function(e) {
-			var self = ttfmakeEditPage,
+			var self = make_pbEditPage,
 				$target = $(e.target),
 				val = $target.val();
 
@@ -64,30 +64,30 @@
 				self.cache.$duplicator.show();
 				self.cache.$builderHide.prop('checked', true).parent().show();
 				self.featuredImageToggle('hide');
-				self.cache.$body.addClass('ttfmake-builder-active').removeClass('ttfmake-default-active');
+				self.cache.$body.addClass('make_pb-builder-active').removeClass('make_pb-default-active');
 			} else {
 				self.cache.$mainEditor.show();
 				self.cache.$builder.hide();
 				self.cache.$duplicator.hide();
 				self.cache.$builderHide.prop('checked', false).parent().hide();
 				self.featuredImageToggle('show');
-				self.cache.$body.removeClass('ttfmake-builder-active').addClass('ttfmake-default-active');
+				self.cache.$body.removeClass('make_pb-builder-active').addClass('make_pb-default-active');
 			}
 		},
 
 		featuredImageToggle: function(state) {
-			var self = ttfmakeEditPage,
+			var self = make_pbEditPage,
 				unavailable;
 
-			self.cache.$featuredImage.find('.ttfmake-message').remove();
+			self.cache.$featuredImage.find('.make_pb-message').remove();
 
-			if ('undefined' !== typeof ttfmakeEditPageData) {
-				unavailable = ttfmakeEditPageData.featuredImage;
+			if ('undefined' !== typeof make_pbEditPageData) {
+				unavailable = make_pbEditPageData.featuredImage;
 			} else {
 				unavailable = 'Featured images are not available for this page while using the current page template.';
 			}
 
-			unavailable = '<div class="ttfmake-message inside"><p class="hide-if-no-js">'+unavailable+'</p></div>';
+			unavailable = '<div class="make_pb-message inside"><p class="hide-if-no-js">'+unavailable+'</p></div>';
 
 			if ('show' === state) {
 				self.cache.$featuredImage.find('.inside').show();
@@ -97,5 +97,5 @@
 		}
 	};
 
-	ttfmakeEditPage.init();
+	make_pbEditPage.init();
 })(jQuery);

@@ -1,10 +1,10 @@
-/* global Backbone, jQuery, _, ttfmakeFormatBuilder */
-var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
+/* global Backbone, jQuery, _, make_pbFormatBuilder */
+var make_pbFormatBuilder = make_pbFormatBuilder || {};
 
-( function ( window, Backbone, $, _, ttfmakeFormatBuilder ) {
+( function ( window, Backbone, $, _, make_pbFormatBuilder ) {
 	'use strict';
 
-	ttfmakeFormatBuilder.FormatModel = Backbone.Model.extend({
+	make_pbFormatBuilder.FormatModel = Backbone.Model.extend({
 		defaults: {},
 
 		initialize: function() {},
@@ -107,12 +107,12 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 			var newID = Date.now();
 
 			// Make it an ID.
-			return 'ttfmake-' + Math.round(newID / 1000);
+			return 'make_pb-' + Math.round(newID / 1000);
 		}
 	});
 
 	// Set up this model as a "no URL model" where data is not synced with the server
-	ttfmakeFormatBuilder.FormatModel.prototype.sync  = function () { return null; };
-	ttfmakeFormatBuilder.FormatModel.prototype.fetch = function () { return null; };
-	ttfmakeFormatBuilder.FormatModel.prototype.save  = function () { return null; };
-})( window, Backbone, jQuery, _, ttfmakeFormatBuilder );
+	make_pbFormatBuilder.FormatModel.prototype.sync  = function () { return null; };
+	make_pbFormatBuilder.FormatModel.prototype.fetch = function () { return null; };
+	make_pbFormatBuilder.FormatModel.prototype.save  = function () { return null; };
+})( window, Backbone, jQuery, _, make_pbFormatBuilder );

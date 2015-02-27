@@ -1,7 +1,7 @@
-/* global Backbone, jQuery, _, ttfmakeFormatBuilder, ttfmakeFormatBuilderVars */
-var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
+/* global Backbone, jQuery, _, make_pbFormatBuilder, make_pbFormatBuilderVars */
+var make_pbFormatBuilder = make_pbFormatBuilder || {};
 
-( function ( window, Backbone, $, _, ttfmakeFormatBuilder, ttfmakeFormatBuilderVars ) {
+( function ( window, Backbone, $, _, make_pbFormatBuilder, make_pbFormatBuilderVars ) {
 	'use strict';
 
 	/**
@@ -9,9 +9,9 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 	 *
 	 * @since 1.4.1.
 	 */
-	ttfmakeFormatBuilder.definitions.notice = {
+	make_pbFormatBuilder.definitions.notice = {
 		block: 'div',
-		classes: 'ttfmake-notice',
+		classes: 'make_pb-notice',
 		wrapper: true
 	};
 
@@ -20,7 +20,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 	 *
 	 * @since 1.4.1.
 	 */
-	ttfmakeFormatBuilder.nodes.notice = 'div.ttfmake-notice';
+	make_pbFormatBuilder.nodes.notice = 'div.make_pb-notice';
 
 	/**
 	 * Defines the listbox item in the 'Choose a format' dropdown.
@@ -29,9 +29,9 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 	 *
 	 * @returns object
 	 */
-	ttfmakeFormatBuilder.choices.notice = function() {
-		var content = ttfmakeFormatBuilder.currentSelection.getContent(),
-			parent = ttfmakeFormatBuilder.getParentNode('p'),
+	make_pbFormatBuilder.choices.notice = function() {
+		var content = make_pbFormatBuilder.currentSelection.getContent(),
+			parent = make_pbFormatBuilder.getParentNode('p'),
 			choice, isP;
 
 		// Determine if the current node or a parent is a <p> tag.
@@ -51,8 +51,8 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 	 *
 	 * @since 1.4.1.
 	 */
-	ttfmakeFormatBuilder.formats = ttfmakeFormatBuilder.formats || {};
-	ttfmakeFormatBuilder.formats.notice = ttfmakeFormatBuilder.FormatModel.extend({
+	make_pbFormatBuilder.formats = make_pbFormatBuilder.formats || {};
+	make_pbFormatBuilder.formats.notice = make_pbFormatBuilder.FormatModel.extend({
 		/**
 		 * Default format option values.
 		 *
@@ -62,9 +62,9 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 			update: false,
 			id: 0,
 			text: '',
-			fontSize: ttfmakeFormatBuilderVars.userSettings.fontSizeBody,
+			fontSize: make_pbFormatBuilderVars.userSettings.fontSizeBody,
 			icon: '',
-			iconSize: (parseInt(ttfmakeFormatBuilderVars.userSettings.fontSizeBody) * 2) + '',
+			iconSize: (parseInt(make_pbFormatBuilderVars.userSettings.fontSizeBody) * 2) + '',
 			colorIcon: '#808080',
 			iconPosition: 'left',
 			paddingHorz: '20',
@@ -82,7 +82,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 		 * @since 1.4.1.
 		 */
 		initialize: function() {
-			var node = ttfmakeFormatBuilder.getParentNode(ttfmakeFormatBuilder.nodes.notice);
+			var node = make_pbFormatBuilder.getParentNode(make_pbFormatBuilder.nodes.notice);
 
 			// Create a new element ID.
 			this.set('id', this.createID());
@@ -102,8 +102,8 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 		 */
 		getOptionFields: function() {
 			var items = [
-				ttfmakeFormatBuilder.getColorButton( 'colorBackground', 'Background Color' ),
-				ttfmakeFormatBuilder.getColorButton( 'colorText', 'Text Color' ),
+				make_pbFormatBuilder.getColorButton( 'colorBackground', 'Background Color' ),
+				make_pbFormatBuilder.getColorButton( 'colorText', 'Text Color' ),
 				{
 					type: 'textbox',
 					name: 'fontSize',
@@ -112,7 +112,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 					classes: 'monospace',
 					value: this.escape('fontSize')
 				},
-				ttfmakeFormatBuilder.getIconButton( 'icon', 'Icon' ),
+				make_pbFormatBuilder.getIconButton( 'icon', 'Icon' ),
 				{
 					type: 'textbox',
 					name: 'iconSize',
@@ -121,7 +121,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 					classes: 'monospace',
 					value: this.escape('iconSize')
 				},
-				ttfmakeFormatBuilder.getColorButton( 'colorIcon', 'Icon Color' ),
+				make_pbFormatBuilder.getColorButton( 'colorIcon', 'Icon Color' ),
 				{
 					type: 'listbox',
 					name: 'iconPosition',
@@ -190,7 +190,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 					classes: 'monospace',
 					value: this.escape('borderWidth')
 				},
-				ttfmakeFormatBuilder.getColorButton( 'colorBorder', 'Border Color' )
+				make_pbFormatBuilder.getColorButton( 'colorBorder', 'Border Color' )
 			];
 
 			return this.wrapOptionFields(items);
@@ -212,7 +212,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 			if ($node.attr('id')) this.set('id', $node.attr('id'));
 
 			// Parse the icon.
-			icon = $node.find('i.ttfmake-notice-icon');
+			icon = $node.find('i.make_pb-notice-icon');
 			if ( icon.length > 0 ) {
 				iconClasses = icon.attr('class').split(/\s+/);
 				// Look for relevant classes on the <i> element.
@@ -277,11 +277,11 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 
 			// If not updating an existing format, apply to the current selection using the Formatter.
 			if (true !== this.get('update')) {
-				ttfmakeFormatBuilder.editor.formatter.apply('notice');
+				make_pbFormatBuilder.editor.formatter.apply('notice');
 			}
 
 			// Make sure the right node is selected.
-			$node = $(ttfmakeFormatBuilder.getParentNode(ttfmakeFormatBuilder.nodes.notice));
+			$node = $(make_pbFormatBuilder.getParentNode(make_pbFormatBuilder.nodes.notice));
 
 			// Set the element ID, if it doesn't have one yet.
 			if (! $node.attr('id')) {
@@ -299,18 +299,18 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 			});
 
 			// Add a font-size style if it's different than the user setting for the body font.
-			if (this.escape('fontSize') != ttfmakeFormatBuilderVars.userSettings.fontSizeBody) {
+			if (this.escape('fontSize') != make_pbFormatBuilderVars.userSettings.fontSizeBody) {
 				$node.css('fontSize', this.escape('fontSize') + 'px');
 			}
 
 			// Remove any existing icons.
-			$node.find('i.ttfmake-notice-icon').remove();
+			$node.find('i.make_pb-notice-icon').remove();
 
 			// Add the current icon, if one is set.
 			if ('' !== this.get('icon')) {
 				// Build the icon.
 				$icon = $('<i>');
-				$icon.attr('class', 'ttfmake-notice-icon fa ' + this.escape('icon') + ' pull-' + this.escape('iconPosition'));
+				$icon.attr('class', 'make_pb-notice-icon fa ' + this.escape('icon') + ' pull-' + this.escape('iconPosition'));
 				$icon.css({
 					fontSize: this.escape('iconSize') + 'px',
 					color: this.escape('colorIcon')
@@ -330,20 +330,20 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 		 * @since 1.4.1.
 		 */
 		remove: function() {
-			var node = ttfmakeFormatBuilder.getParentNode(ttfmakeFormatBuilder.nodes.notice),
+			var node = make_pbFormatBuilder.getParentNode(make_pbFormatBuilder.nodes.notice),
 				content;
 
 			// Remove the icon if it exists.
-			$(node).find('i.ttfmake-notice-icon').remove();
+			$(node).find('i.make_pb-notice-icon').remove();
 
 			// Get inner content.
 			content = $(node).html().trim();
 
 			// Set the selection to the whole node.
-			ttfmakeFormatBuilder.currentSelection.select(node);
+			make_pbFormatBuilder.currentSelection.select(node);
 
 			// Replace the current selection with the inner content.
-			ttfmakeFormatBuilder.currentSelection.setContent(content);
+			make_pbFormatBuilder.currentSelection.setContent(content);
 		}
 	});
-})( window, Backbone, jQuery, _, ttfmakeFormatBuilder, ttfmakeFormatBuilderVars );
+})( window, Backbone, jQuery, _, make_pbFormatBuilder, make_pbFormatBuilderVars );

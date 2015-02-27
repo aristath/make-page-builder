@@ -3,7 +3,7 @@
  * @package Make
  */
 
-if ( ! function_exists( 'ttfmake_get_view' ) ) :
+if ( ! function_exists( 'make_pb_get_view' ) ) :
 /**
  * Determine the current view.
  *
@@ -13,7 +13,7 @@ if ( ! function_exists( 'ttfmake_get_view' ) ) :
  *
  * @return string    The string representing the current view.
  */
-function ttfmake_get_view() {
+function make_pb_get_view() {
 	// Post types
 	$post_types = get_post_types(
 		array(
@@ -65,7 +65,7 @@ function ttfmake_get_view() {
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_get_section_data' ) ) :
+if ( ! function_exists( 'make_pb_get_section_data' ) ) :
 /**
  * Retrieve all of the data for the sections.
  *
@@ -74,9 +74,9 @@ if ( ! function_exists( 'ttfmake_get_section_data' ) ) :
  * @param  string    $post_id    The post to retrieve the data from.
  * @return array                 The combined data.
  */
-function ttfmake_get_section_data( $post_id ) {
+function make_pb_get_section_data( $post_id ) {
 	$ordered_data = array();
-	$ids          = get_post_meta( $post_id, '_ttfmake-section-ids', true );
+	$ids          = get_post_meta( $post_id, '_make_pb-section-ids', true );
 	$ids          = ( ! empty( $ids ) && is_array( $ids ) ) ? array_map( 'strval', $ids ) : $ids;
 	$post_meta    = get_post_meta( $post_id );
 
@@ -87,15 +87,15 @@ function ttfmake_get_section_data( $post_id ) {
 	if ( is_array( $post_meta ) ) {
 		foreach ( $post_meta as $key => $value ) {
 			// Only consider builder values
-			if ( 0 === strpos( $key, '_ttfmake:' ) ) {
+			if ( 0 === strpos( $key, '_make_pb:' ) ) {
 				// Get the individual pieces
-				$temp_data[ str_replace( '_ttfmake:', '', $key ) ] = $value[0];
+				$temp_data[ str_replace( '_make_pb:', '', $key ) ] = $value[0];
 			}
 		}
 	}
 
 	// Create multidimensional array from postmeta
-	$data = ttfmake_create_array_from_meta_keys( $temp_data );
+	$data = make_pb_create_array_from_meta_keys( $temp_data );
 
 	// Reorder the data in the order specified by the section IDs
 	if ( is_array( $ids ) ) {
@@ -118,7 +118,7 @@ function ttfmake_get_section_data( $post_id ) {
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_create_array_from_meta_keys' ) ) :
+if ( ! function_exists( 'make_pb_create_array_from_meta_keys' ) ) :
 /**
  * Convert an array with array keys that map to a multidimensional array to the array.
  *
@@ -127,7 +127,7 @@ if ( ! function_exists( 'ttfmake_create_array_from_meta_keys' ) ) :
  * @param  array    $arr    The array to convert.
  * @return array            The converted array.
  */
-function ttfmake_create_array_from_meta_keys( $arr ) {
+function make_pb_create_array_from_meta_keys( $arr ) {
 	// The new multidimensional array we will return
 	$result = array();
 
@@ -160,7 +160,7 @@ function ttfmake_create_array_from_meta_keys( $arr ) {
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_is_builder_page' ) ) :
+if ( ! function_exists( 'make_pb_is_builder_page' ) ) :
 /**
  * Determine if the post uses the builder or not.
  *
@@ -169,7 +169,7 @@ if ( ! function_exists( 'ttfmake_is_builder_page' ) ) :
  * @param  int     $post_id    The post to inspect.
  * @return bool                True if builder is used for post; false if it is not.
  */
-function ttfmake_is_builder_page( $post_id = 0 ) {
+function make_pb_is_builder_page( $post_id = 0 ) {
 	if ( empty( $post_id ) ) {
 		$post_id = get_the_ID();
 	}
@@ -178,7 +178,7 @@ function ttfmake_is_builder_page( $post_id = 0 ) {
 	$has_builder_template = ( 'template-builder.php' === get_page_template_slug( $post_id ) );
 
 	// Other post types will use meta data to support builder pages
-	$has_builder_meta = ( 1 === (int) get_post_meta( $post_id, '_ttfmake-use-builder', true ) );
+	$has_builder_meta = ( 1 === (int) get_post_meta( $post_id, '_make_pb-use-builder', true ) );
 
 	$is_builder_page = $has_builder_template || $has_builder_meta;
 
@@ -194,7 +194,7 @@ function ttfmake_is_builder_page( $post_id = 0 ) {
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_builder_css' ) ) :
+if ( ! function_exists( 'make_pb_builder_css' ) ) :
 /**
  * Trigger an action hook for each section on a Builder page for the purpose
  * of adding section-specific CSS rules to the document head.
@@ -203,9 +203,9 @@ if ( ! function_exists( 'ttfmake_builder_css' ) ) :
  *
  * @return void
  */
-function ttfmake_builder_css() {
-	if ( ttfmake_is_builder_page() ) {
-		$sections = ttfmake_get_section_data( get_the_ID() );
+function make_pb_builder_css() {
+	if ( make_pb_is_builder_page() ) {
+		$sections = make_pb_get_section_data( get_the_ID() );
 
 		if ( ! empty( $sections ) ) {
 			foreach ( $sections as $id => $data ) {
@@ -226,9 +226,9 @@ function ttfmake_builder_css() {
 }
 endif;
 
-add_action( 'make_css', 'ttfmake_builder_css' );
+add_action( 'make_css', 'make_pb_builder_css' );
 
-if ( ! function_exists( 'ttfmake_builder_banner_css' ) ) :
+if ( ! function_exists( 'make_pb_builder_banner_css' ) ) :
 /**
  * Add frontend CSS rules for Banner sections based on certain section options.
  *
@@ -239,7 +239,7 @@ if ( ! function_exists( 'ttfmake_builder_banner_css' ) ) :
  *
  * @return void
  */
-function ttfmake_builder_banner_css( $data, $id ) {
+function make_pb_builder_banner_css( $data, $id ) {
 	$responsive = ( isset( $data['responsive'] ) ) ? $data['responsive'] : 'balanced';
 	$slider_height = absint( $data['height'] );
 	if ( 0 === $slider_height ) {
@@ -248,20 +248,20 @@ function ttfmake_builder_banner_css( $data, $id ) {
 	$slider_ratio = ( $slider_height / 960 ) * 100;
 
 	if ( 'aspect' === $responsive ) {
-		ttfmake_get_css()->add( array(
+		make_pb_get_css()->add( array(
 			'selectors'    => array( '#builder-section-' . esc_attr( $id ) . ' .builder-banner-slide' ),
 			'declarations' => array(
 				'padding-bottom' => $slider_ratio . '%'
 			),
 		) );
 	} else {
-		ttfmake_get_css()->add( array(
+		make_pb_get_css()->add( array(
 			'selectors'    => array( '#builder-section-' . esc_attr( $id ) . ' .builder-banner-slide' ),
 			'declarations' => array(
 				'padding-bottom' => $slider_height . 'px'
 			),
 		) );
-		ttfmake_get_css()->add( array(
+		make_pb_get_css()->add( array(
 			'selectors'    => array( '#builder-section-' . esc_attr( $id ) . ' .builder-banner-slide' ),
 			'declarations' => array(
 				'padding-bottom' => $slider_ratio . '%'
@@ -272,4 +272,4 @@ function ttfmake_builder_banner_css( $data, $id ) {
 }
 endif;
 
-add_action( 'make_builder_banner_css', 'ttfmake_builder_banner_css', 10, 2 );
+add_action( 'make_builder_banner_css', 'make_pb_builder_banner_css', 10, 2 );

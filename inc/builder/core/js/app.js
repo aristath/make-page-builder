@@ -13,15 +13,15 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 	};
 
 	oneApp.cache = {
-		$sectionOrder: $('#ttfmake-section-order'),
+		$sectionOrder: $('#make_pb-section-order'),
 		$scrollHandle: $('html, body'),
 		$makeEditor: $('#wp-make-wrap'),
 		$makeTextArea: $('#make')
 	};
 
 	oneApp.initSortables = function () {
-		$('.ttfmake-stage').sortable({
-			handle: '.ttfmake-section-header',
+		$('.make_pb-stage').sortable({
+			handle: '.make_pb-section-header',
 			placeholder: 'sortable-placeholder',
 			forcePlaceholderSizeType: true,
 			distance: 2,
@@ -29,7 +29,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 			start: function (event, ui) {
 				// Set the height of the placeholder to that of the sorted item
 				var $item = $(ui.item.get(0)),
-					$stage = $item.parents('.ttfmake-stage');
+					$stage = $item.parents('.make_pb-stage');
 
 				$item.css('-webkit-transform', 'translateZ(0)');
 				$('.sortable-placeholder', $stage).height(parseInt($item.height(), 10) - 2);
@@ -42,7 +42,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 				oneApp.setOrder( $(this).sortable('toArray', {attribute: 'data-id'}), oneApp.cache.$sectionOrder );
 
 				$.each($frames, function() {
-					var id = $(this).attr('id').replace('ttfmake-iframe-', '');
+					var id = $(this).attr('id').replace('make_pb-iframe-', '');
 					setTimeout(function() {
 						oneApp.initFrame(id);
 					}, 100);
@@ -90,7 +90,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 	};
 
 	oneApp.initViews = function () {
-		$('.ttfmake-section').each(function () {
+		$('.make_pb-section').each(function () {
 			var $section = $(this),
 				idAttr = $section.attr('id'),
 				id = $section.attr('data-id'),
@@ -219,8 +219,8 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 	};
 
 	oneApp.initFrame = function(id, link) {
-		var content = $('#ttfmake-content-' + id).val(),
-			iframe = document.getElementById('ttfmake-iframe-' + id),
+		var content = $('#make_pb-content-' + id).val(),
+			iframe = document.getElementById('make_pb-iframe-' + id),
 			iframeContent = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document,
 			iframeHead = $('head', iframeContent),
 			iframeBody = $('body', iframeContent);
@@ -253,15 +253,15 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 		});
 	};
 
-	$('body').on('click', '.ttfmake-remove-image-from-modal', function(evt){
+	$('body').on('click', '.make_pb-remove-image-from-modal', function(evt){
 		evt.preventDefault();
 
-		var $parent = oneApp.$currentPlaceholder.parents('.ttfmake-uploader'),
-			$input = $('.ttfmake-media-uploader-value', $parent);
+		var $parent = oneApp.$currentPlaceholder.parents('.make_pb-uploader'),
+			$input = $('.make_pb-media-uploader-value', $parent);
 
 		// Remove the image
 		oneApp.$currentPlaceholder.css('background-image', '');
-		$parent.removeClass('ttfmake-has-image-set');
+		$parent.removeClass('make_pb-has-image-set');
 
 		// Remove the value from the input
 		$input.removeAttr('value');
@@ -271,7 +271,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 
 	wp.media.view.Sidebar = wp.media.view.Sidebar.extend({
 		render: function() {
-			this.$el.html( wp.media.template( 'ttfmake-remove-image' ) );
+			this.$el.html( wp.media.template( 'make_pb-remove-image' ) );
 			return this;
 		}
 	});

@@ -1,14 +1,14 @@
 (function(tinymce, $) {
-	tinymce.PluginManager.add('ttfmake_hr', function( editor, url ) {
+	tinymce.PluginManager.add('make_pb_hr', function( editor, url ) {
 		var hrWindow, hrListBox, hrSubmit;
 
-		editor.addButton('ttfmake_hr', {
+		editor.addButton('make_pb_hr', {
 			icon: 'hr',
 			tooltip: 'Horizontal line',
 			onclick: function() {
 				hrWindow = editor.windowManager.open( {
 					title: 'Insert Horizontal Line',
-					id: 'ttfmake-hr-picker',
+					id: 'make_pb-hr-picker',
 					body: [
 						{
 							type: 'listbox',
@@ -67,7 +67,7 @@
 
 									styles = selection.split(/-/);
 
-									$hr.addClass('ttfmake-hr');
+									$hr.addClass('make_pb-hr');
 									$hr.css({
 										borderStyle: styles[0],
 										borderTopWidth: styles[1] + 'px'

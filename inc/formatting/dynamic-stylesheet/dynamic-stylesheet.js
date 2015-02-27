@@ -6,14 +6,14 @@
  *
  * @since 1.4.1.
  */
-/* global jQuery, ttfmakeDynamicStylesheet */
+/* global jQuery, make_pbDynamicStylesheet */
 
-var ttfmakeDynamicStylesheet;
+var make_pbDynamicStylesheet;
 
 (function($) {
 	'use strict';
 
-	ttfmakeDynamicStylesheet = {
+	make_pbDynamicStylesheet = {
 		/**
 		 * Container for caching jQuery objects.
 		 *
@@ -29,8 +29,8 @@ var ttfmakeDynamicStylesheet;
 		 * @since 1.4.1.
 		 */
 		cacheSelector: {
-			$button: 'a.ttfmake-button[data-hover-color], a.ttfmake-button[data-hover-background-color]',
-			$list: 'ul.ttfmake-list[data-icon-color]'
+			$button: 'a.make_pb-button[data-hover-color], a.make_pb-button[data-hover-background-color]',
+			$list: 'ul.make_pb-list[data-icon-color]'
 		},
 
 		/**
@@ -74,7 +74,7 @@ var ttfmakeDynamicStylesheet;
 		/**
 		 * Initialize the dynamic stylesheet functionality.
 		 *
-		 * Note that this only does something if the ttfmakeDynamicStylesheetVars object isn't present,
+		 * Note that this only does something if the make_pbDynamicStylesheetVars object isn't present,
 		 * which indicates that it's not loaded in the admin.
 		 *
 		 * @since 1.4.1.
@@ -82,7 +82,7 @@ var ttfmakeDynamicStylesheet;
 		 * @return void
 		 */
 		init: function() {
-			if ('undefined' === typeof ttfmakeDynamicStylesheetVars || ! ttfmakeDynamicStylesheetVars.tinymce) {
+			if ('undefined' === typeof make_pbDynamicStylesheetVars || ! make_pbDynamicStylesheetVars.tinymce) {
 				this.root = this.cache.$document;
 
 				var self = this;
@@ -158,7 +158,7 @@ var ttfmakeDynamicStylesheet;
 				var $style = $('<style type="text/css">');
 
 				// Add an id
-				$style.attr('id', 'ttfmake-dynamic-styles');
+				$style.attr('id', 'make_pb-dynamic-styles');
 
 				// WebKit hack :(
 				//style.appendChild(document.createTextNode(''));
@@ -184,9 +184,9 @@ var ttfmakeDynamicStylesheet;
 		 */
 		removeStylesheet: function() {
 			if (this.root.find('head').length > 0) {
-				$('#ttfmake-dynamic-styles', this.root).remove();
+				$('#make_pb-dynamic-styles', this.root).remove();
 			} else {
-				this.root.parent().find('#ttfmake-dynamic-styles').remove();
+				this.root.parent().find('#make_pb-dynamic-styles').remove();
 			}
 			delete this.stylesheet;
 		},
@@ -229,5 +229,5 @@ var ttfmakeDynamicStylesheet;
 		}
 	};
 
-	ttfmakeDynamicStylesheet.init();
+	make_pbDynamicStylesheet.init();
 })(jQuery);

@@ -8,7 +8,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 		events: function() {
 			return _.extend({}, oneApp.SectionView.prototype.events, {
-				'click .ttfmake-add-slide' : 'addSlide'
+				'click .make_pb-add-slide' : 'addSlide'
 			});
 		},
 
@@ -27,7 +27,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 			// Append view
 			html = view.render().el;
-			$('.ttfmake-banner-slides-stage', this.$el).append(html);
+			$('.make_pb-banner-slides-stage', this.$el).append(html);
 
 			// Only scroll and focus if not triggered by the pseudo event
 			if ( ! params ) {
@@ -39,12 +39,12 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			oneApp.initializeBannerSlidesColorPicker(view);
 
 			// Add the section value to the sortable order
-			oneApp.addOrderValue(view.model.get('id'), $('.ttfmake-banner-slide-order', $(view.$el).parents('.ttfmake-banner-slides')));
+			oneApp.addOrderValue(view.model.get('id'), $('.make_pb-banner-slide-order', $(view.$el).parents('.make_pb-banner-slides')));
 		},
 
 		getParentID: function() {
 			var idAttr = this.$el.attr('id'),
-				id = idAttr.replace('ttfmake-section-', '');
+				id = idAttr.replace('make_pb-section-', '');
 
 			return parseInt(id, 10);
 		}
@@ -56,13 +56,13 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 		view = view || '';
 
 		if (view.$el) {
-			$selector = $('.ttfmake-banner-slides-stage', view.$el);
+			$selector = $('.make_pb-banner-slides-stage', view.$el);
 		} else {
-			$selector = $('.ttfmake-banner-slides-stage');
+			$selector = $('.make_pb-banner-slides-stage');
 		}
 
 		$selector.sortable({
-			handle: '.ttfmake-sortable-handle',
+			handle: '.make_pb-sortable-handle',
 			placeholder: 'sortable-placeholder',
 			forcePlaceholderSizeType: true,
 			distance: 2,
@@ -70,14 +70,14 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			start: function (event, ui) {
 				// Set the height of the placeholder to that of the sorted item
 				var $item = $(ui.item.get(0)),
-					$stage = $item.parents('.ttfmake-banner-slides-stage');
+					$stage = $item.parents('.make_pb-banner-slides-stage');
 
 				$('.sortable-placeholder', $stage).height($item.height());
 			},
 			stop: function (event, ui) {
 				var $item = $(ui.item.get(0)),
-					$stage = $item.parents('.ttfmake-banner-slides'),
-					$orderInput = $('.ttfmake-banner-slide-order', $stage);
+					$stage = $item.parents('.make_pb-banner-slides'),
+					$orderInput = $('.make_pb-banner-slide-order', $stage);
 
 				oneApp.setOrder($(this).sortable('toArray', {attribute: 'data-id'}), $orderInput);
 			}
@@ -90,9 +90,9 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 		view = view || '';
 
 		if (view.$el) {
-			$selector = $('.ttfmake-configuration-color-picker', view.$el);
+			$selector = $('.make_pb-configuration-color-picker', view.$el);
 		} else {
-			$selector = $('.ttfmake-configuration-color-picker');
+			$selector = $('.make_pb-configuration-color-picker');
 		}
 
 		$selector.wpColorPicker();
@@ -102,7 +102,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 	$oneApp.on('afterSectionViewAdded', function(evt, view) {
 		if ('banner' === view.model.get('sectionType')) {
 			// Add an initial slide item
-			$('.ttfmake-add-slide', view.$el).trigger('click', {type: 'pseudo'});
+			$('.make_pb-add-slide', view.$el).trigger('click', {type: 'pseudo'});
 
 			// Initialize the sortables
 			oneApp.initializeBannerSlidesSortables(view);
@@ -112,13 +112,13 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 	// Initialize available slides
 	oneApp.initBannerSlideViews = function ($el) {
 		$el = $el || '';
-		var $slides = ('' === $el) ? $('.ttfmake-banner-slide') : $('.ttfmake-banner-slide', $el);
+		var $slides = ('' === $el) ? $('.make_pb-banner-slide') : $('.make_pb-banner-slide', $el);
 
 		$slides.each(function () {
 			var $item = $(this),
 				idAttr = $item.attr('id'),
 				id = $item.attr('data-id'),
-				$section = $item.parents('.ttfmake-section'),
+				$section = $item.parents('.make_pb-section'),
 				parentID = $section.attr('data-id'),
 				model, view;
 

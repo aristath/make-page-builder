@@ -1,26 +1,26 @@
-/* global Backbone, jQuery, _, ttfmakeBuilderData, setUserSetting, deleteUserSetting */
+/* global Backbone, jQuery, _, make_pbBuilderData, setUserSetting, deleteUserSetting */
 var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 (function (window, Backbone, $, _, oneApp, $oneApp) {
 	'use strict';
 
 	oneApp.MenuView = Backbone.View.extend({
-		el: '#ttfmake-menu',
+		el: '#make_pb-menu',
 
-		$stage: $('#ttfmake-stage'),
+		$stage: $('#make_pb-stage'),
 
 		$document: $(window.document),
 
 		$scrollHandle: $('html, body'),
 
-		$pane: $('.ttfmake-menu-pane'),
+		$pane: $('.make_pb-menu-pane'),
 
 		initialize: function () {
 			this.listenTo(oneApp.sections, 'add', this.addOne);
 		},
 
 		events: {
-			'click .ttfmake-menu-list-item-link': 'addSection'
+			'click .make_pb-menu-list-item-link': 'addSection'
 		},
 
 		addSection: function (evt) {
@@ -63,8 +63,8 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 		menuToggle: function(evt) {
 			evt.preventDefault();
-			var id = ttfmakeBuilderData.pageID,
-				key = 'ttfmakemt' + parseInt(id, 10);
+			var id = make_pbBuilderData.pageID,
+				key = 'make_pbmt' + parseInt(id, 10);
 
 			// Open it down
 			if (this.$pane.is(':hidden')) {
@@ -73,7 +73,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 					easing: 'easeInOutQuad',
 					complete: function() {
 						deleteUserSetting( key );
-						this.$el.addClass('ttfmake-menu-opened').removeClass('ttfmake-menu-closed');
+						this.$el.addClass('make_pb-menu-opened').removeClass('make_pb-menu-closed');
 					}.bind(this)
 				});
 
@@ -84,7 +84,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 					easing: 'easeInOutQuad',
 					complete: function() {
 						setUserSetting( key, 'c' );
-						this.$el.addClass('ttfmake-menu-closed').removeClass('ttfmake-menu-opened');
+						this.$el.addClass('make_pb-menu-closed').removeClass('make_pb-menu-opened');
 					}.bind(this)
 				});
 			}

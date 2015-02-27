@@ -1,5 +1,5 @@
-/* global jQuery, _, ttfmakeFormatBuilder */
-var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
+/* global jQuery, _, make_pbFormatBuilder */
+var make_pbFormatBuilder = make_pbFormatBuilder || {};
 
 ( function( $ ) {
 	var formatWindow, formatInsert, formatRemove;
@@ -12,7 +12,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 	 *
 	 * @since 1.4.1.
 	 */
-	ttfmakeFormatBuilder = {
+	make_pbFormatBuilder = {
 		/**
 		 * Stores the activeEditor instance for usage within the class.
 		 *
@@ -86,17 +86,17 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 					{
 						type: 'form',
 						name: 'listboxForm',
-						items: ttfmakeFormatBuilder.getFormatListBox()
+						items: make_pbFormatBuilder.getFormatListBox()
 					}
 				];
-			} else if ('undefined' !== typeof ttfmakeFormatBuilder.formats[format]) {
+			} else if ('undefined' !== typeof make_pbFormatBuilder.formats[format]) {
 				// Cursor is on an existing format. Only show the option form for that particular format.
-				ttfmakeFormatBuilder.currentFormat = new ttfmakeFormatBuilder.formats[format]({ update: true });
+				make_pbFormatBuilder.currentFormat = new make_pbFormatBuilder.formats[format]({ update: true });
 				items = [
 					{
 						type: 'form',
 						name: 'optionsForm',
-						items: ttfmakeFormatBuilder.currentFormat.getOptionFields()
+						items: make_pbFormatBuilder.currentFormat.getOptionFields()
 					}
 				];
 			}
@@ -104,7 +104,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 			// Define the window args.
 			args = {
 				title: 'Format Builder',
-				id: 'ttfmake-format-builder',
+				id: 'make_pb-format-builder',
 				autoScroll: true,
 				maxHeight: 500,
 				items: {
@@ -116,18 +116,18 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 					items: items
 				},
 				buttons: [
-					ttfmakeFormatBuilder.getRemoveButton(),
-					ttfmakeFormatBuilder.getInsertButton()
+					make_pbFormatBuilder.getRemoveButton(),
+					make_pbFormatBuilder.getInsertButton()
 				],
 				onclose: function() {
 					// Reset the dynamic stylesheet.
-					ttfmakeFormatBuilder.editor.execCommand('Make_Reset_Dynamic_Stylesheet');
+					make_pbFormatBuilder.editor.execCommand('Make_Reset_Dynamic_Stylesheet');
 
 					// Clear the current* objects so there are no collisions when the Format Builder
 					// is opened again.
-					ttfmakeFormatBuilder.editor = {};
-					ttfmakeFormatBuilder.currentFormat = {};
-					ttfmakeFormatBuilder.currentSelection = {};
+					make_pbFormatBuilder.editor = {};
+					make_pbFormatBuilder.currentFormat = {};
+					make_pbFormatBuilder.currentSelection = {};
 				}
 			};
 
@@ -148,7 +148,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 			var format = '';
 
 			$.each(this.nodes, function( fmt, selector ) {
-				var match = ttfmakeFormatBuilder.editor.dom.getParents( node, selector );
+				var match = make_pbFormatBuilder.editor.dom.getParents( node, selector );
 				if ( match.length > 0 ) {
 					format = fmt;
 					return false;
@@ -170,8 +170,8 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 		 * @returns {*}
 		 */
 		getParentNode: function(selector, node, editor) {
-			var Node = node || ttfmakeFormatBuilder.currentSelection.getNode(),
-				Editor = editor || ttfmakeFormatBuilder.editor,
+			var Node = node || make_pbFormatBuilder.currentSelection.getNode(),
+				Editor = editor || make_pbFormatBuilder.editor,
 				matchedParents = Editor.dom.getParents(Node, selector);
 
 			if (matchedParents.length > 0) {
@@ -192,7 +192,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 			var listbox = {
 				type: 'listbox',
 				name: 'format',
-				id: 'ttfmake-format-builder-picker',
+				id: 'make_pb-format-builder-picker',
 				minWidth: 300,
 				values: this.getFormatChoices(),
 				onselect: function() {
@@ -205,11 +205,11 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 						winWidth, winHeight, viewWidth, viewHeight, deltaW, deltaH;
 
 					// Only proceed if the chosen format has a model.
-					if ('undefined' !== typeof ttfmakeFormatBuilder.formats[choice]) {
-						ttfmakeFormatBuilder.currentFormat = new ttfmakeFormatBuilder.formats[choice];
+					if ('undefined' !== typeof make_pbFormatBuilder.formats[choice]) {
+						make_pbFormatBuilder.currentFormat = new make_pbFormatBuilder.formats[choice];
 
 						// Generate the options fields
-						fields.items = ttfmakeFormatBuilder.currentFormat.getOptionFields();
+						fields.items = make_pbFormatBuilder.currentFormat.getOptionFields();
 
 						// Remove previous option forms.
 						formatWindow.find('#optionsForm').remove();
@@ -225,8 +225,8 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 						formatWindow.resizeToContent();
 						winWidth = formatWindow.layoutRect().w;
 						winHeight = formatWindow.layoutRect().h;
-						viewWidth = ttfmakeFormatBuilder.editor.dom.getViewPort().w;
-						viewHeight = ttfmakeFormatBuilder.editor.dom.getViewPort().h;
+						viewWidth = make_pbFormatBuilder.editor.dom.getViewPort().w;
+						viewHeight = make_pbFormatBuilder.editor.dom.getViewPort().h;
 						if (winHeight > maxHeight) {
 							formatWindow.resizeTo(winWidth, maxHeight);
 							winHeight = formatWindow.layoutRect().h;
@@ -277,11 +277,11 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 		 */
 		getInsertButton: function() {
 			var button = {
-				text: ( 'undefined' === typeof ttfmakeFormatBuilder.currentFormat.get ) ? 'Insert' : 'Update',
-				id: 'ttfmake-format-builder-insert',
+				text: ( 'undefined' === typeof make_pbFormatBuilder.currentFormat.get ) ? 'Insert' : 'Update',
+				id: 'make_pb-format-builder-insert',
 				name: 'formatSubmit',
 				classes: 'button-primary',
-				hidden: ( 'undefined' === typeof ttfmakeFormatBuilder.currentFormat.get ),
+				hidden: ( 'undefined' === typeof make_pbFormatBuilder.currentFormat.get ),
 				onPostRender: function() {
 					// Store this control so it can be accessed later.
 					formatInsert = this;
@@ -292,10 +292,10 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 						html;
 
 					// Feed the current data into the model and sanitize it.
-					ttfmakeFormatBuilder.currentFormat.sanitizeOptions( data );
+					make_pbFormatBuilder.currentFormat.sanitizeOptions( data );
 
 					// Insert the HTML into the editor and close the modal.
-					ttfmakeFormatBuilder.currentFormat.insert();
+					make_pbFormatBuilder.currentFormat.insert();
 					formatWindow.fire( 'submit' );
 				}
 			};
@@ -313,16 +313,16 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 		getRemoveButton: function() {
 			var button = {
 				text: 'Remove',
-				id: 'ttfmake-format-builder-remove',
+				id: 'make_pb-format-builder-remove',
 				name: 'formatRemove',
 				classes: 'button-secondary',
-				hidden: ( 'undefined' === typeof ttfmakeFormatBuilder.currentFormat.get || true !== ttfmakeFormatBuilder.currentFormat.get( 'update' ) ),
+				hidden: ( 'undefined' === typeof make_pbFormatBuilder.currentFormat.get || true !== make_pbFormatBuilder.currentFormat.get( 'update' ) ),
 				onPostRender: function() {
 					// Store this control so it can be accessed later.
 					formatRemove = this;
 				},
 				onclick: function() {
-					ttfmakeFormatBuilder.currentFormat.remove();
+					make_pbFormatBuilder.currentFormat.remove();
 					formatWindow.fire( 'submit' );
 				}
 			};
@@ -340,7 +340,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 		 * @returns object
 		 */
 		getColorButton: function( name, label ) {
-			var model = ttfmakeFormatBuilder.currentFormat,
+			var model = make_pbFormatBuilder.currentFormat,
 				button = {
 					type: 'container',
 					label: label,
@@ -355,7 +355,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 									ctrl = this.next(); // Get the hidden text field with the hex code.
 
 								// Open the TinyMCE color picker plugin
-								ttfmakeFormatBuilder.editor.settings.color_picker_callback( function( value ) {
+								make_pbFormatBuilder.editor.settings.color_picker_callback( function( value ) {
 									value = _.escape(value);
 									self.getEl().style.backgroundColor = value;
 									ctrl.value( value );
@@ -384,7 +384,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 		 * @returns object
 		 */
 		getIconButton: function( name, label ) {
-			var model = ttfmakeFormatBuilder.currentFormat,
+			var model = make_pbFormatBuilder.currentFormat,
 				noIcon = '<span class="mce-add-icon">Add icon</span>',
 				yesIcon = '<div class="mce-icon-choice"><i class="fa"></i></div>',
 				button = {
@@ -411,7 +411,7 @@ var ttfmakeFormatBuilder = ttfmakeFormatBuilder || {};
 								var self = this, // Store the button for later access.
 									ctrl = this.next(); // Get the hidden text field with the icon code.
 
-								window.ttfmakeIconPicker.open(ttfmakeFormatBuilder.editor, function(value) {
+								window.make_pbIconPicker.open(make_pbFormatBuilder.editor, function(value) {
 									if ('' !== value) {
 										// Show the chosen icon.
 										$(self.getEl()).html(yesIcon).find('i').addClass(value);

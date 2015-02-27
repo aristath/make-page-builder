@@ -3,7 +3,7 @@
  * @package Make
  */
 
-if ( ! function_exists( 'ttfmake_maybe_show_site_region' ) ) :
+if ( ! function_exists( 'make_pb_maybe_show_site_region' ) ) :
 /**
  * Output the site region (header or footer) markup if the current view calls for it.
  *
@@ -12,21 +12,21 @@ if ( ! function_exists( 'ttfmake_maybe_show_site_region' ) ) :
  * @param  string    $region    Region to maybe show.
  * @return void
  */
-function ttfmake_maybe_show_site_region( $region ) {
+function make_pb_maybe_show_site_region( $region ) {
 	if ( ! in_array( $region, array( 'header', 'footer' ) ) ) {
 		return;
 	}
 
 	// Get the view
-	$view = ttfmake_get_view();
+	$view = make_pb_get_view();
 
 	// Get the relevant option
-	$hide_region = (bool) get_theme_mod( 'layout-' . $view . '-hide-' . $region, ttfmake_get_default( 'layout-' . $view . '-hide-' . $region ) );
+	$hide_region = (bool) get_theme_mod( 'layout-' . $view . '-hide-' . $region, make_pb_get_default( 'layout-' . $view . '-hide-' . $region ) );
 
 	if ( true !== $hide_region ) {
 		get_template_part(
 			'partials/' . $region . '-layout',
-			get_theme_mod( $region . '-layout', ttfmake_get_default( $region . '-layout' ) )
+			get_theme_mod( $region . '-layout', make_pb_get_default( $region . '-layout' ) )
 		);
 	}
 }

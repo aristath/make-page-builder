@@ -3,10 +3,10 @@
  * @package Make
  */
 
-global $ttfmake_sections;
+global $make_pb_sections;
 ?>
 
-<div class="ttfmake-stage<?php if ( empty( $ttfmake_sections ) ) echo ' ttfmake-stage-closed'?>" id="ttfmake-stage">
+<div class="make_pb-stage<?php if ( empty( $make_pb_sections ) ) echo ' make_pb-stage-closed'?>" id="make_pb-stage">
 	<?php
 	/**
 	 * Execute code before the builder stage is displayed.

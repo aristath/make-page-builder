@@ -1,22 +1,32 @@
 <?php
-/**
- * The suffix to use for scripts.
- */
-if ( ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ) ) {
-	define( 'TTFMAKE_SUFFIX', '' );
-} else {
-	define( 'TTFMAKE_SUFFIX', '.min' );
+/*
+Plugin Name: Make Page Builder
+*/
+
+class Make_PB {
+
+	public function __construct() {
+
+		require self::path() . '/inc/extras.php';
+		if ( is_admin() ) {
+			require self::path() . '/inc/edit-page.php';
+			require self::path() . '/inc/builder/core/base.php';
+		}
+
+	}
+
+	public static function path() {
+		return get_template_directory();
+	}
+
+	public static function uri() {
+		return get_template_directory_uri();
+	}
+
+	public static function version() {
+		return;
+	}
+
 }
 
-// Custom functions that act independently of the theme templates
-require get_template_directory() . '/inc/extras.php';
-/**
- * Admin includes.
- */
-if ( is_admin() ) {
-	// Page customizations
-	require get_template_directory() . '/inc/edit-page.php';
-
-	// Page Builder
-	require get_template_directory() . '/inc/builder/core/base.php';
-}
+$Make_PB = new Make_PB();
