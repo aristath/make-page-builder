@@ -40,6 +40,23 @@ class Make_PB {
 
 	}
 
+	public static function locate_template($template_names, $load = false, $require_once = true ) {
+		$located = '';
+		foreach ( (array) $template_names as $template_name ) {
+			if ( !$template_name )
+				continue;
+			if ( file_exists(self::path() . '/' . $template_name)) {
+				$located = self::path() . '/' . $template_name;
+				break;
+			}
+		}
+
+		if ( $load && '' != $located )
+			load_template( $located, $require_once );
+
+		return $located;
+	}
+
 }
 
 function make_page_builder_init() {
