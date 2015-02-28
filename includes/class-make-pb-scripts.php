@@ -7,6 +7,8 @@ class Make_PB_Scripts extends Make_PB {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 11 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'sections_admin_enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'make_pb_edit_page_script' ) );
+		add_action( 'admin_print_styles-post.php', array( $this, 'admin_print_styles' ) );
+		add_action( 'admin_print_styles-post-new.php', array( $this, 'admin_print_styles' ) );
 
 	}
 
@@ -69,6 +71,7 @@ class Make_PB_Scripts extends Make_PB {
 	}
 
 	public function add_js_dependencies( $deps ) {
+
 		if ( ! is_array( $deps ) ) {
 			$deps = array();
 		}
@@ -82,6 +85,26 @@ class Make_PB_Scripts extends Make_PB {
 			'make_pb-sections/js/views/banner-slide.js',
 			'make_pb-sections/js/views/banner.js',
 		) );
+
+	}
+
+	public function admin_print_styles() {
+		global $pagenow;
+
+		echo '<style type="text/css">';
+		if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && Make_PB()->is_builder_active ) ) {
+			echo '#postdivrich { display: none; }';
+		} else {
+			echo '#make_pb-builder, .make_pb-duplicator { display: none; }';
+		}
+
+		foreach ( Make_PB()->sections->get_sections() as $key => $section ) {
+			echo '#make_pb-menu-list-item-link-' . esc_attr( $section['id'] ) . ' .make_pb-menu-list-item-link-icon-wrapper {';
+			echo 'background-image: url(' . addcslashes( esc_url_raw( $section['icon'] ), '"' ) . ');';
+			echo '}';
+		}
+		echo '</style>';
+
 	}
 
 }

@@ -147,7 +147,7 @@ function make_pb_builder_get_gallery_style( $make_pb_section_data ) {
 
 	// Background image
 	if ( isset( $make_pb_section_data['background-image'] ) && 0 !== absint( $make_pb_section_data['background-image'] ) ) {
-		$image_src = make_pb_get_image_src( $make_pb_section_data['background-image'], 'full' );
+		$image_src = Make_PB_Image::get_image_src( $make_pb_section_data['background-image'], 'full' );
 		if ( isset( $image_src[0] ) ) {
 			$gallery_style .= 'background-image: url(\'' . addcslashes( esc_url_raw( $image_src[0] ), '"' ) . '\');';
 		}
@@ -233,7 +233,7 @@ function make_pb_builder_get_gallery_item_image( $item, $aspect ) {
 	if ( make_pb_builder_is_section_type( 'gallery', $make_pb_section_data ) && 0 !== make_pb_sanitize_image_id( $item[ 'image-id' ] ) ) {
 		$image_style = '';
 
-		$image_src = make_pb_get_image_src( $item[ 'image-id' ], 'large' );
+		$image_src = Make_PB_Image::get_image_src( $item[ 'image-id' ], 'large' );
 		if ( isset( $image_src[0]  ) ) {
 			$image_style .= 'background-image: url(\'' . addcslashes( esc_url_raw( $image_src[0] ), '"' ) . '\');';
 		}
@@ -516,7 +516,7 @@ function make_pb_builder_banner_slide_style( $slide, $make_pb_section_data ) {
 
 	// Background image
 	if ( isset( $slide['image-id'] ) && 0 !== make_pb_sanitize_image_id( $slide['image-id'] ) ) {
-		$image_src = make_pb_get_image_src( $slide['image-id'], 'full' );
+		$image_src = Make_PB_Image::get_image_src( $slide['image-id'], 'full' );
 		if ( isset( $image_src[0] ) ) {
 			$slide_style .= 'background-image: url(\'' . addcslashes( esc_url_raw( $image_src[0] ), '"' ) . '\');';
 		}

@@ -9,10 +9,31 @@ class Make_PB {
 
 	public $scripts;
 	public $sections;
+	public $check;
+	public $is_builder_active;
 
 	public function __construct() {
 
-		require self::path() . '/inc/extras.php';
+		if ( ! class_exists( 'Make_PB_Check' ) ) {
+			require self::path() . '/includes/class-make-pb-check.php';
+		}
+
+		if ( ! class_exists( 'Make_PB_Helper' ) ) {
+			require self::path() . '/includes/class-make-pb-helper.php';
+		}
+
+		if ( ! class_exists( 'Make_PB_Config' ) ) {
+			require self::path() . '/includes/class-make-pb-config.php';
+		}
+
+		if ( ! class_exists( 'Make_PB_Image' ) ) {
+			require self::path() . '/includes/class-make-pb-image.php';
+		}
+
+
+		$this->check = Make_PB_Check::instance();
+		$this->is_builder_active = $this->check->is_builder_active();
+
 		if ( is_admin() ) {
 
 			require self::path() . '/includes/class-make-pb-scripts.php';

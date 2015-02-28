@@ -23,7 +23,7 @@ $text_columns = make_pb_builder_get_text_array( $make_pb_section_data );
 			endif;
 			?>
 		<div class="builder-text-column builder-text-column-<?php echo $i; ?>" id="builder-section-<?php echo esc_attr( $make_pb_section_data['id'] ); ?>-column-<?php echo $i; ?>">
-			<?php $image_html =  make_pb_get_image( $column['image-id'], 'large' ); ?>
+			<?php $image_html =  Make_PB_Image::get_image( $column['image-id'], 'large' ); ?>
 			<?php if ( '' !== $image_html ) : ?>
 			<figure class="builder-text-image">
 				<?php echo $link_front . $image_html . $link_back; ?>

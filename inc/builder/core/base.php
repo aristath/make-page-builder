@@ -3,7 +3,6 @@
  * @package Make
  */
 
-if ( ! function_exists( 'Make_PB_Base' ) ) :
 /**
  * Defines the functionality for the HTML Builder.
  *
@@ -43,9 +42,6 @@ class Make_PB_Base {
 	 */
 	public function __construct() {
 
-		// Include the configuration helpers
-		require Make_PB::path() . '/inc/builder/core/configuration-helpers.php';
-
 		// Add the core sections
 		require Make_PB::path() . '/inc/builder/sections/section-definitions.php';
 
@@ -59,11 +55,9 @@ class Make_PB_Base {
 		add_action( 'admin_init', array( $this, 'register_post_type_support_for_builder' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 ); // Bias toward top of stack
 
-		add_action( 'admin_print_styles-post.php', array( $this, 'admin_print_styles' ) );
-		add_action( 'admin_print_styles-post-new.php', array( $this, 'admin_print_styles' ) );
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 		add_action( 'admin_footer', array( $this, 'print_templates' ) );
-		add_action( 'post_submitbox_misc_actions', array( $this, 'builder_toggle' ) );
+
 
 	}
 
@@ -99,28 +93,6 @@ class Make_PB_Base {
 	}
 
 	/**
-	 * Display the checkbox to turn the builder on or off.
-	 *
-	 * @since  1.2.0.
-	 *
-	 * @return void
-	 */
-	public function builder_toggle() {
-		// Do not show the toggle for pages as the builder is controlled by page templates
-		if ( 'page' === get_post_type() ) {
-			return;
-		}
-
-		$using_builder = get_post_meta( get_the_ID(), '_make_pb-use-builder', true );
-	?>
-		<div class="misc-pub-section">
-			<input type="checkbox" value="1" name="use-builder" id="use-builder"<?php checked( $using_builder, 1 ); ?> />
-			&nbsp;<label for="use-builder"><?php _e( 'Use Page Builder', 'make' ); ?></label>
-		</div>
-	<?php
-	}
-
-	/**
 	 * Display the meta box.
 	 *
 	 * @since  1.0.0.
@@ -140,7 +112,7 @@ class Make_PB_Base {
 		Make_PB::get_template_part( 'inc/builder/core/templates/menu' );
 		Make_PB::get_template_part( 'inc/builder/core/templates/stage', 'header' );
 
-		$section_data        = make_pb_get_section_data( $post_local->ID );
+		$section_data        = Make_PB_Helper::get_section_data( $post_local->ID );
 		$registered_sections = Make_PB()->sections->get_sections();
 
 		// Print the current sections
@@ -215,40 +187,6 @@ class Make_PB_Base {
 	}
 
 	/**
-	 * Print additional, dynamic CSS for the builder interface.
-	 *
-	 * @since  1.0.0.
-	 *
-	 * @return void
-	 */
-	public function admin_print_styles() {
-		global $pagenow;
-
-	?>
-		<style type="text/css">
-			<?php if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && make_pb_is_builder_page() ) ) : ?>
-			#postdivrich {
-				display: none;
-			}
-			<?php else : ?>
-			#make_pb-builder {
-				display: none;
-			}
-			.make_pb-duplicator {
-				display: none;
-			}
-			<?php endif; ?>
-
-			<?php foreach ( Make_PB()->sections->get_sections() as $key => $section ) : ?>
-			#make_pb-menu-list-item-link-<?php echo esc_attr( $section['id'] ); ?> .make_pb-menu-list-item-link-icon-wrapper {
-				background-image: url(<?php echo addcslashes( esc_url_raw( $section['icon'] ), '"' ); ?>);
-			}
-			<?php endforeach; ?>
-		</style>
-	<?php
-	}
-
-	/**
 	 * Add a class to indicate the current template being used.
 	 *
 	 * @since  1.0.4.
@@ -259,7 +197,7 @@ class Make_PB_Base {
 	function admin_body_class( $classes ) {
 		global $pagenow;
 
-		if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && make_pb_is_builder_page() ) ) {
+		if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && Make_PB()->is_builder_active ) ) {
 			$classes .= ' make_pb-builder-active';
 			$classes .= ' make-plus-disabled';
 		} else {
@@ -280,7 +218,7 @@ class Make_PB_Base {
 	 * @return string                     Either return the string or echo it.
 	 */
 	public function add_uploader( $section_name, $image_id = 0, $title = '' ) {
-		$image = make_pb_get_image_src( $image_id, 'large' );
+		$image = Make_PB_Image::get_image_src( $image_id, 'large' );
 		$title = ( ! empty( $title ) ) ? $title : __( 'Set image', 'make' );
 		ob_start();
 		?>
@@ -468,7 +406,7 @@ class Make_PB_Base {
 	 * @return array                 The combined data.
 	 */
 	public function get_section_data( $post_id ) {
-		return make_pb_get_section_data( $post_id );
+		return Make_PB_Helper::get_section_data( $post_id );
 	}
 
 	/**
@@ -484,13 +422,11 @@ class Make_PB_Base {
 	 * @return array            The converted array.
 	 */
 	function create_array_from_meta_keys( $arr ) {
-		return make_pb_create_array_from_meta_keys( $arr );
+		return Make_PB_Helper::create_array_from_meta_keys( $arr );
 	}
 
 }
-endif;
 
-if ( ! function_exists( 'make_pb_get_builder_base' ) ) :
 /**
  * Instantiate or return the one Make_PB_Base instance.
  *
@@ -501,7 +437,7 @@ if ( ! function_exists( 'make_pb_get_builder_base' ) ) :
 function make_pb_get_builder_base() {
 	return Make_PB_Base::instance();
 }
-endif;
+
 
 // Add the base immediately
 if ( is_admin() ) {
@@ -713,137 +649,5 @@ function make_pb_get_section_name( $data, $is_js_template ) {
 	 * @param bool      $is_js_template    Whether or not this is in the context of a JS template.
 	 */
 	return apply_filters( 'make_get_section_name', $name, $data, $is_js_template );
-}
-endif;
-
-if ( ! function_exists( 'make_pb_get_image' ) ) :
-/**
- * Get an image to display in page builder backend or front end template.
- *
- * This function allows image IDs defined with a negative number to surface placeholder images. This allows templates to
- * approximate real content without needing to add images to the user's media library.
- *
- * @since  1.0.4.
- *
- * @param  int       $image_id    The attachment ID. Dimension value IDs represent placeholders (100x150).
- * @param  string    $size        The image size.
- * @return string                 HTML for the image. Empty string if image cannot be produced.
- */
-function make_pb_get_image( $image_id, $size ) {
-	$return = '';
-
-	if ( false === strpos( $image_id, 'x' ) ) {
-		$return = wp_get_attachment_image( $image_id, $size );
-	} else {
-		$image = make_pb_get_placeholder_image( $image_id );
-
-		if ( ! empty( $image ) && isset( $image['src'] ) && isset( $image['alt'] ) && isset( $image['class'] ) && isset( $image['height'] ) && isset( $image['width'] ) ) {
-			$return = '<img src="' . $image['src'] . '" alt="' . $image['alt'] . '" class="' . $image['class'] . '" height="' . $image['height'] . '" width="' . $image['width'] . '" />';
-		}
-	}
-
-	/**
-	 * Filter the image HTML.
-	 *
-	 * @since 1.2.3.
-	 *
-	 * @param string    $return      The image HTML.
-	 * @param int       $image_id    The ID for the image.
-	 * @param bool      $size        The requested image size.
-	 */
-	return apply_filters( 'make_get_image', $return, $image_id, $size );
-}
-endif;
-
-if ( ! function_exists( 'make_pb_get_image_src' ) ) :
-/**
- * Get an image's src.
- *
- * @since  1.0.4.
- *
- * @param  int       $image_id    The attachment ID. Dimension value IDs represent placeholders (100x150).
- * @param  string    $size        The image size.
- * @return string                 URL for the image.
- */
-function make_pb_get_image_src( $image_id, $size ) {
-	$src = '';
-
-	if ( false === strpos( $image_id, 'x' ) ) {
-		$image = wp_get_attachment_image_src( $image_id, $size );
-
-		if ( false !== $image && isset( $image[0] ) ) {
-			$src = $image;
-		}
-	} else {
-		$image = make_pb_get_placeholder_image( $image_id );
-
-		if ( isset( $image['src'] ) ) {
-			$wp_src = array(
-				0 => $image['src'],
-				1 => $image['width'],
-				2 => $image['height'],
-			);
-			$src = array_merge( $image, $wp_src );
-		}
-	}
-
-	/**
-	 * Filter the image source attributes.
-	 *
-	 * @since 1.2.3.
-	 *
-	 * @param string    $src         The image source attributes.
-	 * @param int       $image_id    The ID for the image.
-	 * @param bool      $size        The requested image size.
-	 */
-	return apply_filters( 'make_get_image_src', $src, $image_id, $size );
-}
-endif;
-
-global $make_pb_placeholder_images;
-
-if ( ! function_exists( 'make_pb_get_placeholder_image' ) ) :
-/**
- * Gets the specified placeholder image.
- *
- * @since  1.0.4.
- *
- * @param  int      $image_id    Image ID. Should be a dimension value (100x150).
- * @return array                 The image data, including 'src', 'alt', 'class', 'height', and 'width'.
- */
-function make_pb_get_placeholder_image( $image_id ) {
-	global $make_pb_placeholder_images;
-	$return = array();
-
-	if ( isset( $make_pb_placeholder_images[ $image_id ] ) ) {
-		$return = $make_pb_placeholder_images[ $image_id ];
-	}
-
-	/**
-	 * Filter the image source attributes.
-	 *
-	 * @since 1.2.3.
-	 *
-	 * @param string    $return                        The image source attributes.
-	 * @param int       $image_id                      The ID for the image.
-	 * @param bool      $make_pb_placeholder_images    The list of placeholder images.
-	 */
-	return apply_filters( 'make_get_placeholder_image', $return, $image_id, $make_pb_placeholder_images );
-}
-endif;
-
-if ( ! function_exists( 'make_pb_register_placeholder_image' ) ) :
-/**
- * Add a new placeholder image.
- *
- * @since  1.0.4.
- *
- * @param  int      $id      The ID for the image. Should be a dimension value (100x150).
- * @param  array    $data    The image data, including 'src', 'alt', 'class', 'height', and 'width'.
- * @return void
- */
-function make_pb_register_placeholder_image( $id, $data ) {
-	global $make_pb_placeholder_images;
-	$make_pb_placeholder_images[ $id ] = $data;
 }
 endif;

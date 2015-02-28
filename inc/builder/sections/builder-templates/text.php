@@ -170,7 +170,7 @@ do_action( 'make_section_text_after_title', $make_pb_section_data ); ?>
 		foreach ( $inputs as $input ) {
 			if ( isset( $input['type'] ) && isset( $input['name'] ) ) {
 				$section_data  = ( isset( $make_pb_section_data['data']['columns'][ $i ] ) ) ? $make_pb_section_data['data']['columns'][ $i ] : array();
-				$output       .= make_pb_create_input( $column_name, $input, $section_data );
+				$output       .= Make_PB_Config::create_input( $column_name, $input, $section_data );
 			}
 		}
 

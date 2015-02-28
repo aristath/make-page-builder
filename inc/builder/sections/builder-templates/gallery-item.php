@@ -90,7 +90,7 @@ $overlay_id  = 'make_pb-overlay-' . $combined_id;
 	foreach ( $inputs as $input ) {
 		if ( isset( $input['type'] ) && isset( $input['name'] ) ) {
 			$section_data  = ( isset( $make_pb_section_data['data']['gallery-items'][ $make_pb_gallery_id ] ) ) ? $make_pb_section_data['data']['gallery-items'][ $make_pb_gallery_id ] : array();
-			$output       .= make_pb_create_input( $section_name, $input, $section_data );
+			$output       .= Make_PB_Config::create_input( $section_name, $input, $section_data );
 		}
 	}
 

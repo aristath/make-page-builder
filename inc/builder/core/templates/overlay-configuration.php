@@ -15,7 +15,7 @@ $output = '';
 
 foreach ( $make_pb_section_data['section']['config'] as $input ) {
 	if ( isset( $input['type'] ) && isset( $input['name'] ) ) {
-		$output .= make_pb_create_input( $section_name, $input, $make_pb_section_data['data'] );
+		$output .= Make_PB_Config::create_input( $section_name, $input, $make_pb_section_data['data'] );
 	}
 }
 
