@@ -60,7 +60,7 @@ class Make_PB_Base {
 		// Set up actions
 		add_action( 'admin_init', array( $this, 'register_post_type_support_for_builder' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 ); // Bias toward top of stack
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 11 );
+
 		add_action( 'admin_print_styles-post.php', array( $this, 'admin_print_styles' ) );
 		add_action( 'admin_print_styles-post-new.php', array( $this, 'admin_print_styles' ) );
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
@@ -214,123 +214,6 @@ class Make_PB_Base {
 		$section_order = get_post_meta( $post_local->ID, '_make_pb-section-ids', true );
 		$section_order = ( ! empty( $section_order ) ) ? implode( ',', $section_order ) : '';
 		echo '<input type="hidden" value="' . esc_attr( $section_order ) . '" name="make_pb-section-order" id="make_pb-section-order" />';
-	}
-
-	/**
-	 * Enqueue the JS and CSS for the admin.
-	 *
-	 * @since  1.0.0.
-	 *
-	 * @param  string    $hook_suffix    The suffix for the screen.
-	 * @return void
-	 */
-	public function admin_enqueue_scripts( $hook_suffix ) {
-		// Only load resources if they are needed on the current page
-		if ( ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ) ) ) {
-			return;
-		}
-
-		// Enqueue the CSS
-		wp_enqueue_style(
-			'make_pb-builder',
-			Make_PB::uri() . '/inc/builder/core/css/builder.css',
-			array(),
-			Make_PB::version()
-		);
-
-		wp_enqueue_style( 'wp-color-picker' );
-
-		// Dependencies regardless of min/full scripts
-		$dependencies = array(
-			'wplink',
-			'utils',
-			'wp-color-picker',
-			'jquery-effects-core',
-			'jquery-ui-sortable',
-			'backbone',
-		);
-
-		wp_register_script(
-			'make_pb-builder/js/models/section.js',
-			Make_PB::uri() . '/inc/builder/core/js/models/section.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		wp_register_script(
-			'make_pb-builder/js/collections/sections.js',
-			Make_PB::uri() . '/inc/builder/core/js/collections/sections.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		wp_register_script(
-			'make_pb-builder/js/views/menu.js',
-			Make_PB::uri() . '/inc/builder/core/js/views/menu.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		wp_register_script(
-			'make_pb-builder/js/views/section.js',
-			Make_PB::uri() . '/inc/builder/core/js/views/section.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		wp_register_script(
-			'make_pb-builder/js/views/overlay.js',
-			Make_PB::uri() . '/inc/builder/core/js/views/overlay.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		/**
-		 * Filter the dependencies for the Make builder JS.
-		 *
-		 * @since 1.2.3.
-		 *
-		 * @param array    $dependencies    The list of dependencies.
-		 */
-		$dependencies = apply_filters(
-			'make_pb_builder_js_dependencies',
-			array_merge(
-				$dependencies,
-				array(
-					'make_pb-builder/js/models/section.js',
-					'make_pb-builder/js/collections/sections.js',
-					'make_pb-builder/js/views/menu.js',
-					'make_pb-builder/js/views/section.js',
-					'make_pb-builder/js/views/overlay.js',
-				)
-			)
-		);
-
-		wp_enqueue_script(
-			'make_pb-builder',
-			Make_PB::uri() . '/inc/builder/core/js/app.js',
-			$dependencies,
-			Make_PB::version(),
-			true
-		);
-
-		// Add data needed for the JS
-		$data = array(
-			'pageID'        => get_the_ID(),
-			'postRefresh'   => true,
-			'confirmString' => __( 'Delete the section?', 'make' ),
-		);
-
-		wp_localize_script(
-			'make_pb-builder',
-			'make_pbBuilderData',
-			$data
-		);
 	}
 
 	/**

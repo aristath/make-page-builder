@@ -5,14 +5,33 @@ Plugin Name: Make Page Builder
 
 class Make_PB {
 
+	private static $instance;
+
+	public $is_page_builder_active;
+	public $scripts;
+
 	public function __construct() {
+
+		$this->is_page_builder_active = true;
 
 		require self::path() . '/inc/extras.php';
 		if ( is_admin() ) {
-			require self::path() . '/inc/edit-page.php';
+
+			require self::path() . '/includes/class-make-pb-scripts.php';
 			require self::path() . '/inc/builder/core/base.php';
+
+			$this->scripts = new Make_PB_Scripts();
+
 		}
 
+	}
+
+	public static function get_instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
 	}
 
 	public static function path() {
@@ -59,7 +78,9 @@ class Make_PB {
 
 }
 
-function make_page_builder_init() {
-	$Make_PB = new Make_PB();
+function Make_PB() {
+	return Make_PB::get_instance();
 }
-add_action( 'after_setup_theme', 'make_page_builder_init' );
+
+global $Make_PB;
+$Make_PB = Make_PB();

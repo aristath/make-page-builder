@@ -49,9 +49,6 @@ class TTFMAKE_Section_Definitions {
 		$this->register_banner_section();
 		$this->register_gallery_section();
 
-		// Add the section JS
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-
 		// Add additional templating
 		add_action( 'admin_footer', array( $this, 'print_templates' ) );
 	}
@@ -481,119 +478,6 @@ class TTFMAKE_Section_Definitions {
 		}
 
 		return $clean_data;
-	}
-
-	/**
-	 * Enqueue the JS and CSS for the admin.
-	 *
-	 * @since  1.0.0.
-	 *
-	 * @param  string    $hook_suffix    The suffix for the screen.
-	 * @return void
-	 */
-	public function admin_enqueue_scripts( $hook_suffix ) {
-
-		wp_register_script(
-			'make_pb-sections/js/models/gallery-item.js',
-			Make_PB::uri() . '/inc/builder/sections/js/models/gallery-item.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		wp_register_script(
-			'make_pb-sections/js/views/gallery-item.js',
-			Make_PB::uri() . '/inc/builder/sections/js/views/gallery-item.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		wp_register_script(
-			'make_pb-sections/js/views/gallery.js',
-			Make_PB::uri() . '/inc/builder/sections/js/views/gallery.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		wp_register_script(
-			'make_pb-sections/js/views/text.js',
-			Make_PB::uri() . '/inc/builder/sections/js/views/text.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		wp_register_script(
-			'make_pb-sections/js/models/banner-slide.js',
-			Make_PB::uri() . '/inc/builder/sections/js/models/banner-slide.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		wp_register_script(
-			'make_pb-sections/js/views/banner-slide.js',
-			Make_PB::uri() . '/inc/builder/sections/js/views/banner-slide.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		wp_register_script(
-			'make_pb-sections/js/views/banner.js',
-			Make_PB::uri() . '/inc/builder/sections/js/views/banner.js',
-			array(),
-			Make_PB::version(),
-			true
-		);
-
-		wp_enqueue_script(
-			'make_pb-sections/js/quick-start.js',
-			Make_PB::uri() . '/inc/builder/sections/js/quick-start.js',
-			array(
-				'make_pb-builder',
-			),
-			Make_PB::version(),
-			true
-		);
-
-		// Add additional dependencies to the Builder JS
-		add_filter( 'make_pb_builder_js_dependencies', array( $this, 'add_js_dependencies' ) );
-
-		// Add the section CSS
-		wp_enqueue_style(
-			'make_pb-sections/css/sections.css',
-			Make_PB::uri() . '/inc/builder/sections/css/sections.css',
-			array(),
-			Make_PB::version(),
-			'all'
-		);
-	}
-
-	/**
-	 * Append more JS to the list of JS deps.
-	 *
-	 * @since  1.0.0.
-	 *
-	 * @param  array    $deps    The current deps.
-	 * @return array             The modified deps.
-	 */
-	public function add_js_dependencies( $deps ) {
-		if ( ! is_array( $deps ) ) {
-			$deps = array();
-		}
-
-		return array_merge( $deps, array(
-			'make_pb-sections/js/models/gallery-item.js',
-			'make_pb-sections/js/models/banner-slide.js',
-			'make_pb-sections/js/views/gallery-item.js',
-			'make_pb-sections/js/views/gallery.js',
-			'make_pb-sections/js/views/text.js',
-			'make_pb-sections/js/views/banner-slide.js',
-			'make_pb-sections/js/views/banner.js',
-		) );
 	}
 
 	/**
