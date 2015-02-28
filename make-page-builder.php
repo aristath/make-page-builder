@@ -7,13 +7,10 @@ class Make_PB {
 
 	private static $instance;
 
-	public $is_page_builder_active;
 	public $scripts;
 	public $sections;
 
 	public function __construct() {
-
-		$this->is_page_builder_active = true;
 
 		require self::path() . '/inc/extras.php';
 		if ( is_admin() ) {

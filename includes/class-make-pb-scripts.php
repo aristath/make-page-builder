@@ -1,13 +1,8 @@
 <?php
 
-class Make_PB_Scripts {
+class Make_PB_Scripts extends Make_PB {
 
 	function __construct() {
-
-		// Early exit if the page builder is not active.
-		// if ( ! Make_PB()->is_page_builder_active ) {
-		// 	return;
-		// }
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 11 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'sections_admin_enqueue_scripts' ) );
