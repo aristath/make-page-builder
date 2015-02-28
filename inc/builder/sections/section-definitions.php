@@ -65,7 +65,7 @@ class TTFMAKE_Section_Definitions {
 	 * @return void
 	 */
 	public function register_text_section() {
-		make_pb_add_section(
+		Make_PB()->sections->add_section(
 			'text',
 			_x( 'Columns', 'section name', 'make' ),
 			Make_PB::uri() . '/inc/builder/sections/css/images/text.png',
@@ -153,7 +153,7 @@ class TTFMAKE_Section_Definitions {
 	 * @return void
 	 */
 	public function register_banner_section() {
-		make_pb_add_section(
+		Make_PB()->sections->add_section(
 			'banner',
 			_x( 'Banner', 'section name', 'make' ),
 			Make_PB::uri() . '/inc/builder/sections/css/images/banner.png',
@@ -298,7 +298,7 @@ class TTFMAKE_Section_Definitions {
 	 * @return void
 	 */
 	public function register_gallery_section() {
-		make_pb_add_section(
+		Make_PB()->sections->add_section(
 			'gallery',
 			_x( 'Gallery', 'section name', 'make' ),
 			Make_PB::uri() . '/inc/builder/sections/css/images/gallery.png',

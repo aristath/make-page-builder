@@ -9,6 +9,7 @@ class Make_PB {
 
 	public $is_page_builder_active;
 	public $scripts;
+	public $sections;
 
 	public function __construct() {
 
@@ -18,9 +19,12 @@ class Make_PB {
 		if ( is_admin() ) {
 
 			require self::path() . '/includes/class-make-pb-scripts.php';
+			require self::path() . '/includes/class-make-pb-sections.php';
+
 			require self::path() . '/inc/builder/core/base.php';
 
-			$this->scripts = new Make_PB_Scripts();
+			$this->scripts  = new Make_PB_Scripts();
+			$this->sections = Make_PB_Sections::instance();
 
 		}
 

@@ -111,7 +111,7 @@ class Make_PB_Save {
 	public function prepare_data( $sections, $order ) {
 		$ordered_sections    = array();
 		$clean_sections      = array();
-		$registered_sections = make_pb_get_sections();
+		$registered_sections = Make_PB()->sections->get_sections();
 
 		// Get the order in which to process the sections
 		$order = explode( ',', $order );
@@ -354,7 +354,7 @@ class Make_PB_Save {
 			$make_pb_sections     = $data;
 
 			// Get the registered sections
-			$registered_sections = make_pb_get_sections();
+			$registered_sections = Make_PB()->sections->get_sections();
 
 			// Get the template for the section
 			make_pb_load_section_template(

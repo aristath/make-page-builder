@@ -42,8 +42,6 @@ class Make_PB_Base {
 	 * @return Make_PB_Base
 	 */
 	public function __construct() {
-		// Include the API
-		require Make_PB::path() . '/inc/builder/core/api.php';
 
 		// Include the configuration helpers
 		require Make_PB::path() . '/inc/builder/core/configuration-helpers.php';
@@ -143,7 +141,7 @@ class Make_PB_Base {
 		Make_PB::get_template_part( 'inc/builder/core/templates/stage', 'header' );
 
 		$section_data        = make_pb_get_section_data( $post_local->ID );
-		$registered_sections = make_pb_get_sections();
+		$registered_sections = Make_PB()->sections->get_sections();
 
 		// Print the current sections
 		foreach ( $section_data as $section ) {
@@ -241,7 +239,7 @@ class Make_PB_Base {
 			}
 			<?php endif; ?>
 
-			<?php foreach ( make_pb_get_sections() as $key => $section ) : ?>
+			<?php foreach ( Make_PB()->sections->get_sections() as $key => $section ) : ?>
 			#make_pb-menu-list-item-link-<?php echo esc_attr( $section['id'] ); ?> .make_pb-menu-list-item-link-icon-wrapper {
 				background-image: url(<?php echo addcslashes( esc_url_raw( $section['icon'] ), '"' ); ?>);
 			}
@@ -377,7 +375,7 @@ class Make_PB_Base {
 		$make_pb_is_js_template = true;
 
 		// Print the templates
-		foreach ( make_pb_get_sections() as $section ) : ?>
+		foreach ( Make_PB()->sections->get_sections() as $section ) : ?>
 			<script type="text/html" id="tmpl-make_pb-<?php echo esc_attr( $section['id'] ); ?>">
 			<?php
 			ob_start();
