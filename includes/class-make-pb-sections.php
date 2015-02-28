@@ -104,6 +104,34 @@ class Make_PB_Sections {
 		return $located;
 	}
 
+	/**
+	 * Load a consistent header for sections.
+	 *
+	 * @return void
+	 */
+	function load_header() {
+
+		global $make_pb_section_data;
+		Make_PB::get_template_part( 'inc/builder/core/templates/section', 'header' );
+		do_action( 'make_section_' . $make_pb_section_data['section']['id'] . '_before', $make_pb_section_data );
+		do_action( 'make_pb_section_' . $make_pb_section_data['section']['id'] . '_before', $make_pb_section_data );
+
+	}
+
+	/**
+	 * Load a consistent footer for sections.
+	 *
+	 * @return void
+	 */
+	public function load_footer() {
+
+		global $make_pb_section_data;
+		Make_PB::get_template_part( 'inc/builder/core/templates/section', 'footer' );
+		do_action( 'make_section_' . $make_pb_section_data['section']['id'] . '_after', $make_pb_section_data );
+		do_action( 'make_pb_section_' . $make_pb_section_data['section']['id'] . '_after', $make_pb_section_data );
+
+	}
+
 }
 
 

@@ -32,14 +32,14 @@ class Make_PB {
 
 
 		$this->check = Make_PB_Check::instance();
-		$this->is_builder_active = $this->check->is_builder_active();
+		$this->is_builder_active = make_pb_is_builder_active();
 
 		if ( is_admin() ) {
 
 			require self::path() . '/includes/class-make-pb-scripts.php';
 			require self::path() . '/includes/class-make-pb-sections.php';
 
-			require self::path() . '/inc/builder/core/base.php';
+			require self::path() . '/includes/base.php';
 
 			$this->scripts  = new Make_PB_Scripts();
 			$this->sections = Make_PB_Sections::instance();

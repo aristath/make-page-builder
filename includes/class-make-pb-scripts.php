@@ -92,7 +92,7 @@ class Make_PB_Scripts extends Make_PB {
 		global $pagenow;
 
 		echo '<style type="text/css">';
-		if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && Make_PB()->is_builder_active ) ) {
+		if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && make_pb_is_builder_active() ) ) {
 			echo '#postdivrich { display: none; }';
 		} else {
 			echo '#make_pb-builder, .make_pb-duplicator { display: none; }';

@@ -3,7 +3,7 @@
  * @package Make
  */
 
-make_pb_load_section_header();
+Make_PB()->sections->load_header();
 
 global $make_pb_section_data, $make_pb_is_js_template;
 $section_name     = Make_PB()->sections->get_section_name( $make_pb_section_data, $make_pb_is_js_template );
@@ -40,4 +40,4 @@ $section_order    = ( ! empty( $make_pb_section_data['data']['gallery-item-order
 </div>
 
 <input type="hidden" class="make_pb-section-state" name="<?php echo $section_name; ?>[state]" value="<?php if ( isset( $make_pb_section_data['data']['state'] ) ) echo esc_attr( $make_pb_section_data['data']['state'] ); else echo 'open'; ?>" />
-<?php make_pb_load_section_footer();
+<?php Make_PB()->sections->load_footer();

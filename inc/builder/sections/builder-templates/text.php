@@ -3,7 +3,7 @@
  * @package Make
  */
 
-make_pb_load_section_header();
+Make_PB()->sections->load_header();
 
 global $make_pb_section_data, $make_pb_is_js_template;
 $section_id     = ( isset( $make_pb_section_data['data']['id'] ) ) ? $make_pb_section_data['data']['id'] : '{{{ id }}}';
@@ -197,4 +197,4 @@ do_action( 'make_section_text_after_columns', $make_pb_section_data );
 
 <input type="hidden" value="<?php echo esc_attr( implode( ',', $section_order ) ); ?>" name="<?php echo $section_name; ?>[columns-order]" class="make_pb-text-columns-order" />
 <input type="hidden" class="make_pb-section-state" name="<?php echo $section_name; ?>[state]" value="<?php if ( isset( $make_pb_section_data['data']['state'] ) ) echo esc_attr( $make_pb_section_data['data']['state'] ); else echo 'open'; ?>" />
-<?php make_pb_load_section_footer();
+<?php Make_PB()->sections->load_footer();

@@ -48,4 +48,27 @@ class Make_PB_Check {
 
 	}
 
+	/**
+	 * Determines if a page in the process of being saved will use the builder template.
+	 *
+	 * @return bool    True if the builder template will be used; false if it will not.
+	 */
+	public function will_be_builder_active() {
+
+		$use_builder = isset( $_POST['use-builder'] ) ? (int) isset( $_POST['use-builder'] ) : 0;
+		return apply_filters( 'make_will_be_builder_page', ( 1 === $use_builder ), $template, $use_builder );
+
+	}
+
+}
+
+function make_pb_is_builder_active( $post_id = 0 ) {
+
+	if ( 0 == $post_id || empty( $post_id ) ) {
+		$post_id = get_the_ID();
+	}
+
+	$is_builder_active = ( 1 === (int) get_post_meta( $post_id, '_make_pb-use-builder', true ) );
+	return apply_filters( 'make_is_builder_active', $is_builder_active, $post_id );
+
 }

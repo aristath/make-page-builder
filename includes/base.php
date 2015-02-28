@@ -46,30 +46,18 @@ class Make_PB_Base {
 		require Make_PB::path() . '/inc/builder/sections/section-definitions.php';
 
 		// Include the save routines
-		require Make_PB::path() . '/inc/builder/core/save.php';
+		require Make_PB::path() . '/includes/save.php';
 
 		// Include the front-end helpers
 		require Make_PB::path() . '/inc/builder/sections/section-front-end-helpers.php';
 
 		// Set up actions
-		add_action( 'admin_init', array( $this, 'register_post_type_support_for_builder' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 ); // Bias toward top of stack
 
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 		add_action( 'admin_footer', array( $this, 'print_templates' ) );
 
 
-	}
-
-	/**
-	 * Add support for post types to use the Make builder.
-	 *
-	 * @since  1.3.0.
-	 *
-	 * @return void
-	 */
-	public function register_post_type_support_for_builder() {
-		add_post_type_support( 'page', 'make-builder' );
 	}
 
 	/**
@@ -80,12 +68,13 @@ class Make_PB_Base {
 	 * @return void
 	 */
 	public function add_meta_boxes() {
-		foreach ( make_pb_get_post_types_supporting_builder() as $name ) {
+		$post_types = get_post_types( '', 'names' );
+		foreach ( $post_types as $post_type ) {
 			add_meta_box(
 				'make_pb-builder',
 				__( 'Page Builder', 'make' ),
 				array( $this, 'display_builder' ),
-				$name,
+				$post_type,
 				'normal',
 				'high'
 			);
@@ -197,7 +186,7 @@ class Make_PB_Base {
 	function admin_body_class( $classes ) {
 		global $pagenow;
 
-		if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && Make_PB()->is_builder_active ) ) {
+		if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && make_pb_is_builder_active() ) ) {
 			$classes .= ' make_pb-builder-active';
 			$classes .= ' make-plus-disabled';
 		} else {
@@ -443,141 +432,3 @@ function make_pb_get_builder_base() {
 if ( is_admin() ) {
 	make_pb_get_builder_base();
 }
-
-if ( ! function_exists( 'make_pb_get_post_types_supporting_builder' ) ) :
-/**
- * Get all post types that support the Make builder.
- *
- * @since  1.2.0.
- *
- * @return array    Array of all post types that support the builder.
- */
-function make_pb_get_post_types_supporting_builder() {
-	$post_types_supporting_builder = array();
-
-	// Inspect each post type for builder support
-	foreach ( get_post_types() as $name => $data ) {
-		if ( post_type_supports( $name, 'make-builder' ) ) {
-			$post_types_supporting_builder[] = $name;
-		}
-	}
-
-	return $post_types_supporting_builder;
-}
-endif;
-
-if ( ! function_exists( 'make_pb_will_be_builder_page' ) ):
-/**
- * Determines if a page in the process of being saved will use the builder template.
- *
- * @since  1.2.0.
- *
- * @return bool    True if the builder template will be used; false if it will not.
- */
-function make_pb_will_be_builder_page() {
-	$template    = isset( $_POST[ 'page_template' ] ) ? $_POST[ 'page_template' ] : '';
-	$use_builder = isset( $_POST['use-builder'] ) ? (int) isset( $_POST['use-builder'] ) : 0;
-
-	/**
-	 * Allow developers to dynamically change the builder page status.
-	 *
-	 * @since 1.2.3.
-	 *
-	 * @param bool      $will_be_builder_page    Whether or not this page will be a builder page.
-	 * @param string    $template                The template name.
-	 * @param int       $use_builder             Value of the "use-builder" input. 1 === use builder. 0 === do not use builder.
-	 */
-	return apply_filters( 'make_will_be_builder_page', ( 'template-builder.php' === $template || 1 === $use_builder ), $template, $use_builder );
-}
-endif;
-
-if ( ! function_exists( 'make_pb_load_section_header' ) ) :
-/**
- * Load a consistent header for sections.
- *
- * @since  1.0.0.
- *
- * @return void
- */
-function make_pb_load_section_header() {
-	global $make_pb_section_data;
-	Make_PB::get_template_part( 'inc/builder/core/templates/section', 'header' );
-
-	/**
-	 * Allow for script execution in the header of a builder section.
-	 *
-	 * This action is a variable action that allows a developer to hook into specific section types (e.g., 'text'). Do
-	 * not confuse "id" in this context as the individual section id (e.g., 14092814910).
-	 *
-	 * @since 1.2.3.
-	 *
-	 * @param array    $make_pb_section_data    The array of data for the section.
-	 */
-	do_action( 'make_section_' . $make_pb_section_data['section']['id'] . '_before', $make_pb_section_data );
-
-	// Backcompat
-	do_action( 'make_pb_section_' . $make_pb_section_data['section']['id'] . '_before', $make_pb_section_data );
-}
-endif;
-
-if ( ! function_exists( 'make_pb_load_section_footer' ) ) :
-/**
- * Load a consistent footer for sections.
- *
- * @since  1.0.0.
- *
- * @return void
- */
-function make_pb_load_section_footer() {
-	global $make_pb_section_data;
-	Make_PB::get_template_part( 'inc/builder/core/templates/section', 'footer' );
-
-	/**
-	 * Allow for script execution in the footer of a builder section.
-	 *
-	 * This action is a variable action that allows a developer to hook into specific section types (e.g., 'text'). Do
-	 * not confuse "id" in this context as the individual section id (e.g., 14092814910).
-	 *
-	 * @since 1.2.3.
-	 *
-	 * @param array    $make_pb_section_data    The array of data for the section.
-	 */
-	do_action( 'make_section_' . $make_pb_section_data['section']['id'] . '_after', $make_pb_section_data );
-
-	// Backcompat
-	do_action( 'make_pb_section_' . $make_pb_section_data['section']['id'] . '_after', $make_pb_section_data );
-}
-endif;
-
-if ( ! function_exists( 'make_pb_get_wp_editor_id' ) ) :
-/**
- * Generate the ID for a WP editor based on an existing or future section number.
- *
- * @since  1.0.0.
- *
- * @param  array     $data              The data for the section.
- * @param  array     $is_js_template    Whether a JS template is being printed or not.
- * @return string                       The editor ID.
- */
-function make_pb_get_wp_editor_id( $data, $is_js_template ) {
-	$id_base = 'make_pbeditor' . $data['section']['id'];
-
-	if ( $is_js_template ) {
-		$id = $id_base . 'temp';
-	} else {
-		$id = $id_base . $data['data']['id'];
-	}
-
-	/**
-	 * Alter the wp_editor ID.
-	 *
-	 * @since 1.2.3.
-	 *
-	 * @param string    $id                The ID for the editor.
-	 * @param array     $data              The section data.
-	 * @param bool      $is_js_template    Whether or not this is in the context of a JS template.
-	 */
-	return apply_filters( 'make_get_wp_editor_id', $id, $data, $is_js_template );
-}
-endif;
-
