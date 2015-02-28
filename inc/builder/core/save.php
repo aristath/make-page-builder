@@ -357,7 +357,7 @@ class Make_PB_Save {
 			$registered_sections = Make_PB()->sections->get_sections();
 
 			// Get the template for the section
-			make_pb_load_section_template(
+			Make_PB()->sections->load_template(
 				$registered_sections[ $section['section-type'] ]['display_template'],
 				$registered_sections[ $section['section-type'] ]['path']
 			);

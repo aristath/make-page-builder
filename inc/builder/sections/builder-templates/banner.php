@@ -5,7 +5,7 @@
 make_pb_load_section_header();
 
 global $make_pb_section_data, $make_pb_is_js_template;
-$section_name  = make_pb_get_section_name( $make_pb_section_data, $make_pb_is_js_template );
+$section_name  = Make_PB()->sections->get_section_name( $make_pb_section_data, $make_pb_is_js_template );
 $title         = ( isset( $make_pb_section_data['data']['title'] ) ) ? $make_pb_section_data['data']['title'] : '';
 $hide_arrows   = ( isset( $make_pb_section_data['data']['hide-arrows'] ) ) ? $make_pb_section_data['data']['hide-arrows'] : 0;
 $hide_dots     = ( isset( $make_pb_section_data['data']['hide-dots'] ) ) ? $make_pb_section_data['data']['hide-dots'] : 0;

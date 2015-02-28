@@ -7,7 +7,7 @@ make_pb_load_section_header();
 
 global $make_pb_section_data, $make_pb_is_js_template;
 $section_id     = ( isset( $make_pb_section_data['data']['id'] ) ) ? $make_pb_section_data['data']['id'] : '{{{ id }}}';
-$section_name   = make_pb_get_section_name( $make_pb_section_data, $make_pb_is_js_template );
+$section_name   = Make_PB()->sections->get_section_name( $make_pb_section_data, $make_pb_is_js_template );
 $columns_number = ( isset( $make_pb_section_data['data']['columns-number'] ) ) ? $make_pb_section_data['data']['columns-number'] : 3;
 $section_order  = ( ! empty( $make_pb_section_data['data']['columns-order'] ) ) ? $make_pb_section_data['data']['columns-order'] : range(1, 4);
 $columns_class  = ( in_array( $columns_number, range( 1, 4 ) ) && true !== $make_pb_is_js_template ) ? $columns_number : 3;

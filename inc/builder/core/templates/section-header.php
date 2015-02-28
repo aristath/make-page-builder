@@ -87,4 +87,4 @@ ksort( $links );
 	</div>
 	<div class="clear"></div>
 	<div class="make_pb-section-body">
-		<input type="hidden" value="<?php echo $make_pb_section_data['section']['id']; ?>" name="<?php echo make_pb_get_section_name( $make_pb_section_data, $make_pb_is_js_template ); ?>[section-type]" />
+		<input type="hidden" value="<?php echo $make_pb_section_data['section']['id']; ?>" name="<?php echo Make_PB()->sections->get_section_name( $make_pb_section_data, $make_pb_is_js_template ); ?>[section-type]" />

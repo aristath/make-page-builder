@@ -292,7 +292,7 @@ class Make_PB_Base {
 		);
 
 		// Include the template
-		make_pb_load_section_template(
+		Make_PB()->sections->load_template(
 			$make_pb_section_data['section']['builder_template'],
 			$make_pb_section_data['section']['path']
 		);
@@ -549,45 +549,6 @@ function make_pb_load_section_footer() {
 }
 endif;
 
-if ( ! function_exists( 'make_pb_load_section_template' ) ) :
-/**
- * Load a section front- or back-end section template. Searches for child theme versions
- * first, then parent themes, then plugins.
- *
- * @since  1.0.4.
- *
- * @param  string    $slug    The relative path and filename (w/out suffix) required to substitute the template in a child theme.
- * @param  string    $path    An optional path extension to point to the template in the parent theme or a plugin.
- * @return string             The template filename if one is located.
- */
-function make_pb_load_section_template( $slug, $path ) {
-	$templates = array(
-		$slug . '.php',
-		trailingslashit( $path ) . $slug . '.php'
-	);
-
-	/**
-	 * Filter the templates to try and load.
-	 *
-	 * @since 1.2.3.
-	 *
-	 * @param array    $templates    The list of template to try and load.
-	 * @param string   $slug         The template slug.
-	 * @param string   $path         The path to the template.
-	 */
-	$templates = apply_filters( 'make_load_section_template', $templates, $slug, $path );
-
-	if ( '' === $located = Make_PB::locate_template( $templates, true, false ) ) {
-		if ( isset( $templates[1] ) && file_exists( $templates[1] ) ) {
-			require( $templates[1] );
-			$located = $templates[1];
-		}
-	}
-
-	return $located;
-}
-endif;
-
 if ( ! function_exists( 'make_pb_get_wp_editor_id' ) ) :
 /**
  * Generate the ID for a WP editor based on an existing or future section number.
@@ -620,34 +581,3 @@ function make_pb_get_wp_editor_id( $data, $is_js_template ) {
 }
 endif;
 
-if ( ! function_exists( 'make_pb_get_section_name' ) ) :
-/**
- * Generate the name of a section.
- *
- * @since  1.0.0.
- *
- * @param  array     $data              The data for the section.
- * @param  array     $is_js_template    Whether a JS template is being printed or not.
- * @return string                       The name of the section.
- */
-function make_pb_get_section_name( $data, $is_js_template ) {
-	$name = 'make_pb-section';
-
-	if ( $is_js_template ) {
-		$name .= '[{{{ id }}}]';
-	} else {
-		$name .= '[' . $data['data']['id'] . ']';
-	}
-
-	/**
-	 * Alter section name.
-	 *
-	 * @since 1.2.3.
-	 *
-	 * @param string    $name              The name of the section.
-	 * @param array     $data              The section data.
-	 * @param bool      $is_js_template    Whether or not this is in the context of a JS template.
-	 */
-	return apply_filters( 'make_get_section_name', $name, $data, $is_js_template );
-}
-endif;

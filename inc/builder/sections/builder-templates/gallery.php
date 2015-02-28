@@ -6,7 +6,7 @@
 make_pb_load_section_header();
 
 global $make_pb_section_data, $make_pb_is_js_template;
-$section_name     = make_pb_get_section_name( $make_pb_section_data, $make_pb_is_js_template );
+$section_name     = Make_PB()->sections->get_section_name( $make_pb_section_data, $make_pb_is_js_template );
 $columns          = ( isset( $make_pb_section_data['data']['columns'] ) ) ? $make_pb_section_data['data']['columns'] : 3;
 $caption_color    = ( isset( $make_pb_section_data['data']['caption-color'] ) ) ? $make_pb_section_data['data']['caption-color'] : 'light';
 $captions         = ( isset( $make_pb_section_data['data']['captions'] ) ) ? $make_pb_section_data['data']['captions'] : 'reveal';

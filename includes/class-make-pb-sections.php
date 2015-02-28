@@ -56,6 +56,54 @@ class Make_PB_Sections {
 
 	}
 
+	/**
+	 * Generate the name of a section.
+	 *
+	 * @since  1.0.0.
+	 *
+	 * @param  array     $data              The data for the section.
+	 * @param  array     $is_js_template    Whether a JS template is being printed or not.
+	 * @return string                       The name of the section.
+	 */
+	public function get_section_name( $data, $is_js_template ) {
+		$name = 'make_pb-section';
+
+		if ( $is_js_template ) {
+			$name .= '[{{{ id }}}]';
+		} else {
+			$name .= '[' . $data['data']['id'] . ']';
+		}
+
+		return apply_filters( 'make_get_section_name', $name, $data, $is_js_template );
+
+	}
+
+	/**
+	 * Load a section front- or back-end section template. Searches for child theme versions
+	 * first, then parent themes, then plugins.
+	 *
+	 * @param  string    $slug    The relative path and filename (w/out suffix) required to substitute the template in a child theme.
+	 * @param  string    $path    An optional path extension to point to the template in the parent theme or a plugin.
+	 * @return string             The template filename if one is located.
+	 */
+	function load_template( $slug, $path ) {
+		$templates = array(
+			$slug . '.php',
+			trailingslashit( $path ) . $slug . '.php'
+		);
+
+		$templates = apply_filters( 'make_load_section_template', $templates, $slug, $path );
+
+		if ( '' === $located = Make_PB::locate_template( $templates, true, false ) ) {
+			if ( isset( $templates[1] ) && file_exists( $templates[1] ) ) {
+				require( $templates[1] );
+				$located = $templates[1];
+			}
+		}
+
+		return $located;
+	}
+
 }
 
 

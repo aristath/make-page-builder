@@ -2,7 +2,7 @@
 global $make_pb_overlay_class, $make_pb_section_data, $make_pb_is_js_template, $make_pb_overlay_title;
 $make_pb_overlay_class = 'make_pb-configuration-overlay';
 $make_pb_overlay_title = __( 'Configure section', 'make' );
-$section_name          = make_pb_get_section_name( $make_pb_section_data, $make_pb_is_js_template );
+$section_name          = Make_PB()->sections->get_section_name( $make_pb_section_data, $make_pb_is_js_template );
 
 // Include the header
 Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'header' );
