@@ -136,7 +136,7 @@ do_action( 'make_section_text_after_title', $make_pb_section_data ); ?>
 		$make_pb_overlay_id    = $overlay_id;
 		$make_pb_overlay_title = __( 'Configure column', 'make' );
 
-		Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'header' );
+		Make_PB::get_template_part( '/includes/builder/core/templates/overlay', 'header' );
 
 		/**
 		 * Filter the definitions of the Columns section's column configuration inputs.
@@ -176,7 +176,7 @@ do_action( 'make_section_text_after_title', $make_pb_section_data ); ?>
 
 		echo $output;
 
-		Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'footer' );
+		Make_PB::get_template_part( '/includes/builder/core/templates/overlay', 'footer' );
 		?>
 	</div>
 	<?php $j++; endforeach; ?>

@@ -24,7 +24,7 @@ $section_order    = ( ! empty( $make_pb_section_data['data']['gallery-item-order
 		<?php foreach ( $section_order as $key => $section_id  ) : ?>
 			<?php if ( isset( $make_pb_section_data['data']['gallery-items'][ $section_id ] ) ) : ?>
 				<?php global $make_pb_gallery_id; $make_pb_gallery_id = $section_id; ?>
-				<?php Make_PB::get_template_part( '/inc/builder/sections/builder-templates/gallery', 'item' ); ?>
+				<?php Make_PB::get_template_part( '/includes/builder/sections/builder-templates/gallery', 'item' ); ?>
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>

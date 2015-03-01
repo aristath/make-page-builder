@@ -43,13 +43,13 @@ class Make_PB_Base {
 	public function __construct() {
 
 		// Add the core sections
-		require Make_PB::path() . '/inc/builder/sections/section-definitions.php';
+		require Make_PB::path() . '/includes/builder/sections/section-definitions.php';
 
 		// Include the save routines
 		require Make_PB::path() . '/includes/save.php';
 
 		// Include the front-end helpers
-		require Make_PB::path() . '/inc/builder/sections/section-front-end-helpers.php';
+		require Make_PB::path() . '/includes/builder/sections/section-front-end-helpers.php';
 
 		// Set up actions
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 ); // Bias toward top of stack
@@ -98,8 +98,8 @@ class Make_PB_Base {
 		$make_pb_sections = ( is_array( $make_pb_sections ) ) ? $make_pb_sections : array();
 
 		// Load the boilerplate templates
-		Make_PB::get_template_part( 'inc/builder/core/templates/menu' );
-		Make_PB::get_template_part( 'inc/builder/core/templates/stage', 'header' );
+		Make_PB::get_template_part( 'includes/builder/core/templates/menu' );
+		Make_PB::get_template_part( 'includes/builder/core/templates/stage', 'header' );
 
 		$section_data        = Make_PB_Helper::get_section_data( $post_local->ID );
 		$registered_sections = Make_PB()->sections->get_sections();
@@ -167,7 +167,7 @@ class Make_PB_Base {
 			}
 		}
 
-		Make_PB::get_template_part( 'inc/builder/core/templates/stage', 'footer' );
+		Make_PB::get_template_part( 'includes/builder/core/templates/stage', 'footer' );
 
 		// Add the sort input
 		$section_order = get_post_meta( $post_local->ID, '_make_pb-section-ids', true );
@@ -316,7 +316,7 @@ class Make_PB_Base {
 		unset( $GLOBALS['make_pb_is_js_template'] );
 
 		// Load the overlay for TinyMCE
-		Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'tinymce' );
+		Make_PB::get_template_part( '/includes/builder/core/templates/overlay', 'tinymce' );
 
 		// Print the template for removing images
 		?>

@@ -89,7 +89,7 @@ class Make_PB_Save {
 		}
 
 		// Don't save data if we're not using the Builder template
-		if ( ! make_pb_will_be_builder_page() ) {
+		if ( ! Make_PB()->check->will_be_builder_active() ) {
 			return;
 		}
 
@@ -284,7 +284,7 @@ class Make_PB_Save {
 	 * @return array                Modified post data.
 	 */
 	public function wp_insert_post_data( $data, $postarr ) {
-		if ( ! make_pb_will_be_builder_page() || ! isset( $_POST[ 'make_pb-builder-nonce' ] ) || ! wp_verify_nonce( $_POST[ 'make_pb-builder-nonce' ], 'save' ) ) {
+		if ( ! Make_PB()->check->will_be_builder_active() || ! isset( $_POST[ 'make_pb-builder-nonce' ] ) || ! wp_verify_nonce( $_POST[ 'make_pb-builder-nonce' ], 'save' ) ) {
 			return $data;
 		}
 
@@ -358,8 +358,8 @@ class Make_PB_Save {
 
 			// Get the template for the section
 			Make_PB()->sections->load_template(
-				$registered_sections[ $section['section-type'] ]['display_template'],
-				$registered_sections[ $section['section-type'] ]['path']
+				$registered_sections[$section['section-type']]['display_template'],
+				$registered_sections[$section['section-type']]['path']
 			);
 
 			// Cleanup the global

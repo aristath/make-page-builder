@@ -112,7 +112,7 @@ class Make_PB_Sections {
 	function load_header() {
 
 		global $make_pb_section_data;
-		Make_PB::get_template_part( 'inc/builder/core/templates/section', 'header' );
+		Make_PB::get_template_part( 'includes/builder/core/templates/section', 'header' );
 		do_action( 'make_section_' . $make_pb_section_data['section']['id'] . '_before', $make_pb_section_data );
 		do_action( 'make_pb_section_' . $make_pb_section_data['section']['id'] . '_before', $make_pb_section_data );
 
@@ -126,9 +126,38 @@ class Make_PB_Sections {
 	public function load_footer() {
 
 		global $make_pb_section_data;
-		Make_PB::get_template_part( 'inc/builder/core/templates/section', 'footer' );
+		Make_PB::get_template_part( 'includes/builder/core/templates/section', 'footer' );
 		do_action( 'make_section_' . $make_pb_section_data['section']['id'] . '_after', $make_pb_section_data );
 		do_action( 'make_pb_section_' . $make_pb_section_data['section']['id'] . '_after', $make_pb_section_data );
+
+	}
+
+	/**
+	 * An array of defaults for all the Builder section settings
+	 *
+	 * @return array    The section defaults.
+	 */
+	public function get_section_defaults() {
+
+		$defaults = array();
+		return apply_filters( 'make_section_defaults', $defaults );
+
+	}
+
+	/**
+	 * Define the choices for section setting dropdowns.
+	 *
+	 * @param  string    $key             The key for the section setting.
+	 * @param  string    $section_type    The section type.
+ 	 * @return array                      The array of choices for the section setting.
+	 */
+	public function get_choices( $key, $section_type ) {
+
+		$choices = array( 0 );
+
+		$choice_id = "$section_type-$key";
+		switch ( $choice_id ) {}
+		return apply_filters( 'make_section_choices', $choices, $key, $section_type );
 
 	}
 

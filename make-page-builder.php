@@ -14,32 +14,21 @@ class Make_PB {
 
 	public function __construct() {
 
-		if ( ! class_exists( 'Make_PB_Check' ) ) {
-			require self::path() . '/includes/class-make-pb-check.php';
-		}
-
-		if ( ! class_exists( 'Make_PB_Helper' ) ) {
-			require self::path() . '/includes/class-make-pb-helper.php';
-		}
-
-		if ( ! class_exists( 'Make_PB_Config' ) ) {
-			require self::path() . '/includes/class-make-pb-config.php';
-		}
-
-		if ( ! class_exists( 'Make_PB_Image' ) ) {
-			require self::path() . '/includes/class-make-pb-image.php';
-		}
-
+		self::include_file( self::path() . '/includes/class-make-pb-check.php', 'Make_PB_Check' );
+		self::include_file( self::path() . '/includes/class-make-pb-helper.php', 'Make_PB_Helper' );
+		self::include_file( self::path() . '/includes/class-make-pb-config.php', 'Make_PB_Config' );
+		self::include_file( self::path() . '/includes/class-make-pb-image.php', 'Make_PB_Image' );
 
 		$this->check = Make_PB_Check::instance();
 		$this->is_builder_active = make_pb_is_builder_active();
 
 		if ( is_admin() ) {
-
-			require self::path() . '/includes/class-make-pb-scripts.php';
-			require self::path() . '/includes/class-make-pb-sections.php';
-
-			require self::path() . '/includes/base.php';
+			self::include_file( self::path() . '/includes/class-make-pb-scripts.php', 'Make_PB_Scripts' );
+			self::include_file( self::path() . '/includes/class-make-pb-sections.php', 'Make_PB_Sections' );
+			self::include_file( self::path() . '/includes/class-make-pb-section-text.php', 'Make_PB_Section_Text' );
+			self::include_file( self::path() . '/includes/class-make-pb-section-banner.php', 'Make_PB_Section_Banner' );
+			self::include_file( self::path() . '/includes/class-make-pb-section-gallery.php', 'Make_PB_Section_Gallery' );
+			self::include_file( self::path() . '/includes/base.php', 'Make_PB_Base' );
 
 			$this->scripts  = new Make_PB_Scripts();
 			$this->sections = Make_PB_Sections::instance();
@@ -54,6 +43,12 @@ class Make_PB {
 		}
 
 		return self::$instance;
+	}
+
+	public static function include_file( $path, $class ) {
+		if ( ! class_exists( $class ) ) {
+			require $path;
+		}
 	}
 
 	public static function path() {

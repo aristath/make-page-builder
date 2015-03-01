@@ -5,7 +5,7 @@ $make_pb_overlay_title = __( 'Configure section', 'make' );
 $section_name          = Make_PB()->sections->get_section_name( $make_pb_section_data, $make_pb_is_js_template );
 
 // Include the header
-Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'header' );
+Make_PB::get_template_part( '/includes/builder/core/templates/overlay', 'header' );
 
 // Sort the config in case 3rd party code added another input
 ksort( $make_pb_section_data['section']['config'], SORT_NUMERIC );
@@ -21,4 +21,4 @@ foreach ( $make_pb_section_data['section']['config'] as $input ) {
 
 echo $output;
 
-Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'footer' );
+Make_PB::get_template_part( '/includes/builder/core/templates/overlay', 'footer' );

@@ -58,7 +58,7 @@ $overlay_id  = 'make_pb-overlay-' . $combined_id;
 	$make_pb_overlay_id    = $overlay_id;
 	$make_pb_overlay_title = __( 'Configure slide', 'make' );
 
-	Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'header' );
+	Make_PB::get_template_part( '/includes/builder/core/templates/overlay', 'header' );
 
 	/**
 	 * Filter the definitions of the Banner slide configuration inputs.
@@ -109,7 +109,7 @@ $overlay_id  = 'make_pb-overlay-' . $combined_id;
 
 	echo $output;
 
-	Make_PB::get_template_part( '/inc/builder/core/templates/overlay', 'footer' );
+	Make_PB::get_template_part( '/includes/builder/core/templates/overlay', 'footer' );
 	?>
 
 	<input type="hidden" class="make_pb-banner-slide-state" name="<?php echo $section_name; ?>[state]" value="<?php echo esc_attr( $state ); ?>" />
