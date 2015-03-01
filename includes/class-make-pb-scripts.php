@@ -49,7 +49,6 @@ class Make_PB_Scripts extends Make_PB {
 		wp_register_script( 'make_pb-sections/js/models/gallery-item.js', Make_PB::uri() . '/includes/builder/sections/js/models/gallery-item.js', array(), $version, true );
 		wp_register_script( 'make_pb-sections/js/views/gallery-item.js', Make_PB::uri() . '/includes/builder/sections/js/views/gallery-item.js', array(), $version, true );
 		wp_register_script( 'make_pb-sections/js/views/gallery.js', Make_PB::uri() . '/includes/builder/sections/js/views/gallery.js', array(), $version, true );
-		wp_register_script( 'make_pb-sections/js/views/text.js', Make_PB::uri() . '/includes/builder/sections/js/views/text.js', array(), $version, true );
 		wp_register_script( 'make_pb-sections/js/models/banner-slide.js', Make_PB::uri() . '/includes/builder/sections/js/models/banner-slide.js', array(), $version, true );
 		wp_register_script( 'make_pb-sections/js/views/banner-slide.js', Make_PB::uri() . '/includes/builder/sections/js/views/banner-slide.js', array(), $version, true );
 		wp_register_script( 'make_pb-sections/js/views/banner.js', Make_PB::uri() . '/includes/builder/sections/js/views/banner.js', array(), $version, true );
@@ -81,7 +80,6 @@ class Make_PB_Scripts extends Make_PB {
 			'make_pb-sections/js/models/banner-slide.js',
 			'make_pb-sections/js/views/gallery-item.js',
 			'make_pb-sections/js/views/gallery.js',
-			'make_pb-sections/js/views/text.js',
 			'make_pb-sections/js/views/banner-slide.js',
 			'make_pb-sections/js/views/banner.js',
 		) );

@@ -1,26 +1,17 @@
 /*---------------------------------------------------------
  Text and Gallery section (sections.css)
 -------------------------------------------------------- */
-.make_pb-section-text .make_pb-titlediv {
-    margin-bottom: 0; /*reset*/
-    padding-right: 90px;
-}
-.make_pb-section-text .make_pb-media-uploader-placeholder {
-    border-bottom: 0; /*reset*/
-}
-.make_pb-section-text .make_pb-section-body,
 .make_pb-section-gallery .make_pb-section-body {
     padding-left: 10px;
     padding-right: 10px;
 }
-.make_pb-text-columns-stage .sortable-placeholder,
+
 .make_pb-gallery-items-stage .sortable-placeholder {
     width: 100%;
     margin: 0; /*reset*/
     padding: 0 9px;
 }
 @media screen and ( min-width: 1160px ) {
-    .make_pb-text-columns-stage .sortable-placeholder,
     .make_pb-gallery-items-stage .sortable-placeholder {
         display: flex;
         display: -ms-flexbox;
@@ -33,8 +24,7 @@
 .make_pb-gallery-items-stage .sortable-placeholder {
     padding: 0; /*reset*/
 }
-.make_pb-gallery-items-stage,
-.make_pb-text-columns-stage {
+.make_pb-gallery-items-stage {
     display: flex;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -42,7 +32,6 @@
     -ms-flex-wrap: wrap;
     -webkit-flex-wrap: wrap;
 }
-.make_pb-text-column,
 .make_pb-gallery-item {
     width: 100%;
     padding: 0 10px;
@@ -51,52 +40,12 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.make_pb-text-column {
-    position: relative;
-}
 @media screen and ( min-width: 1160px ) {
-    .make_pb-text-column,
     .make_pb-gallery-item {
         flex: 1;
         -ms-flex: 1;
         -webkit-flex: 1;
         margin-bottom: 0; /*reset*/
-    }
-}
-/*---------------------------------------------------------
- Text: One column (sections.css)
--------------------------------------------------------- */
-.make_pb-text-columns-1 .make_pb-text-column-position-2,
-.make_pb-text-columns-1 .make_pb-text-column-position-3,
-.make_pb-text-columns-1 .make_pb-text-column-position-4 {
-    display: none;
-    width: 0%;
-}
-.make_pb-text-columns-1 .make_pb-sortable-handle {
-    visibility: hidden;
-}
-/*---------------------------------------------------------
- Text: Two column (sections.css)
--------------------------------------------------------- */
-.make_pb-text-columns-2 .make_pb-text-column-position-3,
-.make_pb-text-columns-2 .make_pb-text-column-position-4 {
-    display: none;
-    width: 0%;
-}
-/*---------------------------------------------------------
- Text: Three column (sections.css)
--------------------------------------------------------- */
-.make_pb-text-columns-3 .make_pb-text-column-position-4 {
-    display: none;
-    width: 0%;
-}
-@media screen and ( min-width: 1160px ) {
-    .make_pb-text-columns-2,
-    .make_pb-text-columns-3,
-    .make_pb-text-columns-4 {
-        display: flex;
-        display: -ms-flexbox;
-        display: -webkit-flex;
     }
 }
 /*---------------------------------------------------------
@@ -309,15 +258,13 @@
     color: #1bc865;
 }
 .edit-content-link.item-has-content.edit-gallery-item-link:before,
-.edit-content-link.item-has-content.edit-banner-slide-link:before,
-.edit-content-link.item-has-content.edit-text-column-link:before {
+.edit-content-link.item-has-content.edit-banner-slide-link:before {
     content: "\f214";
 }
 .edit-gallery-item-link,
 .remove-gallery-item-link,
 .edit-banner-slide-link,
 .remove-banner-slide-link,
-.edit-text-column-link,
 .configure-gallery-item-link,
 .configure-banner-slide-link,
 .configure-column-link,
@@ -336,7 +283,6 @@
     text-decoration: none;  /*reset*/
     outline: none !important;
 }
-.edit-text-column-link,
 .configure-column-link,
 .remove-widget-link {
     top: 0; /*reset*/
@@ -363,7 +309,6 @@
 .remove-gallery-item-link:hover,
 .edit-banner-slide-link:hover,
 .remove-banner-slide-link:hover,
-.edit-text-column-link:hover,
 .configure-gallery-item-link:hover,
 .configure-banner-slide-link:hover,
 .configure-column-link:hover,
@@ -374,7 +319,6 @@
 .remove-gallery-item-link span,
 .edit-banner-slide-link span,
 .remove-banner-slide-link span,
-.edit-text-column-link span,
 .configure-gallery-item-link span,
 .configure-banner-slide-link span,
 .configure-column-link span,
@@ -385,8 +329,7 @@
     overflow: hidden;
 }
 .edit-gallery-item-link:before,
-.edit-banner-slide-link:before,
-.edit-text-column-link:before {
+.edit-banner-slide-link:before {
     content: "\f464";
     font: 400 20px/39px dashicons;
     speak: none; /*reset*/

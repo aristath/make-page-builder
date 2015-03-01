@@ -172,7 +172,6 @@
     opacity: .5;
 }
 .make_pb-gallery-item:hover .sortable-background,
-.make_pb-text-column:hover .sortable-background.column-sortable-background,
 .make_pb-banner-slide:hover .sortable-background {
     opacity: 1; /*reset*/
 }

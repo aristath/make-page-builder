@@ -25,7 +25,6 @@ class Make_PB {
 		if ( is_admin() ) {
 			self::include_file( self::path() . '/includes/class-make-pb-scripts.php', 'Make_PB_Scripts' );
 			self::include_file( self::path() . '/includes/class-make-pb-sections.php', 'Make_PB_Sections' );
-			self::include_file( self::path() . '/includes/class-make-pb-section-text.php', 'Make_PB_Section_Text' );
 			self::include_file( self::path() . '/includes/class-make-pb-section-banner.php', 'Make_PB_Section_Banner' );
 			self::include_file( self::path() . '/includes/class-make-pb-section-gallery.php', 'Make_PB_Section_Gallery' );
 			self::include_file( self::path() . '/includes/base.php', 'Make_PB_Base' );
