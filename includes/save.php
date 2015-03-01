@@ -1,21 +1,21 @@
 <?php
 /**
- * @package Make
+ * @package Maera
  */
 
-if ( ! function_exists( 'Make_PB_Save' ) ) :
+if ( ! function_exists( 'Maera_PB_Save' ) ) :
 /**
  * Defines the functionality for the HTML Builder.
  *
  * @since 1.0.0.
  */
-class Make_PB_Save {
+class Maera_PB_Save {
 	/**
-	 * The one instance of Make_PB_Save.
+	 * The one instance of Maera_PB_Save.
 	 *
 	 * @since 1.0.0.
 	 *
-	 * @var   Make_PB_Save
+	 * @var   Maera_PB_Save
 	 */
 	private static $instance;
 
@@ -29,11 +29,11 @@ class Make_PB_Save {
 	private $_sanitized_sections = array();
 
 	/**
-	 * Instantiate or return the one Make_PB_Save instance.
+	 * Instantiate or return the one Maera_PB_Save instance.
 	 *
 	 * @since  1.0.0.
 	 *
-	 * @return Make_PB_Save
+	 * @return Maera_PB_Save
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -48,11 +48,11 @@ class Make_PB_Save {
 	 *
 	 * @since  1.0.0.
 	 *
-	 * @return Make_PB_Save
+	 * @return Maera_PB_Save
 	 */
 	public function __construct() {
 		// Only add filters when the builder is being saved
-		if ( isset( $_POST[ 'make_pb-builder-nonce' ] ) && wp_verify_nonce( $_POST[ 'make_pb-builder-nonce' ], 'save' ) && isset( $_POST['make_pb-section-order'] ) ) {
+		if ( isset( $_POST[ 'maera_pb-builder-nonce' ] ) && wp_verify_nonce( $_POST[ 'maera_pb-builder-nonce' ], 'save' ) && isset( $_POST['maera_pb-section-order'] ) ) {
 			// Save the post's meta data
 			add_action( 'save_post', array( $this, 'save_post' ), 10, 2 );
 
@@ -83,18 +83,18 @@ class Make_PB_Save {
 
 		// Indicate if the post is a builder post; handled earlier because if won't pass future tests
 		if ( isset( $_POST['use-builder'] ) && 1 === (int) $_POST['use-builder'] ) {
-			update_post_meta( $post_id, '_make_pb-use-builder', 1 );
+			update_post_meta( $post_id, '_maera_pb-use-builder', 1 );
 		} else {
-			delete_post_meta( $post_id, '_make_pb-use-builder' );
+			delete_post_meta( $post_id, '_maera_pb-use-builder' );
 		}
 
 		// Don't save data if we're not using the Builder template
-		if ( ! Make_PB()->check->will_be_builder_active() ) {
+		if ( ! Maera_PB()->check->will_be_builder_active() ) {
 			return;
 		}
 
 		// Process and save data
-		if ( isset( $_POST[ 'make_pb-builder-nonce' ] ) && wp_verify_nonce( $_POST[ 'make_pb-builder-nonce' ], 'save' ) && isset( $_POST['make_pb-section-order'] ) ) {
+		if ( isset( $_POST[ 'maera_pb-builder-nonce' ] ) && wp_verify_nonce( $_POST[ 'maera_pb-builder-nonce' ], 'save' ) && isset( $_POST['maera_pb-section-order'] ) ) {
 			$this->save_data( $this->get_sanitized_sections(), $post_id );
 		}
 	}
@@ -111,7 +111,7 @@ class Make_PB_Save {
 	public function prepare_data( $sections, $order ) {
 		$ordered_sections    = array();
 		$clean_sections      = array();
-		$registered_sections = Make_PB()->sections->get_sections();
+		$registered_sections = Maera_PB()->sections->get_sections();
 
 		// Get the order in which to process the sections
 		$order = explode( ',', $order );
@@ -138,7 +138,7 @@ class Make_PB_Save {
 				 * @param array  $data            The raw section data.
 				 * @param string $section_type    The type of section being handled.
 				 */
-				$clean_sections[ $id ]                 = apply_filters( 'make_prepare_data_section', call_user_func_array( $registered_sections[ $values['section-type'] ]['save_callback'], array( $values ) ), $values, $values['section-type'] );
+				$clean_sections[ $id ]                 = apply_filters( 'maera_prepare_data_section', call_user_func_array( $registered_sections[ $values['section-type'] ]['save_callback'], array( $values ) ), $values, $values['section-type'] );
 				$clean_sections[ $id ]['state']        = ( isset( $values['state'] ) ) ? sanitize_key( $values['state'] ) : 'open';
 				$clean_sections[ $id ]['section-type'] = $values['section-type'];
 				$clean_sections[ $id ]['id']           = $id;
@@ -154,7 +154,7 @@ class Make_PB_Save {
 		 * @param array    $sections          The raw sections.
 		 * @param array    $order             The order for the sections.
 		 */
-		return apply_filters( 'make_prepare_data', $clean_sections, $sections, $order );
+		return apply_filters( 'maera_prepare_data', $clean_sections, $sections, $order );
 	}
 
 	/**
@@ -172,7 +172,7 @@ class Make_PB_Save {
 		 * array serialization, whereby changing the site domain can lead to the value being unreadable. Instead, each
 		 * value is independent.
 		 */
-		$values_to_save = $this->flatten_array( $sections, '_make_pb:', ':' );
+		$values_to_save = $this->flatten_array( $sections, '_maera_pb:', ':' );
 
 		foreach ( $values_to_save as $key => $value ) {
 			update_post_meta( $post_id, $key, $value );
@@ -180,7 +180,7 @@ class Make_PB_Save {
 
 		// Save the ids for the sections. This will be used to lookup all of the separate values.
 		$section_ids = array_keys( $sections );
-		update_post_meta( $post_id, '_make_pb-section-ids', $section_ids );
+		update_post_meta( $post_id, '_maera_pb-section-ids', $section_ids );
 
 		/**
 		 * Execute code after the section data is saved.
@@ -193,7 +193,7 @@ class Make_PB_Save {
 		 * @param array    $sections    The clean section data.
 		 * @param int      $post_id     The post ID for the saved data.
 		 */
-		do_action( 'make_builder_data_saved', $sections, $post_id );
+		do_action( 'maera_builder_data_saved', $sections, $post_id );
 
 		// Remove the old section values if necessary
 		$this->prune_abandoned_rows( $post_id, $values_to_save );
@@ -216,7 +216,7 @@ class Make_PB_Save {
 		if ( is_array( $post_meta ) && ! empty( $post_meta ) ) {
 			foreach ( $post_meta as $key => $value ) {
 				// Only consider builder values
-				if ( 0 === strpos( $key, '_make_pb:' ) ) {
+				if ( 0 === strpos( $key, '_maera_pb:' ) ) {
 					if ( ! isset( $current_values[ $key ] ) ) {
 						delete_post_meta( $post_id, $key );
 					}
@@ -284,7 +284,7 @@ class Make_PB_Save {
 	 * @return array                Modified post data.
 	 */
 	public function wp_insert_post_data( $data, $postarr ) {
-		if ( ! Make_PB()->check->will_be_builder_active() || ! isset( $_POST[ 'make_pb-builder-nonce' ] ) || ! wp_verify_nonce( $_POST[ 'make_pb-builder-nonce' ], 'save' ) ) {
+		if ( ! Maera_PB()->check->will_be_builder_active() || ! isset( $_POST[ 'maera_pb-builder-nonce' ] ) || ! wp_verify_nonce( $_POST[ 'maera_pb-builder-nonce' ], 'save' ) ) {
 			return $data;
 		}
 
@@ -305,7 +305,7 @@ class Make_PB_Save {
 		 *
 		 * @param array    $data   The sanitized data.
 		 */
-		$sanitized_sections = apply_filters( 'make_insert_post_data_sections', $this->get_sanitized_sections() );
+		$sanitized_sections = apply_filters( 'maera_insert_post_data_sections', $this->get_sanitized_sections() );
 
 		// The data has been deleted and can be removed
 		if ( empty( $sanitized_sections ) ) {
@@ -334,10 +334,10 @@ class Make_PB_Save {
 	 */
 	public function generate_post_content( $data ) {
 		// Run wpautop when saving the data
-		add_filter( 'make_pb_the_builder_content', 'wpautop' );
+		add_filter( 'maera_pb_the_builder_content', 'wpautop' );
 
 		// Handle oEmbeds correctly
-		add_filter( 'make_pb_the_builder_content', array( $this, 'embed_handling' ), 8 );
+		add_filter( 'maera_pb_the_builder_content', array( $this, 'embed_handling' ), 8 );
 		add_filter( 'embed_handler_html', array( $this, 'embed_handler_html' ) , 10, 3 );
 		add_filter( 'embed_oembed_html', array( $this, 'embed_oembed_html' ) , 10, 4 );
 
@@ -349,21 +349,21 @@ class Make_PB_Save {
 
 		// For each sections, render it using the template
 		foreach ( $data as $section ) {
-			global $make_pb_section_data, $make_pb_sections;
-			$make_pb_section_data = $section;
-			$make_pb_sections     = $data;
+			global $maera_pb_section_data, $maera_pb_sections;
+			$maera_pb_section_data = $section;
+			$maera_pb_sections     = $data;
 
 			// Get the registered sections
-			$registered_sections = Make_PB()->sections->get_sections();
+			$registered_sections = Maera_PB()->sections->get_sections();
 
 			// Get the template for the section
-			Make_PB()->sections->load_template(
+			Maera_PB()->sections->load_template(
 				$registered_sections[$section['section-type']]['display_template'],
 				$registered_sections[$section['section-type']]['path']
 			);
 
 			// Cleanup the global
-			unset( $GLOBALS['make_pb_section_data'] );
+			unset( $GLOBALS['maera_pb_section_data'] );
 		}
 
 		// Get the rendered templates from the output buffer
@@ -382,7 +382,7 @@ class Make_PB_Save {
 		 * @param string    $post_content    The fully generated post content.
 		 * @param array     $data            The data used to generate the content.
 		 */
-		return apply_filters( 'make_generate_post_content', $post_content, $data );
+		return apply_filters( 'maera_generate_post_content', $post_content, $data );
 	}
 
 	/**
@@ -515,7 +515,7 @@ class Make_PB_Save {
 		 * @param array    $current_section    The data for the current section.
 		 * @param array    $sections           The list of all sections.
 		 */
-		return apply_filters( 'make_get_next_section_data', $next_data, $current_section, $sections );
+		return apply_filters( 'maera_get_next_section_data', $next_data, $current_section, $sections );
 	}
 
 	/**
@@ -547,7 +547,7 @@ class Make_PB_Save {
 		 * @param array    $current_section    The data for the current section.
 		 * @param array    $sections           The list of all sections.
 		 */
-		return apply_filters( 'make_get_next_section_data', $prev_section, $current_section, $sections );
+		return apply_filters( 'maera_get_next_section_data', $prev_section, $current_section, $sections );
 	}
 
 	/**
@@ -584,7 +584,7 @@ class Make_PB_Save {
 		 * @param string    $classes            The sting of classes.
 		 * @param array     $current_section    The array of data for the current section.
 		 */
-		return apply_filters( 'make_section_classes', $prev . ' ' . $current . ' ' . $next, $current_section );
+		return apply_filters( 'maera_section_classes', $prev . ' ' . $current . ' ' . $next, $current_section );
 	}
 
 	/**
@@ -603,7 +603,7 @@ class Make_PB_Save {
 		 *
 		 * @param string    $content    The post content.
 		 */
-		$content = apply_filters( 'make_the_builder_content', $content );
+		$content = apply_filters( 'maera_the_builder_content', $content );
 		$content = str_replace( ']]>', ']]&gt;', $content );
 		echo $content;
 	}
@@ -617,9 +617,9 @@ class Make_PB_Save {
 	 */
 	public function get_sanitized_sections() {
 		if ( empty( $this->_sanitized_sections ) ) {
-			if ( isset( $_POST['make_pb-section-order'] ) ) {
-				$data = ( isset( $_POST['make_pb-section'] ) ) ? $_POST['make_pb-section'] : array();
-				$this->_sanitized_sections = $this->prepare_data( $data, $_POST['make_pb-section-order'] );
+			if ( isset( $_POST['maera_pb-section-order'] ) ) {
+				$data = ( isset( $_POST['maera_pb-section'] ) ) ? $_POST['maera_pb-section'] : array();
+				$this->_sanitized_sections = $this->prepare_data( $data, $_POST['maera_pb-section-order'] );
 			}
 		}
 
@@ -640,22 +640,22 @@ class Make_PB_Save {
 }
 endif;
 
-if ( ! function_exists( 'make_pb_get_builder_save' ) ) :
+if ( ! function_exists( 'maera_pb_get_builder_save' ) ) :
 /**
- * Instantiate or return the one Make_PB_Save instance.
+ * Instantiate or return the one Maera_PB_Save instance.
  *
  * @since  1.0.0.
  *
- * @return Make_PB_Save
+ * @return Maera_PB_Save
  */
-function make_pb_get_builder_save() {
-	return Make_PB_Save::instance();
+function maera_pb_get_builder_save() {
+	return Maera_PB_Save::instance();
 }
 endif;
 
-add_action( 'admin_init', 'make_pb_get_builder_save' );
+add_action( 'admin_init', 'maera_pb_get_builder_save' );
 
-if ( ! function_exists( 'make_pb_sanitize_image_id' ) ) :
+if ( ! function_exists( 'maera_pb_sanitize_image_id' ) ) :
 /**
  * Cleans an ID for an image.
  *
@@ -666,7 +666,7 @@ if ( ! function_exists( 'make_pb_sanitize_image_id' ) ) :
  * @param  int|string    $id    Image ID.
  * @return int|string           Cleaned image ID.
  */
-function make_pb_sanitize_image_id( $id ) {
+function maera_pb_sanitize_image_id( $id ) {
 	if ( false !== strpos( $id, 'x' ) ) {
 		$pieces       = explode( 'x', $id );
 		$clean_pieces = array_map( 'absint', $pieces );

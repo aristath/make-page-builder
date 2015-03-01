@@ -1,19 +1,19 @@
 <?php
 /**
- * @package Make
+ * @package Maera
  */
 
-global $make_pb_section_data, $make_pb_sections;
-$gallery  = make_pb_builder_get_gallery_array( $make_pb_section_data );
-$darken   = ( isset( $make_pb_section_data[ 'darken' ] ) ) ? absint( $make_pb_section_data[ 'darken' ] ) : 0;
-$captions = ( isset( $make_pb_section_data[ 'captions' ] ) ) ? esc_attr( $make_pb_section_data[ 'captions' ] ) : 'reveal';
-$aspect   = ( isset( $make_pb_section_data[ 'aspect' ] ) ) ? esc_attr( $make_pb_section_data[ 'aspect' ] ) : 'square';
+global $maera_pb_section_data, $maera_pb_sections;
+$gallery  = maera_pb_builder_get_gallery_array( $maera_pb_section_data );
+$darken   = ( isset( $maera_pb_section_data[ 'darken' ] ) ) ? absint( $maera_pb_section_data[ 'darken' ] ) : 0;
+$captions = ( isset( $maera_pb_section_data[ 'captions' ] ) ) ? esc_attr( $maera_pb_section_data[ 'captions' ] ) : 'reveal';
+$aspect   = ( isset( $maera_pb_section_data[ 'aspect' ] ) ) ? esc_attr( $maera_pb_section_data[ 'aspect' ] ) : 'square';
 ?>
 
-<section id="builder-section-<?php echo esc_attr( $make_pb_section_data['id'] ); ?>" class="builder-section<?php echo esc_attr( make_pb_builder_get_gallery_class( $make_pb_section_data, $make_pb_sections ) ); ?>" style="<?php echo esc_attr( make_pb_builder_get_gallery_style( $make_pb_section_data ) ); ?>">
-	<?php if ( '' !== $make_pb_section_data['title'] ) : ?>
+<section id="builder-section-<?php echo esc_attr( $maera_pb_section_data['id'] ); ?>" class="builder-section<?php echo esc_attr( maera_pb_builder_get_gallery_class( $maera_pb_section_data, $maera_pb_sections ) ); ?>" style="<?php echo esc_attr( maera_pb_builder_get_gallery_style( $maera_pb_section_data ) ); ?>">
+	<?php if ( '' !== $maera_pb_section_data['title'] ) : ?>
 	<h3 class="builder-gallery-section-title">
-		<?php echo apply_filters( 'the_title', $make_pb_section_data['title'] ); ?>
+		<?php echo apply_filters( 'the_title', $maera_pb_section_data['title'] ); ?>
 	</h3>
 	<?php endif; ?>
 	<div class="builder-section-content">
@@ -24,8 +24,8 @@ $aspect   = ( isset( $make_pb_section_data[ 'aspect' ] ) ) ? esc_attr( $make_pb_
 			endif;
 			$i++;
 		?>
-		<div class="builder-gallery-item<?php echo esc_attr( make_pb_builder_get_gallery_item_class( $item, $make_pb_section_data, $i ) ); ?>"<?php echo $onclick; ?>>
-			<?php $image = make_pb_builder_get_gallery_item_image( $item, $aspect ); ?>
+		<div class="builder-gallery-item<?php echo esc_attr( maera_pb_builder_get_gallery_item_class( $item, $maera_pb_section_data, $i ) ); ?>"<?php echo $onclick; ?>>
+			<?php $image = maera_pb_builder_get_gallery_item_image( $item, $aspect ); ?>
 			<?php if ( '' !== $image ) : ?>
 				<?php echo $image; ?>
 			<?php endif; ?>
@@ -39,11 +39,11 @@ $aspect   = ( isset( $make_pb_section_data[ 'aspect' ] ) ) ? esc_attr( $make_pb_
 					<?php endif; ?>
 					<?php if ( '' !== $item['description'] ) : ?>
 					<div class="builder-gallery-description">
-						<?php make_pb_get_builder_save()->the_builder_content( $item['description'] ); ?>
+						<?php maera_pb_get_builder_save()->the_builder_content( $item['description'] ); ?>
 					</div>
 					<?php elseif ( has_excerpt( $item['image-id'] ) ) : ?>
 					<div class="builder-gallery-description">
-						<?php echo make_pb_sanitize_text( get_post( $item['image-id'] )->post_excerpt ); ?>
+						<?php echo maera_pb_sanitize_text( get_post( $item['image-id'] )->post_excerpt ); ?>
 					</div>
 					<?php endif; ?>
 				</div>

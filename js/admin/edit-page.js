@@ -3,11 +3,11 @@
  *
  * @since 1.0.0
  */
-/* global jQuery, make_pbEditPageData */
+/* global jQuery, maera_pbEditPageData */
 (function($) {
 	'use strict';
 
-	var make_pbEditPage = {
+	var maera_pbEditPage = {
 		cache: {
 			$document: $(document)
 		},
@@ -21,9 +21,9 @@
 			this.cache.$pageTemplate = $('#page_template');
 			this.cache.$builderToggle = $('#use-builder');
 			this.cache.$mainEditor = $('#postdivrich');
-			this.cache.$builder = $('#make_pb-builder');
-			this.cache.$duplicator = $('.make_pb-duplicator');
-			this.cache.$builderHide = $('#make_pb-builder-hide');
+			this.cache.$builder = $('#maera_pb-builder');
+			this.cache.$duplicator = $('.maera_pb-duplicator');
+			this.cache.$builderHide = $('#maera_pb-builder-hide');
 			this.cache.$featuredImage = $('#postimagediv');
 			this.cache.$commentstatus = $('#comment_status');
 			this.cache.$pingstatus = $('#ping_status');
@@ -38,7 +38,7 @@
 			self.cache.$builderToggle.on('click', self.templateToggle);
 
 			// Change default settings for new pages
-			if ( typeof make_pbEditPageData !== 'undefined' && 'post-new.php' === make_pbEditPageData.pageNow && 'page' === pagenow ) {
+			if ( typeof maera_pbEditPageData !== 'undefined' && 'post-new.php' === maera_pbEditPageData.pageNow && 'page' === pagenow ) {
 				// Builder template is selected by default
 				self.cache.$pageTemplate.val('template-builder.php');
 
@@ -47,14 +47,14 @@
 				self.cache.$pingstatus.prop('checked', '');
 			}
 
-			// Make sure screen is correctly toggled on load
+			// Maera sure screen is correctly toggled on load
 			self.cache.$document.on('ready', function() {
 				self.cache.$pageTemplate.trigger('change');
 			});
 		},
 
 		templateToggle: function(e) {
-			var self = make_pbEditPage,
+			var self = maera_pbEditPage,
 				$target = $(e.target),
 				val = $target.val();
 
@@ -64,30 +64,30 @@
 				self.cache.$duplicator.show();
 				self.cache.$builderHide.prop('checked', true).parent().show();
 				self.featuredImageToggle('hide');
-				self.cache.$body.addClass('make_pb-builder-active').removeClass('make_pb-default-active');
+				self.cache.$body.addClass('maera_pb-builder-active').removeClass('maera_pb-default-active');
 			} else {
 				self.cache.$mainEditor.show();
 				self.cache.$builder.hide();
 				self.cache.$duplicator.hide();
 				self.cache.$builderHide.prop('checked', false).parent().hide();
 				self.featuredImageToggle('show');
-				self.cache.$body.removeClass('make_pb-builder-active').addClass('make_pb-default-active');
+				self.cache.$body.removeClass('maera_pb-builder-active').addClass('maera_pb-default-active');
 			}
 		},
 
 		featuredImageToggle: function(state) {
-			var self = make_pbEditPage,
+			var self = maera_pbEditPage,
 				unavailable;
 
-			self.cache.$featuredImage.find('.make_pb-message').remove();
+			self.cache.$featuredImage.find('.maera_pb-message').remove();
 
-			if ('undefined' !== typeof make_pbEditPageData) {
-				unavailable = make_pbEditPageData.featuredImage;
+			if ('undefined' !== typeof maera_pbEditPageData) {
+				unavailable = maera_pbEditPageData.featuredImage;
 			} else {
 				unavailable = 'Featured images are not available for this page while using the current page template.';
 			}
 
-			unavailable = '<div class="make_pb-message inside"><p class="hide-if-no-js">'+unavailable+'</p></div>';
+			unavailable = '<div class="maera_pb-message inside"><p class="hide-if-no-js">'+unavailable+'</p></div>';
 
 			if ('show' === state) {
 				self.cache.$featuredImage.find('.inside').show();
@@ -97,5 +97,5 @@
 		}
 	};
 
-	make_pbEditPage.init();
+	maera_pbEditPage.init();
 })(jQuery);

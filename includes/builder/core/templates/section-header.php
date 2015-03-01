@@ -1,39 +1,39 @@
 <?php
 /**
- * @package Make
+ * @package Maera
  */
 
-global $make_pb_section_data, $make_pb_is_js_template;
+global $maera_pb_section_data, $maera_pb_is_js_template;
 
 $links = array(
 	100 => array(
 	'href'  => '#',
-	'class' => 'make_pb-section-remove',
-	'label' => __( 'Delete section', 'make' ),
-	'title' => __( 'Delete section', 'make' ),
+	'class' => 'maera_pb-section-remove',
+	'label' => __( 'Delete section', 'maera' ),
+	'title' => __( 'Delete section', 'maera' ),
 ) );
 
-if ( ! empty( $make_pb_section_data['section']['config'] ) ) {
-	$id = ( true === $make_pb_is_js_template ) ? '{{{ id }}}' : esc_attr( $make_pb_section_data['data']['id'] );
+if ( ! empty( $maera_pb_section_data['section']['config'] ) ) {
+	$id = ( true === $maera_pb_is_js_template ) ? '{{{ id }}}' : esc_attr( $maera_pb_section_data['data']['id'] );
 	$links[25] = array(
 		'href'  => '#',
-		'class' => 'make_pb-section-configure make_pb-overlay-open',
-		'label' => __( 'Configure section', 'make' ),
-		'title' => __( 'Configure section', 'make' ),
-		'other' => 'data-overlay="#make_pb-overlay-' . $id . '"'
+		'class' => 'maera_pb-section-configure maera_pb-overlay-open',
+		'label' => __( 'Configure section', 'maera' ),
+		'title' => __( 'Configure section', 'maera' ),
+		'other' => 'data-overlay="#maera_pb-overlay-' . $id . '"'
 	);
 }
 
 /**
  * Deprecated: Filter the definitions for the links that appear in each Builder section's footer.
  *
- * This filter is deprecated. Use make_builder_section_links instead.
+ * This filter is deprecated. Use maera_builder_section_links instead.
  *
  * @since 1.0.7.
  *
  * @param array    $links    The link definition array.
  */
-$links = apply_filters( 'make_pb_builder_section_footer_links', $links );
+$links = apply_filters( 'maera_pb_builder_section_footer_links', $links );
 /**
  * Filter the definitions for the buttons that appear in each Builder section's header.
  *
@@ -41,12 +41,12 @@ $links = apply_filters( 'make_pb_builder_section_footer_links', $links );
  *
  * @param array    $links    The button definition array.
  */
-$links = apply_filters( 'make_builder_section_links', $links );
+$links = apply_filters( 'maera_builder_section_links', $links );
 ksort( $links );
 ?>
 
-<?php if ( ! isset( $make_pb_is_js_template ) || true !== $make_pb_is_js_template ) : ?>
-<div class="make_pb-section <?php if ( isset( $make_pb_section_data['data']['state'] ) && 'open' === $make_pb_section_data['data']['state'] ) echo 'make_pb-section-open'; ?> make_pb-section-<?php echo esc_attr( $make_pb_section_data['section']['id'] ); ?>" id="<?php echo 'make_pb-section-' . esc_attr( $make_pb_section_data['data']['id'] ); ?>" data-id="<?php echo esc_attr( $make_pb_section_data['data']['id'] ); ?>" data-section-type="<?php echo esc_attr( $make_pb_section_data['section']['id'] ); ?>">
+<?php if ( ! isset( $maera_pb_is_js_template ) || true !== $maera_pb_is_js_template ) : ?>
+<div class="maera_pb-section <?php if ( isset( $maera_pb_section_data['data']['state'] ) && 'open' === $maera_pb_section_data['data']['state'] ) echo 'maera_pb-section-open'; ?> maera_pb-section-<?php echo esc_attr( $maera_pb_section_data['section']['id'] ); ?>" id="<?php echo 'maera_pb-section-' . esc_attr( $maera_pb_section_data['data']['id'] ); ?>" data-id="<?php echo esc_attr( $maera_pb_section_data['data']['id'] ); ?>" data-section-type="<?php echo esc_attr( $maera_pb_section_data['section']['id'] ); ?>">
 <?php endif; ?>
 	<?php
 	/**
@@ -54,14 +54,14 @@ ksort( $links );
 	 *
 	 * @since 1.2.3.
 	 */
-	do_action( 'make_before_section_header' );
+	do_action( 'maera_before_section_header' );
 	?>
-	<div class="make_pb-section-header">
-		<?php $header_title = ( isset( $make_pb_section_data['data']['label'] ) ) ? $make_pb_section_data['data']['label'] : ''; ?>
+	<div class="maera_pb-section-header">
+		<?php $header_title = ( isset( $maera_pb_section_data['data']['label'] ) ) ? $maera_pb_section_data['data']['label'] : ''; ?>
 		<h3>
-			<span class="make_pb-section-header-title"><?php echo esc_html( $header_title ); ?></span><em><?php echo ( esc_html( $make_pb_section_data['section']['label'] ) ); ?></em>
+			<span class="maera_pb-section-header-title"><?php echo esc_html( $header_title ); ?></span><em><?php echo ( esc_html( $maera_pb_section_data['section']['label'] ) ); ?></em>
 		</h3>
-		<div class="ttf-make-section-header-button-wrapper">
+		<div class="ttf-maera-section-header-button-wrapper">
 			<?php foreach ( $links as $link ) : ?>
 				<?php
 				$href  = ( isset( $link['href'] ) ) ? ' href="' . esc_url( $link['href'] ) . '"' : '';
@@ -71,7 +71,7 @@ ksort( $links );
 				$other = ( isset( $link['other'] ) ) ? ' ' . $link['other'] : '';
 
 				// Set up the class value with a base class
-				$class_base = ' class="make_pb-builder-section-link';
+				$class_base = ' class="maera_pb-builder-section-link';
 				$class      = ( isset( $link['class'] ) ) ? $class_base . ' ' . esc_attr( $link['class'] ) . '"' : '"';
 				?>
 				<a<?php echo $href . $id . $class . $title . $other; ?>>
@@ -81,10 +81,10 @@ ksort( $links );
 				</a>
 			<?php endforeach; ?>
 		</div>
-		<a href="#" class="make_pb-section-toggle" title="<?php esc_attr_e( 'Click to toggle', 'make' ); ?>">
+		<a href="#" class="maera_pb-section-toggle" title="<?php esc_attr_e( 'Click to toggle', 'maera' ); ?>">
 			<div class="handlediv"></div>
 		</a>
 	</div>
 	<div class="clear"></div>
-	<div class="make_pb-section-body">
-		<input type="hidden" value="<?php echo $make_pb_section_data['section']['id']; ?>" name="<?php echo Make_PB()->sections->get_section_name( $make_pb_section_data, $make_pb_is_js_template ); ?>[section-type]" />
+	<div class="maera_pb-section-body">
+		<input type="hidden" value="<?php echo $maera_pb_section_data['section']['id']; ?>" name="<?php echo Maera_PB()->sections->get_section_name( $maera_pb_section_data, $maera_pb_is_js_template ); ?>[section-type]" />

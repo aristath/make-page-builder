@@ -1,6 +1,6 @@
 <?php
 
-class Make_PB_Config {
+class Maera_PB_Config {
 
 	/**
 	 * Generate a select input for the configuration overlay.
@@ -18,7 +18,7 @@ class Make_PB_Config {
 			$id     = $section_name . '[' . $args['name'] . ']';
 			$label  = ( isset( $args['label'] ) ) ? '<label for="' . $id . '">' . esc_html( $args['label'] ) . '</label>' : '';
 			$class  = ( isset( $args['class'] ) ) ? ' class="' . esc_attr( $args['class'] ) . '"' : '';
-			$description = ( isset( $args['description'] ) ) ? '<div class="make_pb-configuration-description">' . esc_html( $args['description'] ) . '</div>': '';
+			$description = ( isset( $args['description'] ) ) ? '<div class="maera_pb-configuration-description">' . esc_html( $args['description'] ) . '</div>': '';
 			$select = '<select id="' . $id . '"' . $class .' name="' . $id . '">%s</select>';
 
 			$options = '';
@@ -45,7 +45,7 @@ class Make_PB_Config {
 		$current_value = self::get_current_configuration_value( $section_data, $args );
 		$id          = $section_name . '[' . $args['name'] . ']';
 		$label       = ( isset( $args['label'] ) ) ? '<label for="' . $id . '">' . esc_html( $args['label'] ) . '</label>' : '';
-		$description = ( isset( $args['description'] ) ) ? '<div class="make_pb-configuration-description">' . esc_html( $args['description'] ) . '</div>': '';
+		$description = ( isset( $args['description'] ) ) ? '<div class="maera_pb-configuration-description">' . esc_html( $args['description'] ) . '</div>': '';
 		$args        = '<input id="' . $id . '" type="checkbox" name="' . $id . '" value="1"' . checked( 1, $current_value, false ) . '>' . $description;
 
 		return  $label . $args;
@@ -80,7 +80,7 @@ class Make_PB_Config {
 		$name        = $section_name . '[' . $args['name'] . ']';
 		$label       = ( isset( $args['label'] ) ) ? '<label for="' . $name . '">' . esc_html( $args['label'] ) . '</label>' : '';
 
-		return $label . make_pb_get_builder_base()->add_uploader( $name, $current_value, __( 'Set image', 'make' ) );
+		return $label . maera_pb_get_builder_base()->add_uploader( $name, $current_value, __( 'Set image', 'maera' ) );
 	}
 
 	/**
@@ -114,7 +114,7 @@ class Make_PB_Config {
 		$name        = 'name="' . $section_name . '[' . esc_attr( $args['name'] ) . ']"';
 		$class       = ( isset( $args['class'] ) ) ? ' ' . esc_attr( $args['class'] ) : '';
 
-		return  '<input' . $placeholder . ' type="text" ' . $name . ' value="' . $current_value . '" class="make_pb-title' . $class . '" autocomplete="off">';
+		return  '<input' . $placeholder . ' type="text" ' . $name . ' value="' . $current_value . '" class="maera_pb-title' . $class . '" autocomplete="off">';
 	}
 
 	/**
@@ -145,7 +145,7 @@ class Make_PB_Config {
 			// Get the input HTML
 			$function_name = 'create_' . $args['type'];
 
-			$input_html = call_user_func( 'Make_PB_Config::' . $function_name, $section_name, $args, $section_data );
+			$input_html = call_user_func( 'Maera_PB_Config::' . $function_name, $section_name, $args, $section_data );
 
 			/**
 			 * Filter the wrapped used for the inputs.
@@ -154,7 +154,7 @@ class Make_PB_Config {
 			 * @param string    $args            The input data that is wrapped.
 			 * @param string    $section_data    The data for the section.
 			 */
-			$wrap = apply_filters( 'make_configuration_overlay_input_wrap', '<div class="make_pb-configuration-overlay-input-wrap %1$s">%2$s</div>', $args, $section_data );
+			$wrap = apply_filters( 'maera_configuration_overlay_input_wrap', '<div class="maera_pb-configuration-overlay-input-wrap %1$s">%2$s</div>', $args, $section_data );
 
 			/**
 			 * Filter the HTML for the input.
@@ -163,7 +163,7 @@ class Make_PB_Config {
 			 * @param string    $args            The input data.
 			 * @param string    $section_data    The data for the section.
 			 */
-			$input_html = apply_filters( 'make_configuration_overlay_input', $input_html, $args, $section_data );
+			$input_html = apply_filters( 'maera_configuration_overlay_input', $input_html, $args, $section_data );
 
 			if ( ! empty( $input_html ) ) {
 				// Add "-wrap" to each class

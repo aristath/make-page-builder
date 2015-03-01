@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Make Page Builder
+Plugin Name: Maera Page Builder
 */
 
-class Make_PB {
+class Maera_PB {
 
 	private static $instance;
 
@@ -14,23 +14,23 @@ class Make_PB {
 
 	public function __construct() {
 
-		self::include_file( self::path() . '/includes/class-make-pb-check.php', 'Make_PB_Check' );
-		self::include_file( self::path() . '/includes/class-make-pb-helper.php', 'Make_PB_Helper' );
-		self::include_file( self::path() . '/includes/class-make-pb-config.php', 'Make_PB_Config' );
-		self::include_file( self::path() . '/includes/class-make-pb-image.php', 'Make_PB_Image' );
+		self::include_file( self::path() . '/includes/class-maera-pb-check.php', 'Maera_PB_Check' );
+		self::include_file( self::path() . '/includes/class-maera-pb-helper.php', 'Maera_PB_Helper' );
+		self::include_file( self::path() . '/includes/class-maera-pb-config.php', 'Maera_PB_Config' );
+		self::include_file( self::path() . '/includes/class-maera-pb-image.php', 'Maera_PB_Image' );
 
-		$this->check = Make_PB_Check::instance();
-		$this->is_builder_active = make_pb_is_builder_active();
+		$this->check = Maera_PB_Check::instance();
+		$this->is_builder_active = maera_pb_is_builder_active();
 
 		if ( is_admin() ) {
-			self::include_file( self::path() . '/includes/class-make-pb-scripts.php', 'Make_PB_Scripts' );
-			self::include_file( self::path() . '/includes/class-make-pb-sections.php', 'Make_PB_Sections' );
-			self::include_file( self::path() . '/includes/class-make-pb-section-banner.php', 'Make_PB_Section_Banner' );
-			self::include_file( self::path() . '/includes/class-make-pb-section-gallery.php', 'Make_PB_Section_Gallery' );
-			self::include_file( self::path() . '/includes/base.php', 'Make_PB_Base' );
+			self::include_file( self::path() . '/includes/class-maera-pb-scripts.php', 'Maera_PB_Scripts' );
+			self::include_file( self::path() . '/includes/class-maera-pb-sections.php', 'Maera_PB_Sections' );
+			self::include_file( self::path() . '/includes/class-maera-pb-section-banner.php', 'Maera_PB_Section_Banner' );
+			self::include_file( self::path() . '/includes/class-maera-pb-section-gallery.php', 'Maera_PB_Section_Gallery' );
+			self::include_file( self::path() . '/includes/base.php', 'Maera_PB_Base' );
 
-			$this->scripts  = new Make_PB_Scripts();
-			$this->sections = Make_PB_Sections::instance();
+			$this->scripts  = new Maera_PB_Scripts();
+			$this->sections = Maera_PB_Sections::instance();
 
 		}
 
@@ -94,9 +94,9 @@ class Make_PB {
 
 }
 
-function Make_PB() {
-	return Make_PB::get_instance();
+function Maera_PB() {
+	return Maera_PB::get_instance();
 }
 
-global $Make_PB;
-$Make_PB = Make_PB();
+global $Maera_PB;
+$Maera_PB = Maera_PB();

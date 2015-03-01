@@ -1,6 +1,6 @@
 <?php
 
-class Make_PB_Section_Definitions {
+class Maera_PB_Section_Definitions {
 
 	private static $instance;
 
@@ -28,8 +28,8 @@ class Make_PB_Section_Definitions {
 	 * @return void
 	 */
 	public function print_templates() {
-		global $hook_suffix, $typenow, $make_pb_is_js_template;
-		$make_pb_is_js_template = true;
+		global $hook_suffix, $typenow, $maera_pb_is_js_template;
+		$maera_pb_is_js_template = true;
 
 		// Define the templates to print
 		$templates = array(
@@ -47,10 +47,10 @@ class Make_PB_Section_Definitions {
 
 		// Print the templates
 		foreach ( $templates as $template ) : ?>
-		<script type="text/html" id="tmpl-make_pb-<?php echo $template['id']; ?>">
+		<script type="text/html" id="tmpl-maera_pb-<?php echo $template['id']; ?>">
 			<?php
 			ob_start();
-			make_pb_get_builder_base()->load_section( $template, array() );
+			maera_pb_get_builder_base()->load_section( $template, array() );
 			$html = ob_get_clean();
 			$html = str_replace(
 				array(
@@ -65,13 +65,13 @@ class Make_PB_Section_Definitions {
 			?>
 		</script>
 		<?php endforeach;
-		unset( $GLOBALS['make_pb_is_js_template'] );
+		unset( $GLOBALS['maera_pb_is_js_template'] );
 	}
 
 }
 
 
-if ( ! function_exists( 'make_pb_get_section_default' ) ) :
+if ( ! function_exists( 'maera_pb_get_section_default' ) ) :
 /**
  * Return the default value for a particular section setting.
  *
@@ -81,8 +81,8 @@ if ( ! function_exists( 'make_pb_get_section_default' ) ) :
  * @param  string    $section_type    The section type.
  * @return mixed                      Default value if found; false if not found.
  */
-function make_pb_get_section_default( $key, $section_type ) {
-	$defaults = Make_PB()->sections->get_section_defaults();
+function maera_pb_get_section_default( $key, $section_type ) {
+	$defaults = Maera_PB()->sections->get_section_defaults();
 	$id       = "$section_type-$key";
 	$value    = ( isset( $defaults[ $id ] ) ) ? $defaults[ $id ] : false;
 
@@ -95,16 +95,16 @@ function make_pb_get_section_default( $key, $section_type ) {
 	 * @param string    $key             The key to get data for.
 	 * @param string    $section_type    The type of section the data is for.
 	 */
-	return apply_filters( 'make_get_section_default', $value, $key, $section_type );
+	return apply_filters( 'maera_get_section_default', $value, $key, $section_type );
 }
 endif;
 
-function make_pb_get_section_choices( $key, $section_type ) {
-	return Make_PB()->sections->get_choices( $key, $section_type );
+function maera_pb_get_section_choices( $key, $section_type ) {
+	return Maera_PB()->sections->get_choices( $key, $section_type );
 }
 
 
-if ( ! function_exists( 'make_pb_sanitize_section_choice' ) ) :
+if ( ! function_exists( 'maera_pb_sanitize_section_choice' ) ) :
 /**
  * Sanitize a value from a list of allowed values.
  *
@@ -115,12 +115,12 @@ if ( ! function_exists( 'make_pb_sanitize_section_choice' ) ) :
  * @param  string        $section_type    The section type.
  * @return mixed                          The sanitized value.
  */
-function make_pb_sanitize_section_choice( $value, $key, $section_type ) {
-	$choices         = make_pb_get_section_choices( $key, $section_type );
+function maera_pb_sanitize_section_choice( $value, $key, $section_type ) {
+	$choices         = maera_pb_get_section_choices( $key, $section_type );
 	$allowed_choices = array_keys( $choices );
 
 	if ( ! in_array( $value, $allowed_choices ) ) {
-		$value = make_pb_get_section_default( $key, $section_type );
+		$value = maera_pb_get_section_default( $key, $section_type );
 	}
 
 	/**
@@ -132,22 +132,22 @@ function make_pb_sanitize_section_choice( $value, $key, $section_type ) {
 	 * @param string    $key             The key for the section choice.
 	 * @param string    $section_type    The section type.
 	 */
-	return apply_filters( 'make_sanitize_section_choice', $value, $key, $section_type );
+	return apply_filters( 'maera_sanitize_section_choice', $value, $key, $section_type );
 }
 endif;
 
 /**
- * Instantiate or return the one Make_PB_Section_Definitions instance.
+ * Instantiate or return the one Maera_PB_Section_Definitions instance.
  *
  * @since  1.0.0.
  *
- * @return Make_PB_Section_Definitions
+ * @return Maera_PB_Section_Definitions
  */
-function make_pb_get_section_definitions() {
-	return Make_PB_Section_Definitions::instance();
+function maera_pb_get_section_definitions() {
+	return Maera_PB_Section_Definitions::instance();
 }
 
 // Kick off the section definitions immediately
 if ( is_admin() ) {
-	add_action( 'after_setup_theme', 'make_pb_get_section_definitions', 11 );
+	add_action( 'after_setup_theme', 'maera_pb_get_section_definitions', 11 );
 }

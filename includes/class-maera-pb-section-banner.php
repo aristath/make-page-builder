@@ -1,6 +1,6 @@
 <?php
 
-class Make_PB_Section_Banner {
+class Maera_PB_Section_Banner {
 
 	private static $instance;
 
@@ -28,11 +28,11 @@ class Make_PB_Section_Banner {
 	 * @return void
 	 */
 	public function register_banner_section() {
-		Make_PB()->sections->add_section(
+		Maera_PB()->sections->add_section(
 			'banner',
-			_x( 'Banner', 'section name', 'make' ),
-			Make_PB::uri() . '/includes/builder/sections/css/images/banner.png',
-			__( 'Display multiple types of content in a banner or a slider.', 'make' ),
+			_x( 'Banner', 'section name', 'maera' ),
+			Maera_PB::uri() . '/includes/builder/sections/css/images/banner.png',
+			__( 'Display multiple types of content in a banner or a slider.', 'maera' ),
 			array( $this, 'save_banner' ),
 			'sections/builder-templates/banner',
 			'sections/front-end-templates/banner',
@@ -42,59 +42,59 @@ class Make_PB_Section_Banner {
 				100 => array(
 					'type'  => 'section_title',
 					'name'  => 'title',
-					'label' => __( 'Enter section title', 'make' ),
-					'class' => 'make_pb-configuration-title make_pb-section-header-title-input',
+					'label' => __( 'Enter section title', 'maera' ),
+					'class' => 'maera_pb-configuration-title maera_pb-section-header-title-input',
 				),
 				200 => array(
 					'type'    => 'checkbox',
-					'label'   => __( 'Hide navigation arrows', 'make' ),
+					'label'   => __( 'Hide navigation arrows', 'maera' ),
 					'name'    => 'hide-arrows',
 					'default' => 0
 				),
 				300 => array(
 					'type'    => 'checkbox',
-					'label'   => __( 'Hide navigation dots', 'make' ),
+					'label'   => __( 'Hide navigation dots', 'maera' ),
 					'name'    => 'hide-dots',
 					'default' => 0
 				),
 				400 => array(
 					'type'    => 'checkbox',
-					'label'   => __( 'Autoplay slideshow', 'make' ),
+					'label'   => __( 'Autoplay slideshow', 'maera' ),
 					'name'    => 'autoplay',
 					'default' => 1
 				),
 				500 => array(
 					'type'    => 'text',
-					'label'   => __( 'Time between slides (ms)', 'make' ),
+					'label'   => __( 'Time between slides (ms)', 'maera' ),
 					'name'    => 'delay',
 					'default' => 6000
 				),
 				600 => array(
 					'type'    => 'select',
-					'label'   => __( 'Transition effect', 'make' ),
+					'label'   => __( 'Transition effect', 'maera' ),
 					'name'    => 'transition',
 					'default' => 'scrollHorz',
 					'options' => array(
-						'scrollHorz' => __( 'Slide horizontal', 'make' ),
-						'fade'       => __( 'Fade', 'make' ),
-						'none'       => __( 'None', 'make' ),
+						'scrollHorz' => __( 'Slide horizontal', 'maera' ),
+						'fade'       => __( 'Fade', 'maera' ),
+						'none'       => __( 'None', 'maera' ),
 					)
 				),
 				700 => array(
 					'type'    => 'text',
-					'label'   => __( 'Section height (px)', 'make' ),
+					'label'   => __( 'Section height (px)', 'maera' ),
 					'name'    => 'height',
 					'default' => 600
 				),
 				800 => array(
 					'type'        => 'select',
-					'label'       => __( 'Responsive behavior', 'make' ),
+					'label'       => __( 'Responsive behavior', 'maera' ),
 					'name'        => 'responsive',
 					'default'     => 'balanced',
-					'description' => __( 'Choose how the Banner will respond to varying screen widths. Default is ideal for large amounts of written content, while Aspect is better for showing your images.', 'make' ),
+					'description' => __( 'Choose how the Banner will respond to varying screen widths. Default is ideal for large amounts of written content, while Aspect is better for showing your images.', 'maera' ),
 					'options'     => array(
-						'balanced' => __( 'Default', 'make' ),
-						'aspect'   => __( 'Aspect', 'make' ),
+						'balanced' => __( 'Default', 'maera' ),
+						'aspect'   => __( 'Aspect', 'maera' ),
 					)
 				)
 			)
@@ -134,7 +134,7 @@ class Make_PB_Section_Banner {
 		}
 
 		if ( isset( $data['banner-slide-order'] ) ) {
-			$clean_data['banner-slide-order'] = array_map( array( 'Make_PB_Save', 'clean_section_id' ), explode( ',', $data['banner-slide-order'] ) );
+			$clean_data['banner-slide-order'] = array_map( array( 'Maera_PB_Save', 'clean_section_id' ), explode( ',', $data['banner-slide-order'] ) );
 		}
 
 		if ( isset( $data['banner-slides'] ) && is_array( $data['banner-slides'] ) ) {
@@ -151,7 +151,7 @@ class Make_PB_Section_Banner {
 				$clean_data['banner-slides'][ $id ]['darken'] = ( isset( $slide['darken'] ) && 1 === (int) $slide['darken'] ) ? 1 : 0;
 
 				if ( isset( $slide['image-id'] ) ) {
-					$clean_data['banner-slides'][ $id ]['image-id'] = make_pb_sanitize_image_id( $slide['image-id'] );
+					$clean_data['banner-slides'][ $id ]['image-id'] = maera_pb_sanitize_image_id( $slide['image-id'] );
 				}
 
 				$clean_data['banner-slides'][ $id ]['alignment'] = ( isset( $slide['alignment'] ) && in_array( $slide['alignment'], array( 'none', 'left', 'right' ) ) ) ? $slide['alignment'] : 'none';
@@ -167,11 +167,11 @@ class Make_PB_Section_Banner {
 
 }
 
-function make_pb_get_section_definition_banner() {
-	return Make_PB_Section_Banner::instance();
+function maera_pb_get_section_definition_banner() {
+	return Maera_PB_Section_Banner::instance();
 }
 
 // Kick off the section definitions immediately
 if ( is_admin() ) {
-	add_action( 'after_setup_theme', 'make_pb_get_section_definition_banner', 11 );
+	add_action( 'after_setup_theme', 'maera_pb_get_section_definition_banner', 11 );
 }

@@ -7,8 +7,8 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 	oneApp.GalleryView = oneApp.SectionView.extend({
 		events: function() {
 			return _.extend({}, oneApp.SectionView.prototype.events, {
-				'click .make_pb-gallery-add-item' : 'addGalleryItem',
-				'change .make_pb-gallery-columns' : 'handleColumns'
+				'click .maera_pb-gallery-add-item' : 'addGalleryItem',
+				'change .maera_pb-gallery-columns' : 'handleColumns'
 			});
 		},
 
@@ -27,7 +27,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 			// Append view
 			html = view.render().el;
-			$('.make_pb-gallery-items-stage', this.$el).append(html);
+			$('.maera_pb-gallery-items-stage', this.$el).append(html);
 
 			// Only scroll and focus if not triggered by the pseudo event
 			if ( ! params ) {
@@ -36,12 +36,12 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			}
 
 			// Add the section value to the sortable order
-			oneApp.addOrderValue(view.model.get('id'), $('.make_pb-gallery-item-order', $(view.$el).parents('.make_pb-gallery-items')));
+			oneApp.addOrderValue(view.model.get('id'), $('.maera_pb-gallery-item-order', $(view.$el).parents('.maera_pb-gallery-items')));
 		},
 
 		getParentID: function() {
 			var idAttr = this.$el.attr('id'),
-				id = idAttr.replace('make_pb-section-', '');
+				id = idAttr.replace('maera_pb-section-', '');
 
 			return parseInt(id, 10);
 		},
@@ -50,32 +50,32 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			evt.preventDefault();
 
 			var columns = $(evt.target).val(),
-				$stage = $('.make_pb-gallery-items-stage', this.$el);
+				$stage = $('.maera_pb-gallery-items-stage', this.$el);
 
-			$stage.removeClass('make_pb-gallery-columns-1 make_pb-gallery-columns-2 make_pb-gallery-columns-3 make_pb-gallery-columns-4');
-			$stage.addClass('make_pb-gallery-columns-' + parseInt(columns, 10));
+			$stage.removeClass('maera_pb-gallery-columns-1 maera_pb-gallery-columns-2 maera_pb-gallery-columns-3 maera_pb-gallery-columns-4');
+			$stage.addClass('maera_pb-gallery-columns-' + parseInt(columns, 10));
 		}
 	});
 
-	// Makes gallery items sortable
+	// Maeras gallery items sortable
 	oneApp.initializeGalleryItemSortables = function(view) {
-		$('.make_pb-gallery-items-stage', view).sortable({
-			handle: '.make_pb-sortable-handle',
+		$('.maera_pb-gallery-items-stage', view).sortable({
+			handle: '.maera_pb-sortable-handle',
 			placeholder: 'sortable-placeholder',
 			distance: 2,
 			tolerance: 'pointer',
 			start: function (event, ui) {
 				// Set the height of the placeholder to that of the sorted item
 				var $item = $(ui.item.get(0)),
-					$stage = $item.parents('.make_pb-gallery-items-stage');
+					$stage = $item.parents('.maera_pb-gallery-items-stage');
 
 				$('.sortable-placeholder', $stage)
 					.height(parseInt($item.height(), 10) - 2); // -2 to account for placeholder border
 			},
 			stop: function (event, ui) {
 				var $item = $(ui.item.get(0)),
-					$stage = $item.parents('.make_pb-gallery-items'),
-					$orderInput = $('.make_pb-gallery-item-order', $stage);
+					$stage = $item.parents('.maera_pb-gallery-items'),
+					$orderInput = $('.maera_pb-gallery-item-order', $stage);
 
 				oneApp.setOrder($(this).sortable('toArray', {attribute: 'data-id'}), $orderInput);
 			}
@@ -88,9 +88,9 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 		view = view || '';
 
 		if (view.$el) {
-			$selector = $('.make_pb-gallery-background-color', view.$el);
+			$selector = $('.maera_pb-gallery-background-color', view.$el);
 		} else {
-			$selector = $('.make_pb-gallery-background-color');
+			$selector = $('.maera_pb-gallery-background-color');
 		}
 
 		$selector.wpColorPicker();
@@ -100,7 +100,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 	$oneApp.on('afterSectionViewAdded', function(evt, view) {
 		if ('gallery' === view.model.get('sectionType')) {
 			// Add 3 initial gallery item
-			var $addButton = $('.make_pb-gallery-add-item', view.$el);
+			var $addButton = $('.maera_pb-gallery-add-item', view.$el);
 			$addButton.trigger('click', {type: 'pseudo'});
 			$addButton.trigger('click', {type: 'pseudo'});
 			$addButton.trigger('click', {type: 'pseudo'});
@@ -114,13 +114,13 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 	// Initialize available gallery items
 	oneApp.initGalleryItemViews = function ($el) {
 		$el = $el || '';
-		var $items = ('' === $el) ? $('.make_pb-gallery-item') : $('.make_pb-gallery-item', $el);
+		var $items = ('' === $el) ? $('.maera_pb-gallery-item') : $('.maera_pb-gallery-item', $el);
 
 		$items.each(function () {
 			var $item = $(this),
 				idAttr = $item.attr('id'),
 				id = $item.attr('data-id'),
-				$section = $item.parents('.make_pb-section'),
+				$section = $item.parents('.maera_pb-section'),
 				parentID = $section.attr('data-id'),
 				model;
 
@@ -144,8 +144,8 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 	// Set the classes for the elements
 	oneApp.setClearClasses = function ($el) {
-		var columns = $('.make_pb-gallery-columns', $el).val(),
-			$items = $('.make_pb-gallery-item', $el);
+		var columns = $('.maera_pb-gallery-columns', $el).val(),
+			$items = $('.maera_pb-gallery-item', $el);
 
 		$items.each(function(index, item){
 			var $item = $(item);

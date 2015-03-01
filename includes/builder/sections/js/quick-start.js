@@ -13,7 +13,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			});
 
 			$oneApp.on('afterSectionViewRemoved', function() {
-				if ($('.make_pb-section').length < 1) {
+				if ($('.maera_pb-section').length < 1) {
 					$messageBox.removeClass('ttfmp-import-message-hide');
 				}
 			});

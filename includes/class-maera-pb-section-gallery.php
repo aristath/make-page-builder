@@ -1,6 +1,6 @@
 <?php
 
-class Make_PB_Section_Gallery {
+class Maera_PB_Section_Gallery {
 
 	private static $instance;
 
@@ -28,11 +28,11 @@ class Make_PB_Section_Gallery {
 	 * @return void
 	 */
 	public function register_gallery_section() {
-		Make_PB()->sections->add_section(
+		Maera_PB()->sections->add_section(
 			'gallery',
-			_x( 'Gallery', 'section name', 'make' ),
-			Make_PB::uri() . '/includes/builder/sections/css/images/gallery.png',
-			__( 'Display your images in various grid combinations.', 'make' ),
+			_x( 'Gallery', 'section name', 'maera' ),
+			Maera_PB::uri() . '/includes/builder/sections/css/images/gallery.png',
+			__( 'Display your images in various grid combinations.', 'maera' ),
 			array( $this, 'save_gallery' ),
 			'sections/builder-templates/gallery',
 			'sections/front-end-templates/gallery',
@@ -42,14 +42,14 @@ class Make_PB_Section_Gallery {
 				100 => array(
 					'type'  => 'section_title',
 					'name'  => 'title',
-					'label' => __( 'Enter section title', 'make' ),
-					'class' => 'make_pb-configuration-title make_pb-section-header-title-input',
+					'label' => __( 'Enter section title', 'maera' ),
+					'class' => 'maera_pb-configuration-title maera_pb-section-header-title-input',
 				),
 				200 => array(
 					'type'    => 'select',
 					'name'    => 'columns',
-					'label'   => __( 'Columns', 'make' ),
-					'class'   => 'make_pb-gallery-columns',
+					'label'   => __( 'Columns', 'maera' ),
+					'class'   => 'maera_pb-gallery-columns',
 					'default' => 3,
 					'options' => array(
 						1 => 1,
@@ -61,63 +61,63 @@ class Make_PB_Section_Gallery {
 				300 => array(
 					'type'    => 'select',
 					'name'    => 'aspect',
-					'label'   => __( 'Aspect ratio', 'make' ),
+					'label'   => __( 'Aspect ratio', 'maera' ),
 					'default' => 'square',
 					'options' => array(
-						'square'    => __( 'Square', 'make' ),
-						'landscape' => __( 'Landscape', 'make' ),
-						'portrait'  => __( 'Portrait', 'make' ),
-						'none'      => __( 'None', 'make' ),
+						'square'    => __( 'Square', 'maera' ),
+						'landscape' => __( 'Landscape', 'maera' ),
+						'portrait'  => __( 'Portrait', 'maera' ),
+						'none'      => __( 'None', 'maera' ),
 					)
 				),
 				400 => array(
 					'type'    => 'select',
 					'name'    => 'captions',
-					'label'   => __( 'Caption style', 'make' ),
+					'label'   => __( 'Caption style', 'maera' ),
 					'default' => 'reveal',
 					'options' => array(
-						'reveal'  => __( 'Reveal', 'make' ),
-						'overlay' => __( 'Overlay', 'make' ),
-						'none'    => __( 'None', 'make' ),
+						'reveal'  => __( 'Reveal', 'maera' ),
+						'overlay' => __( 'Overlay', 'maera' ),
+						'none'    => __( 'None', 'maera' ),
 					)
 				),
 				500 => array(
 					'type'    => 'select',
 					'name'    => 'caption-color',
-					'label'   => __( 'Caption color', 'make' ),
+					'label'   => __( 'Caption color', 'maera' ),
 					'default' => 'light',
 					'options' => array(
-						'light'  => __( 'Light', 'make' ),
-						'dark' => __( 'Dark', 'make' ),
+						'light'  => __( 'Light', 'maera' ),
+						'dark' => __( 'Dark', 'maera' ),
 					)
 				),
 				600 => array(
 					'type'  => 'image',
 					'name'  => 'background-image',
-					'label' => __( 'Background image', 'make' ),
-					'class' => 'make_pb-configuration-media'
+					'label' => __( 'Background image', 'maera' ),
+					'class' => 'maera_pb-configuration-media'
 				),
 				700 => array(
 					'type'    => 'checkbox',
-					'label'   => __( 'Darken background to improve readability', 'make' ),
+					'label'   => __( 'Darken background to improve readability', 'maera' ),
 					'name'    => 'darken',
 					'default' => 0,
 				),
 				800 => array(
 					'type'    => 'select',
 					'name'    => 'background-style',
-					'label'   => __( 'Background style', 'make' ),
+					'label'   => __( 'Background style', 'maera' ),
 					'default' => 'tile',
 					'options' => array(
-						'tile'  => __( 'Tile', 'make' ),
-						'cover' => __( 'Cover', 'make' ),
+						'tile'  => __( 'Tile', 'maera' ),
+						'cover' => __( 'Cover', 'maera' ),
 					),
 				),
 				900 => array(
 					'type'    => 'color',
-					'label'   => __( 'Background color', 'make' ),
+					'label'   => __( 'Background color', 'maera' ),
 					'name'    => 'background-color',
-					'class'   => 'make_pb-gallery-background-color make_pb-configuration-color-picker',
+					'class'   => 'maera_pb-gallery-background-color maera_pb-configuration-color-picker',
 					'default' => '',
 				),
 			)
@@ -161,7 +161,7 @@ class Make_PB_Section_Gallery {
 		}
 
 		if ( isset( $data['background-image']['image-id'] ) ) {
-			$clean_data['background-image'] = make_pb_sanitize_image_id( $data['background-image']['image-id'] );
+			$clean_data['background-image'] = maera_pb_sanitize_image_id( $data['background-image']['image-id'] );
 		}
 
 		if ( isset( $data['title'] ) ) {
@@ -185,7 +185,7 @@ class Make_PB_Section_Gallery {
 		}
 
 		if ( isset( $data['gallery-item-order'] ) ) {
-			$clean_data['gallery-item-order'] = array_map( array( 'Make_PB_Save', 'clean_section_id' ), explode( ',', $data['gallery-item-order'] ) );
+			$clean_data['gallery-item-order'] = array_map( array( 'Maera_PB_Save', 'clean_section_id' ), explode( ',', $data['gallery-item-order'] ) );
 		}
 
 		if ( isset( $data['gallery-items'] ) && is_array( $data['gallery-items'] ) ) {
@@ -203,7 +203,7 @@ class Make_PB_Section_Gallery {
 				}
 
 				if ( isset( $item['image-id'] ) ) {
-					$clean_data['gallery-items'][ $id ]['image-id'] = make_pb_sanitize_image_id( $item['image-id'] );
+					$clean_data['gallery-items'][ $id ]['image-id'] = maera_pb_sanitize_image_id( $item['image-id'] );
 				}
 			}
 		}
@@ -213,11 +213,11 @@ class Make_PB_Section_Gallery {
 
 }
 
-function make_pb_get_section_definition_gallery() {
-	return Make_PB_Section_Gallery::instance();
+function maera_pb_get_section_definition_gallery() {
+	return Maera_PB_Section_Gallery::instance();
 }
 
 // Kick off the section definitions immediately
 if ( is_admin() ) {
-	add_action( 'after_setup_theme', 'make_pb_get_section_definition_gallery', 11 );
+	add_action( 'after_setup_theme', 'maera_pb_get_section_definition_gallery', 11 );
 }

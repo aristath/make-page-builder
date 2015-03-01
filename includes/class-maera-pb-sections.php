@@ -1,6 +1,6 @@
 <?php
 
-class Make_PB_Sections {
+class Maera_PB_Sections {
 
 	private $_sections = array();
 	private static $instance;
@@ -41,7 +41,7 @@ class Make_PB_Sections {
 	 */
 	public function add_section( $id, $label, $icon, $description, $save_callback, $builder_template, $display_template, $order, $path, $config = array() ) {
 
-		$this->_sections[$id] = apply_filters( 'make_add_section', array(
+		$this->_sections[$id] = apply_filters( 'maera_add_section', array(
 			'id'               => $id,
 			'label'            => $label,
 			'icon'             => $icon,
@@ -66,7 +66,7 @@ class Make_PB_Sections {
 	 * @return string                       The name of the section.
 	 */
 	public function get_section_name( $data, $is_js_template ) {
-		$name = 'make_pb-section';
+		$name = 'maera_pb-section';
 
 		if ( $is_js_template ) {
 			$name .= '[{{{ id }}}]';
@@ -74,7 +74,7 @@ class Make_PB_Sections {
 			$name .= '[' . $data['data']['id'] . ']';
 		}
 
-		return apply_filters( 'make_get_section_name', $name, $data, $is_js_template );
+		return apply_filters( 'maera_get_section_name', $name, $data, $is_js_template );
 
 	}
 
@@ -92,9 +92,9 @@ class Make_PB_Sections {
 			trailingslashit( $path ) . $slug . '.php'
 		);
 
-		$templates = apply_filters( 'make_load_section_template', $templates, $slug, $path );
+		$templates = apply_filters( 'maera_load_section_template', $templates, $slug, $path );
 
-		if ( '' === $located = Make_PB::locate_template( $templates, true, false ) ) {
+		if ( '' === $located = Maera_PB::locate_template( $templates, true, false ) ) {
 			if ( isset( $templates[1] ) && file_exists( $templates[1] ) ) {
 				require( $templates[1] );
 				$located = $templates[1];
@@ -111,10 +111,10 @@ class Make_PB_Sections {
 	 */
 	function load_header() {
 
-		global $make_pb_section_data;
-		Make_PB::get_template_part( 'includes/builder/core/templates/section', 'header' );
-		do_action( 'make_section_' . $make_pb_section_data['section']['id'] . '_before', $make_pb_section_data );
-		do_action( 'make_pb_section_' . $make_pb_section_data['section']['id'] . '_before', $make_pb_section_data );
+		global $maera_pb_section_data;
+		Maera_PB::get_template_part( 'includes/builder/core/templates/section', 'header' );
+		do_action( 'maera_section_' . $maera_pb_section_data['section']['id'] . '_before', $maera_pb_section_data );
+		do_action( 'maera_pb_section_' . $maera_pb_section_data['section']['id'] . '_before', $maera_pb_section_data );
 
 	}
 
@@ -125,10 +125,10 @@ class Make_PB_Sections {
 	 */
 	public function load_footer() {
 
-		global $make_pb_section_data;
-		Make_PB::get_template_part( 'includes/builder/core/templates/section', 'footer' );
-		do_action( 'make_section_' . $make_pb_section_data['section']['id'] . '_after', $make_pb_section_data );
-		do_action( 'make_pb_section_' . $make_pb_section_data['section']['id'] . '_after', $make_pb_section_data );
+		global $maera_pb_section_data;
+		Maera_PB::get_template_part( 'includes/builder/core/templates/section', 'footer' );
+		do_action( 'maera_section_' . $maera_pb_section_data['section']['id'] . '_after', $maera_pb_section_data );
+		do_action( 'maera_pb_section_' . $maera_pb_section_data['section']['id'] . '_after', $maera_pb_section_data );
 
 	}
 
@@ -140,7 +140,7 @@ class Make_PB_Sections {
 	public function get_section_defaults() {
 
 		$defaults = array();
-		return apply_filters( 'make_section_defaults', $defaults );
+		return apply_filters( 'maera_section_defaults', $defaults );
 
 	}
 
@@ -157,19 +157,19 @@ class Make_PB_Sections {
 
 		$choice_id = "$section_type-$key";
 		switch ( $choice_id ) {}
-		return apply_filters( 'make_section_choices', $choices, $key, $section_type );
+		return apply_filters( 'maera_section_choices', $choices, $key, $section_type );
 
 	}
 
 }
 
 
-function make_pb_get_sections_by_order() {
-	$sections = Make_PB()->sections->get_sections();
-	usort( $sections, 'make_pb_sorter' );
+function maera_pb_get_sections_by_order() {
+	$sections = Maera_PB()->sections->get_sections();
+	usort( $sections, 'maera_pb_sorter' );
 	return $sections;
 }
 
-function make_pb_sorter( $a, $b ) {
+function maera_pb_sorter( $a, $b ) {
 	return $a['order'] - $b['order'];
 }

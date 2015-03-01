@@ -1,18 +1,18 @@
 /*---------------------------------------------------------
  Text and Gallery section (sections.css)
 -------------------------------------------------------- */
-.make_pb-section-gallery .make_pb-section-body {
+.maera_pb-section-gallery .maera_pb-section-body {
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.make_pb-gallery-items-stage .sortable-placeholder {
+.maera_pb-gallery-items-stage .sortable-placeholder {
     width: 100%;
     margin: 0; /*reset*/
     padding: 0 9px;
 }
 @media screen and ( min-width: 1160px ) {
-    .make_pb-gallery-items-stage .sortable-placeholder {
+    .maera_pb-gallery-items-stage .sortable-placeholder {
         display: flex;
         display: -ms-flexbox;
         display: -webkit-flex;
@@ -21,10 +21,10 @@
         -webkit-flex: 1;
     }
 }
-.make_pb-gallery-items-stage .sortable-placeholder {
+.maera_pb-gallery-items-stage .sortable-placeholder {
     padding: 0; /*reset*/
 }
-.make_pb-gallery-items-stage {
+.maera_pb-gallery-items-stage {
     display: flex;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -32,7 +32,7 @@
     -ms-flex-wrap: wrap;
     -webkit-flex-wrap: wrap;
 }
-.make_pb-gallery-item {
+.maera_pb-gallery-item {
     width: 100%;
     padding: 0 10px;
     margin-bottom: 20px;
@@ -41,7 +41,7 @@
     box-sizing: border-box;
 }
 @media screen and ( min-width: 1160px ) {
-    .make_pb-gallery-item {
+    .maera_pb-gallery-item {
         flex: 1;
         -ms-flex: 1;
         -webkit-flex: 1;
@@ -51,8 +51,8 @@
 /*---------------------------------------------------------
  Gallery: One column (sections.css)
 -------------------------------------------------------- */
-.make_pb-gallery-columns-1 .make_pb-gallery-item,
-.make_pb-gallery-columns-1 .sortable-placeholder {
+.maera_pb-gallery-columns-1 .maera_pb-gallery-item,
+.maera_pb-gallery-columns-1 .sortable-placeholder {
     flex: 0 100%;
     -ms-flex: 0 100%;
     -webkit-flex: 0 100%;
@@ -63,15 +63,15 @@
 /*---------------------------------------------------------
  Gallery: Two column (sections.css)
 -------------------------------------------------------- */
-.make_pb-gallery-columns-2 .make_pb-gallery-item,
-.make_pb-gallery-columns-2 .sortable-placeholder {
+.maera_pb-gallery-columns-2 .maera_pb-gallery-item,
+.maera_pb-gallery-columns-2 .sortable-placeholder {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 @media screen and ( min-width: 1160px ) {
-    .make_pb-gallery-columns-2 .make_pb-gallery-item,
-    .make_pb-gallery-columns-2 .sortable-placeholder {
+    .maera_pb-gallery-columns-2 .maera_pb-gallery-item,
+    .maera_pb-gallery-columns-2 .sortable-placeholder {
         flex: 0 50%;
         -ms-flex: 0 50%;
         -webkit-flex: 0 50%;
@@ -80,15 +80,15 @@
 /*---------------------------------------------------------
  Gallery: Three column (sections.css)
 -------------------------------------------------------- */
-.make_pb-gallery-columns-3 .make_pb-gallery-item,
-.make_pb-gallery-columns-3 .sortable-placeholder {
+.maera_pb-gallery-columns-3 .maera_pb-gallery-item,
+.maera_pb-gallery-columns-3 .sortable-placeholder {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 @media screen and ( min-width: 1160px ) {
-    .make_pb-gallery-columns-3 .make_pb-gallery-item,
-    .make_pb-gallery-columns-3 .sortable-placeholder {
+    .maera_pb-gallery-columns-3 .maera_pb-gallery-item,
+    .maera_pb-gallery-columns-3 .sortable-placeholder {
         flex: 0 33.333%;
         -ms-flex: 0 33.333%;
         -webkit-flex: 0 33.333%;
@@ -97,15 +97,15 @@
 /*---------------------------------------------------------
  Gallery: Four column (sections.css)
 -------------------------------------------------------- */
-.make_pb-gallery-columns-4 .make_pb-gallery-item,
-.make_pb-gallery-columns-4 .sortable-placeholder {
+.maera_pb-gallery-columns-4 .maera_pb-gallery-item,
+.maera_pb-gallery-columns-4 .sortable-placeholder {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 @media screen and ( min-width: 1160px ) {
-    .make_pb-gallery-columns-4 .make_pb-gallery-item,
-    .make_pb-gallery-columns-4 .sortable-placeholder {
+    .maera_pb-gallery-columns-4 .maera_pb-gallery-item,
+    .maera_pb-gallery-columns-4 .sortable-placeholder {
         flex: 0 25%;
         -ms-flex: 0 25%;
         -webkit-flex: 0 25%;
@@ -114,53 +114,53 @@
 /*---------------------------------------------------------
  Banner (sections.css)
 -------------------------------------------------------- */
-.make_pb-banner-slide {
+.maera_pb-banner-slide {
     position: relative;
     margin-bottom: 20px;
 }
-.make_pb-banner-slide-body {
+.maera_pb-banner-slide-body {
     padding: 12px;
 }
-.make_pb-banner-slides .make_pb-banner-slide-header h3 {
+.maera_pb-banner-slides .maera_pb-banner-slide-header h3 {
     background-color: #ffffff;
 }
-.make_pb-banner-options {
+.maera_pb-banner-options {
     float: left;
     width: 100%;
     margin-top: 40px;
 }
-.make_pb-banner-options-container {
+.maera_pb-banner-options-container {
     float: left;
     margin-right: 50px;
 }
-.make_pb-banner-options-title {
+.maera_pb-banner-options-title {
     margin-top: 8px;
 }
-.make_pb-gallery-add-item {
+.maera_pb-gallery-add-item {
     margin-left: 10px;
     margin-right: 10px;
 }
-.make_pb-banner-add-item,
-.make_pb-gallery-add-item {
+.maera_pb-banner-add-item,
+.maera_pb-gallery-add-item {
     clear: both;
     height: 76px;
     background-color: #fff;
     border: 1px solid #dfdfdf;
 }
-.make_pb-banner-add-item:before,
-.make_pb-gallery-add-item:before {
+.maera_pb-banner-add-item:before,
+.maera_pb-gallery-add-item:before {
     content: "\f502";
     display: block;
     color: #1bc865;
     font: 36px/76px dashicons;
     text-align: center;
 }
-.make_pb-banner-add-item-link,
-.make_pb-gallery-add-item-link {
+.maera_pb-banner-add-item-link,
+.maera_pb-gallery-add-item-link {
     text-decoration: none; /*reset*/
 }
-.make_pb-banner-add-item span,
-.make_pb-gallery-add-item span {
+.maera_pb-banner-add-item span,
+.maera_pb-gallery-add-item span {
     display: none; /*reset*/
     text-indent: -9999px;
     white-space: nowrap;
@@ -170,35 +170,35 @@
  Banner: Slide (sections.css)
 -------------------------------------------------------- */
 @media screen and ( min-width: 1160px ) {
-    .make_pb-banner-slide-option-wrapper,
-    .make_pb-banner-slide-background-image-wrapper,
-    .make_pb-gallery-background-image-wrapper,
-    .make_pb-gallery-background-options-wrapper {
+    .maera_pb-banner-slide-option-wrapper,
+    .maera_pb-banner-slide-background-image-wrapper,
+    .maera_pb-gallery-background-image-wrapper,
+    .maera_pb-gallery-background-options-wrapper {
         width: 50%;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
     }
-    .make_pb-banner-slide-option-wrapper,
-    .make_pb-gallery-background-options-wrapper {
+    .maera_pb-banner-slide-option-wrapper,
+    .maera_pb-gallery-background-options-wrapper {
         float: right;
         padding-left: 20px;
     }
-    .make_pb-banner-slide-background-image-wrapper,
-    .make_pb-gallery-background-image-wrapper {
+    .maera_pb-banner-slide-background-image-wrapper,
+    .maera_pb-gallery-background-image-wrapper {
         float: left;
     }
 }
-.make_pb-banner-slide-header h3 em {
+.maera_pb-banner-slide-header h3 em {
     font-weight: normal; /*reset*/
     color: #999999;
 }
-.make_pb-add-slide-wrapper,
-.make_pb-add-gallery-item-wrapper {
+.maera_pb-add-slide-wrapper,
+.maera_pb-add-gallery-item-wrapper {
     margin-bottom: 20px;
 }
-.make_pb-add-slide-wrapper a:before,
-.make_pb-add-gallery-item-wrapper a:before {
+.maera_pb-add-slide-wrapper a:before,
+.maera_pb-add-gallery-item-wrapper a:before {
     content: "\f132";
     position: relative;
     top: 1px;
@@ -206,51 +206,51 @@
     font-family: Dashicons;
 }
 @media screen and ( max-width: 782px ) {
-    .make_pb-add-slide-wrapper a:before,
-    .make_pb-add-gallery-item-wrapper a:before {
+    .maera_pb-add-slide-wrapper a:before,
+    .maera_pb-add-gallery-item-wrapper a:before {
         top: 3px;
     }
 }
-.make_pb-banner-slide .make_pb-banner-slide-body {
+.maera_pb-banner-slide .maera_pb-banner-slide-body {
     display: none;
 }
-.make_pb-banner-slide-open .make_pb-banner-slide-body {
+.maera_pb-banner-slide-open .maera_pb-banner-slide-body {
     display: block; /*reset*/
 }
-.make_pb-stage .make_pb-banner-slides .sortable-placeholder {
+.maera_pb-stage .maera_pb-banner-slides .sortable-placeholder {
     width: 100%;
     margin-bottom: 18px;
 }
 /*---------------------------------------------------------
  Gallery (sections.css)
 -------------------------------------------------------- */
-.make_pb-gallery-items-stage {
+.maera_pb-gallery-items-stage {
     float: left;
     width: 100%;
 }
-.make_pb-gallery-item {
+.maera_pb-gallery-item {
     position: relative;
     margin-bottom: 20px;
 }
-#poststuff .make_pb-large-title {
+#poststuff .maera_pb-large-title {
     padding-top: 12px;
     border-top: 1px solid #dfdfdf;
 }
-#poststuff .make_pb-large-title:before {
+#poststuff .maera_pb-large-title:before {
     content: "\f108";
     position: relative;
     top: 7px;
     font-size: 30px;
     font-family: Dashicons;
 }
-.make_pb-gallery-background-options-wrapper label {
+.maera_pb-gallery-background-options-wrapper label {
     vertical-align: top;
 }
-.make_pb-gallery-item-description-wrapper textarea {
+.maera_pb-gallery-item-description-wrapper textarea {
     width: 100%;
     height: 75px;
 }
-.make_pb-gallery-background-options-container {
+.maera_pb-gallery-background-options-container {
     float: left;
     width: 100%;
 }
@@ -355,17 +355,17 @@
  Quick Start info (sections.css)
 -------------------------------------------------------- */
 .ttfmp-import-message-hide,
-.make_pb-default-active .ttfmp-import-message {
+.maera_pb-default-active .ttfmp-import-message {
     display: none;
 }
 /*---------------------------------------------------------
- Make Plus disabled (sections.css)
+ Maera Plus disabled (sections.css)
 -------------------------------------------------------- */
-.make-plus-disabled .edit-text-column-link {
+.maera-plus-disabled .edit-text-column-link {
     top: 20px;
     right: 10px;
 }
-.make-plus-disabled .configure-column-link {
+.maera-plus-disabled .configure-column-link {
     top: 20px;
     right: 55px;
 }

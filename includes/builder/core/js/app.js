@@ -1,7 +1,7 @@
 /*global jQuery, tinyMCE, switchEditors */
-var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
+var oneApp = oneApp || {}, ttfMaeraFrames = ttfMaeraFrames || [];
 
-(function ($, oneApp, ttfMakeFrames) {
+(function ($, oneApp, ttfMaeraFrames) {
 	'use strict';
 
 	// Kickoff Backbone App
@@ -13,15 +13,15 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 	};
 
 	oneApp.cache = {
-		$sectionOrder: $('#make_pb-section-order'),
+		$sectionOrder: $('#maera_pb-section-order'),
 		$scrollHandle: $('html, body'),
-		$makeEditor: $('#wp-make-wrap'),
-		$makeTextArea: $('#make')
+		$maeraEditor: $('#wp-maera-wrap'),
+		$maeraTextArea: $('#maera')
 	};
 
 	oneApp.initSortables = function () {
-		$('.make_pb-stage').sortable({
-			handle: '.make_pb-section-header',
+		$('.maera_pb-stage').sortable({
+			handle: '.maera_pb-section-header',
 			placeholder: 'sortable-placeholder',
 			forcePlaceholderSizeType: true,
 			distance: 2,
@@ -29,7 +29,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 			start: function (event, ui) {
 				// Set the height of the placeholder to that of the sorted item
 				var $item = $(ui.item.get(0)),
-					$stage = $item.parents('.make_pb-stage');
+					$stage = $item.parents('.maera_pb-stage');
 
 				$item.css('-webkit-transform', 'translateZ(0)');
 				$('.sortable-placeholder', $stage).height(parseInt($item.height(), 10) - 2);
@@ -42,7 +42,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 				oneApp.setOrder( $(this).sortable('toArray', {attribute: 'data-id'}), oneApp.cache.$sectionOrder );
 
 				$.each($frames, function() {
-					var id = $(this).attr('id').replace('make_pb-iframe-', '');
+					var id = $(this).attr('id').replace('maera_pb-iframe-', '');
 					setTimeout(function() {
 						oneApp.initFrame(id);
 					}, 100);
@@ -90,7 +90,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 	};
 
 	oneApp.initViews = function () {
-		$('.make_pb-section').each(function () {
+		$('.maera_pb-section').each(function () {
 			var $section = $(this),
 				idAttr = $section.attr('id'),
 				id = $section.attr('data-id'),
@@ -135,7 +135,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 			iframeBody = $('body', iframeContent),
 			content;
 
-		content = oneApp.getMakeContent();
+		content = oneApp.getMaeraContent();
 
 		// Since content is being displayed in the iframe, run it through autop
 		content = switchEditors.wpautop(oneApp.wrapShortcodes(content));
@@ -144,35 +144,35 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 	};
 
 	oneApp.setTextArea = function (textAreaID) {
-		$('#' + textAreaID).val(oneApp.getMakeContent());
+		$('#' + textAreaID).val(oneApp.getMaeraContent());
 	};
 
-	oneApp.getMakeContent = function () {
+	oneApp.getMaeraContent = function () {
 		var content = '';
 
 		if (oneApp.isVisualActive()) {
-			content = tinyMCE.get('make').getContent();
+			content = tinyMCE.get('maera').getContent();
 		} else {
-			content = oneApp.cache.$makeTextArea.val();
+			content = oneApp.cache.$maeraTextArea.val();
 		}
 
 		return content;
 	};
 
-	oneApp.setMakeContent = function (content) {
+	oneApp.setMaeraContent = function (content) {
 		if (oneApp.isVisualActive()) {
-			tinyMCE.get('make').setContent(content);
+			tinyMCE.get('maera').setContent(content);
 		} else {
-			oneApp.cache.$makeTextArea.val(switchEditors.pre_wpautop(content));
+			oneApp.cache.$maeraTextArea.val(switchEditors.pre_wpautop(content));
 		}
 	};
 
-	oneApp.setMakeContentFromTextArea = function (iframeID, textAreaID) {
+	oneApp.setMaeraContentFromTextArea = function (iframeID, textAreaID) {
 		var textAreaContent = $('#' + textAreaID).val();
 
 		oneApp.setActiveiframeID(iframeID);
 		oneApp.setActiveTextAreaID(textAreaID);
-		oneApp.setMakeContent(textAreaContent);
+		oneApp.setMaeraContent(textAreaContent);
 	};
 
 	oneApp.setActiveiframeID = function(iframeID) {
@@ -200,27 +200,27 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 	};
 
 	oneApp.isTextActive = function() {
-		return oneApp.cache.$makeEditor.hasClass('html-active');
+		return oneApp.cache.$maeraEditor.hasClass('html-active');
 	};
 
 	oneApp.isVisualActive = function() {
-		return oneApp.cache.$makeEditor.hasClass('tmce-active');
+		return oneApp.cache.$maeraEditor.hasClass('tmce-active');
 	};
 
 	oneApp.initFrames = function() {
-		if (ttfMakeFrames.length > 0) {
+		if (ttfMaeraFrames.length > 0) {
 			var link = oneApp.getFrameHeadLinks();
 
 			// Add content and CSS
-			_.each(ttfMakeFrames, function(id) {
+			_.each(ttfMaeraFrames, function(id) {
 				oneApp.initFrame(id, link);
 			});
 		}
 	};
 
 	oneApp.initFrame = function(id, link) {
-		var content = $('#make_pb-content-' + id).val(),
-			iframe = document.getElementById('make_pb-iframe-' + id),
+		var content = $('#maera_pb-content-' + id).val(),
+			iframe = document.getElementById('maera_pb-iframe-' + id),
 			iframeContent = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document,
 			iframeHead = $('head', iframeContent),
 			iframeBody = $('body', iframeContent);
@@ -232,7 +232,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 	};
 
 	oneApp.getFrameHeadLinks = function() {
-		var scripts = tinyMCEPreInit.mceInit.make.content_css.split(','),
+		var scripts = tinyMCEPreInit.mceInit.maera.content_css.split(','),
 			link = '';
 
 		// Create the CSS links for the head
@@ -253,15 +253,15 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 		});
 	};
 
-	$('body').on('click', '.make_pb-remove-image-from-modal', function(evt){
+	$('body').on('click', '.maera_pb-remove-image-from-modal', function(evt){
 		evt.preventDefault();
 
-		var $parent = oneApp.$currentPlaceholder.parents('.make_pb-uploader'),
-			$input = $('.make_pb-media-uploader-value', $parent);
+		var $parent = oneApp.$currentPlaceholder.parents('.maera_pb-uploader'),
+			$input = $('.maera_pb-media-uploader-value', $parent);
 
 		// Remove the image
 		oneApp.$currentPlaceholder.css('background-image', '');
-		$parent.removeClass('make_pb-has-image-set');
+		$parent.removeClass('maera_pb-has-image-set');
 
 		// Remove the value from the input
 		$input.removeAttr('value');
@@ -271,7 +271,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 
 	wp.media.view.Sidebar = wp.media.view.Sidebar.extend({
 		render: function() {
-			this.$el.html( wp.media.template( 'make_pb-remove-image' ) );
+			this.$el.html( wp.media.template( 'maera_pb-remove-image' ) );
 			return this;
 		}
 	});
@@ -282,4 +282,4 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 	oneApp.initSortables();
 	oneApp.initViews();
 	oneApp.triggerInitFrames();
-})(jQuery, oneApp, ttfMakeFrames);
+})(jQuery, oneApp, ttfMaeraFrames);

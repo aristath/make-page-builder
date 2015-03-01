@@ -1,6 +1,6 @@
 <?php
 
-class Make_PB_Check {
+class Maera_PB_Check {
 
 	private static $instance;
 
@@ -20,12 +20,12 @@ class Make_PB_Check {
 
 	public function builder_toggle() {
 
-		$using_builder = get_post_meta( get_the_ID(), '_make_pb-use-builder', true );
+		$using_builder = get_post_meta( get_the_ID(), '_maera_pb-use-builder', true );
 		?>
 
 		<div class="misc-pub-section">
 			<input type="checkbox" value="1" name="use-builder" id="use-builder"<?php checked( $using_builder, 1 ); ?> />
-			&nbsp;<label for="use-builder"><?php _e( 'Use Page Builder', 'make' ); ?></label>
+			&nbsp;<label for="use-builder"><?php _e( 'Use Page Builder', 'maera' ); ?></label>
 		</div>
 		<?php
 
@@ -43,8 +43,8 @@ class Make_PB_Check {
 			$post_id = get_the_ID();
 		}
 
-		$is_builder_active = ( 1 === (int) get_post_meta( $post_id, '_make_pb-use-builder', true ) );
-		return apply_filters( 'make_is_builder_active', $is_builder_active, $post_id );
+		$is_builder_active = ( 1 === (int) get_post_meta( $post_id, '_maera_pb-use-builder', true ) );
+		return apply_filters( 'maera_is_builder_active', $is_builder_active, $post_id );
 
 	}
 
@@ -56,19 +56,19 @@ class Make_PB_Check {
 	public function will_be_builder_active() {
 
 		$use_builder = isset( $_POST['use-builder'] ) ? (int) isset( $_POST['use-builder'] ) : 0;
-		return apply_filters( 'make_will_be_builder_page', ( 1 === $use_builder ), $template, $use_builder );
+		return apply_filters( 'maera_will_be_builder_page', ( 1 === $use_builder ), $template, $use_builder );
 
 	}
 
 }
 
-function make_pb_is_builder_active( $post_id = 0 ) {
+function maera_pb_is_builder_active( $post_id = 0 ) {
 
 	if ( 0 == $post_id || empty( $post_id ) ) {
 		$post_id = get_the_ID();
 	}
 
-	$is_builder_active = ( 1 === (int) get_post_meta( $post_id, '_make_pb-use-builder', true ) );
-	return apply_filters( 'make_is_builder_active', $is_builder_active, $post_id );
+	$is_builder_active = ( 1 === (int) get_post_meta( $post_id, '_maera_pb-use-builder', true ) );
+	return apply_filters( 'maera_is_builder_active', $is_builder_active, $post_id );
 
 }

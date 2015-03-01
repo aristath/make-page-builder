@@ -1,28 +1,28 @@
 <?php
 /**
- * @package Make
+ * @package Maera
  */
 
-$class = ( 'c' === get_user_setting( 'make_pbmt' . get_the_ID() ) ) ? 'closed' : 'opened';
+$class = ( 'c' === get_user_setting( 'maera_pbmt' . get_the_ID() ) ) ? 'closed' : 'opened';
 ?>
 
-<div class="make_pb-menu make_pb-menu-<?php echo esc_attr( $class ); ?>" id="make_pb-menu">
-	<div class="make_pb-menu-pane">
-		<ul class="make_pb-menu-list">
+<div class="maera_pb-menu maera_pb-menu-<?php echo esc_attr( $class ); ?>" id="maera_pb-menu">
+	<div class="maera_pb-menu-pane">
+		<ul class="maera_pb-menu-list">
 			<?php
 			/**
 			 * Execute code before the builder menu is displayed.
 			 *
 			 * @since 1.2.3.
 			 */
-			do_action( 'make_before_builder_menu' );
+			do_action( 'maera_before_builder_menu' );
 			?>
-			<?php foreach ( make_pb_get_sections_by_order() as $key => $item ) : ?>
-			<a href="#" title="<?php echo esc_html( $item['description'] ); ?>" class="make_pb-menu-list-item-link" id="make_pb-menu-list-item-link-<?php echo esc_attr( $item['id'] ); ?>" data-section="<?php echo esc_attr( $item['id'] ); ?>">
+			<?php foreach ( maera_pb_get_sections_by_order() as $key => $item ) : ?>
+			<a href="#" title="<?php echo esc_html( $item['description'] ); ?>" class="maera_pb-menu-list-item-link" id="maera_pb-menu-list-item-link-<?php echo esc_attr( $item['id'] ); ?>" data-section="<?php echo esc_attr( $item['id'] ); ?>">
 
-				<li class="make_pb-menu-list-item">
-						<div class="make_pb-menu-list-item-link-icon-wrapper clear">
-							<span class="make_pb-menu-list-item-link-icon"></span>
+				<li class="maera_pb-menu-list-item">
+						<div class="maera_pb-menu-list-item-link-icon-wrapper clear">
+							<span class="maera_pb-menu-list-item-link-icon"></span>
 							<div class="section-type-description">
 								<h4>
 									<?php echo esc_html( $item['label'] ); ?>
@@ -39,7 +39,7 @@ $class = ( 'c' === get_user_setting( 'make_pbmt' . get_the_ID() ) ) ? 'closed' :
 			 *
 			 * @since 1.2.3.
 			 */
-			do_action( 'make_after_builder_menu' );
+			do_action( 'maera_after_builder_menu' );
 			?>
 		</ul>
 	</div>

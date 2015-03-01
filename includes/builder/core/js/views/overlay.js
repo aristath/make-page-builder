@@ -7,7 +7,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 	oneApp.OverlayView = Backbone.View.extend({
 		events: function() {
 			return _.extend({}, oneApp.SectionView.prototype.events, {
-				'click .make_pb-overlay-close-action' : 'closeOnClick'
+				'click .maera_pb-overlay-close-action' : 'closeOnClick'
 			});
 		},
 
@@ -16,7 +16,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			this.$el.show();
 
 			// Auto focus on the editor
-			var focusOn = (oneApp.isVisualActive()) ? tinyMCE.get('make') : oneApp.cache.$makeTextArea;
+			var focusOn = (oneApp.isVisualActive()) ? tinyMCE.get('maera') : oneApp.cache.$maeraTextArea;
 			focusOn.focus();
 		},
 
@@ -43,7 +43,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			textareaID = textareaID || oneApp.getActiveTextAreaID();
 
 			var link = $('.edit-content-link[data-textarea="' + textareaID + '"]'),
-				content = oneApp.getMakeContent();
+				content = oneApp.getMaeraContent();
 
 			if ('' !== content) {
 				link.addClass('item-has-content');
@@ -56,7 +56,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 	// Initialize available gallery items
 	oneApp.initOverlayViews = function () {
 		oneApp.tinymceOverlay = new oneApp.OverlayView({
-			el: $('#make_pb-tinymce-overlay')
+			el: $('#maera_pb-tinymce-overlay')
 		});
 	};
 

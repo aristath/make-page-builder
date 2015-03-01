@@ -1,12 +1,12 @@
 /*---------------------------------------------------------
  Builder (builder.css)
 -------------------------------------------------------- */
-.make_pb-titlediv {
+.maera_pb-titlediv {
     position: relative;
     margin-bottom: 20px;
 }
-.make_pb-titlediv .make_pb-title,
-.make_pb-configuration-overlay-input-wrap .make_pb-configuration-title {
+.maera_pb-titlediv .maera_pb-title,
+.maera_pb-configuration-overlay-input-wrap .maera_pb-configuration-title {
     width: 100%;
     height: 41px;
     margin: 0; /*reset*/
@@ -18,26 +18,26 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.make_pb-titlediv .make_pb-title:focus {
+.maera_pb-titlediv .maera_pb-title:focus {
     border: 1px solid #ddd;
     -webkit-box-shadow: none; /*reset*/
     box-shadow: none; /*reset*/
 }
-#make_pb-builder .inside {
+#maera_pb-builder .inside {
     padding: 0; /*reset*/
 }
-#make_pb-builder *:focus {
+#maera_pb-builder *:focus {
     outline: none !important; /*reset*/
     box-shadow: none !important; /*reset*/
 }
-.make_pb-stage {
+.maera_pb-stage {
     clear: both;
     padding-top: 10px;
 }
-.make_pb-stage-closed {
+.maera_pb-stage-closed {
     padding-top: 0; /*reset*/
 }
-.make_pb-stage .sortable-placeholder {
+.maera_pb-stage .sortable-placeholder {
     margin-bottom: 10px;
 }
 /*---------------------------------------------------------
@@ -46,40 +46,40 @@
 .clear {
     clear: both;
 }
-.make_pb-show {
+.maera_pb-show {
     display: block;
 }
-.make_pb-hide {
+.maera_pb-hide {
     display: none; /*reset*/
 }
 /*---------------------------------------------------------
  Menu (builder.css)
 -------------------------------------------------------- */
-.make_pb-menu {
+.maera_pb-menu {
     margin-top: -6px;
 }
-.make_pb-menu-pane {
+.maera_pb-menu-pane {
     margin-bottom: 40px;
     border-top: none; /*reset*/
     line-height: 0; /*reset*/
 }
-.make_pb-menu-list {
+.maera_pb-menu-list {
     display: inline-block;
     width: 100%;
     margin: 0; /*reset*/
 }
-.make_pb-menu-list h4 {
+.maera_pb-menu-list h4 {
     margin: 0; /*reset*/
     font-size: 14px;
 }
-.make_pb-menu-list a {
+.maera_pb-menu-list a {
     text-decoration: none; /*reset*/
     color: #777777 !important;
 }
-.make_pb-menu-list a:hover {
+.maera_pb-menu-list a:hover {
     color: #333333 !important;
 }
-.make_pb-menu-list a .make_pb-menu-list-item-link-icon {
+.maera_pb-menu-list a .maera_pb-menu-list-item-link-icon {
     display: block;
     visibility: hidden;
     width: 84px;
@@ -87,10 +87,10 @@
     background: url(images/section-icons-hover.png) center center no-repeat;
     background-size: 36px 36px;
 }
-.make_pb-menu-list a:hover .make_pb-menu-list-item-link-icon {
+.maera_pb-menu-list a:hover .maera_pb-menu-list-item-link-icon {
     visibility: visible;
 }
-.make_pb-menu-list-item {
+.maera_pb-menu-list-item {
     float: left;
     width: 50%;
     height: 155px;
@@ -102,38 +102,38 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.make_pb-menu-list-item:hover .make_pb-menu-list-item-link-icon-wrapper {
+.maera_pb-menu-list-item:hover .maera_pb-menu-list-item-link-icon-wrapper {
     border-color: #bbbbbb;
 }
-.make_pb-menu-list-item:last-of-type {
+.maera_pb-menu-list-item:last-of-type {
     margin-right: 0; /*reset*/
 }
-.make_pb-menu-list-item:hover {
+.maera_pb-menu-list-item:hover {
     background-color: #fafafa;
 }
 @media screen and (min-width: 1160px) {
-    .make_pb-menu-list-item {
+    .maera_pb-menu-list-item {
         width: 25%;
     }
-    .make_pb-menu-list-item-link:nth-child(even) .make_pb-menu-list-item {
+    .maera_pb-menu-list-item-link:nth-child(even) .maera_pb-menu-list-item {
         border-right: 1px solid #eeeeee;
     }
-    .make_pb-menu-list-item-link:nth-child(4) .make_pb-menu-list-item,
-    .make_pb-menu-list-item-link:nth-child(8) .make_pb-menu-list-item,
-    .make_pb-menu-list-item-link:nth-child(12) .make_pb-menu-list-item {
+    .maera_pb-menu-list-item-link:nth-child(4) .maera_pb-menu-list-item,
+    .maera_pb-menu-list-item-link:nth-child(8) .maera_pb-menu-list-item,
+    .maera_pb-menu-list-item-link:nth-child(12) .maera_pb-menu-list-item {
         border-right: 0; /*reset*/
     }
 }
-.make_pb-menu-list-item a {
+.maera_pb-menu-list-item a {
     color: #21759b;
 }
-.make_pb-menu-list-item a:hover {
+.maera_pb-menu-list-item a:hover {
     color: #d54e21;
 }
-.make_pb-menu-list-item-link {
+.maera_pb-menu-list-item-link {
     display: block;
 }
-.make_pb-menu-list-item-link-icon-wrapper {
+.maera_pb-menu-list-item-link-icon-wrapper {
     display: inline-block;
     width: 84px;
     height: 74px;
@@ -152,7 +152,7 @@
 /*---------------------------------------------------------
  Sortable handle (builder.css)
 -------------------------------------------------------- */
-.make_pb-sortable-handle {
+.maera_pb-sortable-handle {
     position: relative;
     width: 100%;
     height: 20px;
@@ -171,33 +171,33 @@
     background: url(images/sortable-background.png) center center repeat-x;
     opacity: .5;
 }
-.make_pb-gallery-item:hover .sortable-background,
-.make_pb-banner-slide:hover .sortable-background {
+.maera_pb-gallery-item:hover .sortable-background,
+.maera_pb-banner-slide:hover .sortable-background {
     opacity: 1; /*reset*/
 }
 /*---------------------------------------------------------
  Forms (builder.css)
 -------------------------------------------------------- */
-.make_pb-section input[type=checkbox],
-.make_pb-section input[type=radio],
-.make_pb-section input[type=search],
-.make_pb-section input[type=number],
-.make_pb-section input[type=text],
-.make_pb-section textarea {
+.maera_pb-section input[type=checkbox],
+.maera_pb-section input[type=radio],
+.maera_pb-section input[type=search],
+.maera_pb-section input[type=number],
+.maera_pb-section input[type=text],
+.maera_pb-section textarea {
     -webkit-box-shadow: none; /*reset*/
     box-shadow: none; /*reset*/
 }
-.make_pb-section input[type=text]:focus,
-.make_pb-section input[type=number]:focus {
+.maera_pb-section input[type=text]:focus,
+.maera_pb-section input[type=number]:focus {
     border-color: #ddd;
 }
-.make_pb-configuration-overlay-input-wrap select {
+.maera_pb-configuration-overlay-input-wrap select {
     border: 1px solid #ddd;
 }
 /*---------------------------------------------------------
  Sections (builder.css)
 -------------------------------------------------------- */
-.make_pb-section {
+.maera_pb-section {
     overflow: hidden;
     width: 100%;
     margin-bottom: 10px;
@@ -207,7 +207,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.make_pb-section-body {
+.maera_pb-section-body {
     display: none;
     float: left;
     width: 100%;
@@ -216,24 +216,24 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.make_pb-section-open {
+.maera_pb-section-open {
     margin-bottom: 40px;
 }
-.make_pb-section-open .make_pb-section-body {
+.maera_pb-section-open .maera_pb-section-body {
     display: block; /*reset*/
 }
-.make_pb-section-header-title {
+.maera_pb-section-header-title {
     max-width: 90%;
     display: inline-block;
 }
-.make_pb-section h4 {
+.maera_pb-section h4 {
     margin: 20px 0 10px;
     font-size: 13px;
 }
-.make_pb-section-header {
+.maera_pb-section-header {
     cursor: move;
 }
-.make_pb-section-header h3 {
+.maera_pb-section-header h3 {
     float: left;
     width: 100%;
     color: #222;
@@ -253,100 +253,100 @@
     -ms-transition: background-color 300ms ease;
     transition: background-color 300ms ease;
 }
-.make_pb-section-open .make_pb-section-header h3 {
+.maera_pb-section-open .maera_pb-section-header h3 {
     color: #fff;
     border-color: #222;
     background-color: #222;
 }
-.make_pb-section-header span {
+.maera_pb-section-header span {
     font-weight: bold;
 }
-.make_pb-section-header em {
+.maera_pb-section-header em {
     margin-left: 10px;
     color: #777;
     font-weight: normal !important;
     font-style: normal !important;
 }
-.make_pb-section-open .make_pb-section-header em {
+.maera_pb-section-open .maera_pb-section-header em {
     color: #bbb;
 }
-.make_pb-section .handlediv {
+.maera_pb-section .handlediv {
     position: relative;
     height: 40px;
     padding-left: 10px;
     border-left: 1px solid #d9d9d9;
 }
 @media screen and ( max-width: 782px ) {
-    .make_pb-section .handlediv {
+    .maera_pb-section .handlediv {
         height: 48px;
         margin-top: 0; /*reset*/
     }
 }
-.make_pb-section-open .handlediv {
+.maera_pb-section-open .handlediv {
     border-left-color: #999;
 }
-.make_pb-section-toggle:focus {
+.maera_pb-section-toggle:focus {
     border: none !important;
 }
-.make_pb-section-toggle .handlediv,
-.make_pb-banner-slide-toggle .handlediv {
+.maera_pb-section-toggle .handlediv,
+.maera_pb-banner-slide-toggle .handlediv {
     top: -40px;
     right: 0; /*reset*/
     margin-bottom: -40px;
 }
 @media screen and ( max-width: 782px ) {
-    .make_pb-section-toggle .handlediv,
-    .make_pb-banner-slide-toggle .handlediv {
+    .maera_pb-section-toggle .handlediv,
+    .maera_pb-banner-slide-toggle .handlediv {
         top: -48px;
         margin-bottom: -48px;
     }
 }
-.make_pb-stage .make_pb-section .make_pb-section-header .handlediv:before,
-.make_pb-stage .make_pb-section .make_pb-banner-slide-header .handlediv:before {
+.maera_pb-stage .maera_pb-section .maera_pb-section-header .handlediv:before,
+.maera_pb-stage .maera_pb-section .maera_pb-banner-slide-header .handlediv:before {
     content: '\f140';
     top: 1px;
 }
 @media screen and ( max-width: 782px ) {
-    .make_pb-stage .make_pb-section .make_pb-section-header .handlediv:before,
-    .make_pb-stage .make_pb-section .make_pb-banner-slide-header .handlediv:before {
+    .maera_pb-stage .maera_pb-section .maera_pb-section-header .handlediv:before,
+    .maera_pb-stage .maera_pb-section .maera_pb-banner-slide-header .handlediv:before {
         top: 5px;
     }
 }
-.make_pb-stage .make_pb-section .make_pb-section-header .handlediv:hover:before,
-.make_pb-stage .make_pb-section .make_pb-banner-slide-header .handlediv:hover:before {
+.maera_pb-stage .maera_pb-section .maera_pb-section-header .handlediv:hover:before,
+.maera_pb-stage .maera_pb-section .maera_pb-banner-slide-header .handlediv:hover:before {
     color: #222;
 }
-.make_pb-stage .make_pb-section-open .make_pb-section-header .handlediv:hover:before,
-.make_pb-stage .make_pb-section-open .make_pb-banner-slide-header .handlediv:hover:before {
+.maera_pb-stage .maera_pb-section-open .maera_pb-section-header .handlediv:hover:before,
+.maera_pb-stage .maera_pb-section-open .maera_pb-banner-slide-header .handlediv:hover:before {
     color: #fff;
 }
-.make_pb-stage .make_pb-section.make_pb-section-open .make_pb-section-header .handlediv:before,
-.make_pb-stage .make_pb-section .make_pb-banner-slide-open .make_pb-banner-slide-header .handlediv:before {
+.maera_pb-stage .maera_pb-section.maera_pb-section-open .maera_pb-section-header .handlediv:before,
+.maera_pb-stage .maera_pb-section .maera_pb-banner-slide-open .maera_pb-banner-slide-header .handlediv:before {
     content: '\f142';
 }
-.make_pb-media-link-wrap {
+.maera_pb-media-link-wrap {
     margin-bottom: 8px;
 }
-.make_pb-media-uploader-add {
+.maera_pb-media-uploader-add {
     display: inline-block;
     cursor: pointer;
 }
-.make_pb-section-open .make_pb-builder-section-link,
-.make_pb-section:hover .make_pb-builder-section-link {
+.maera_pb-section-open .maera_pb-builder-section-link,
+.maera_pb-section:hover .maera_pb-builder-section-link {
     visibility: visible;
 }
-.make_pb-builder-section-link {
+.maera_pb-builder-section-link {
     visibility: hidden;
 }
 /*---------------------------------------------------------
  Sections header buttons (builder.css)
 -------------------------------------------------------- */
-.ttf-make-section-header-button-wrapper {
+.ttf-maera-section-header-button-wrapper {
     position: absolute;
     right: 45px;
 }
-.make_pb-section-remove,
-.make_pb-section-configure,
+.maera_pb-section-remove,
+.maera_pb-section-configure,
 .ttfmp-duplicate-section {
     display: inline-block;
     height: 100%;
@@ -354,25 +354,25 @@
     color: #aaa;
     text-decoration: none;  /*reset*/
 }
-.make_pb-section-open .make_pb-section-remove,
-.make_pb-section-open .make_pb-section-configure,
-.make_pb-section-open .ttfmp-duplicate-section {
+.maera_pb-section-open .maera_pb-section-remove,
+.maera_pb-section-open .maera_pb-section-configure,
+.maera_pb-section-open .ttfmp-duplicate-section {
     color: #bbb;
 }
 /*---------------------------------------------------------
  Hide Configure Section button when closed (builder.css)
 -------------------------------------------------------- */
-.make_pb-section .make_pb-section-configure {
+.maera_pb-section .maera_pb-section-configure {
     display: none;
 }
-.make_pb-section-open .make_pb-section-configure {
+.maera_pb-section-open .maera_pb-section-configure {
     display: inline-block;
 }
 /*---------------------------------------------------------
  Hide button labels (builder.css)
 -------------------------------------------------------- */
-.make_pb-section-remove span,
-.make_pb-section-configure span,
+.maera_pb-section-remove span,
+.maera_pb-section-configure span,
 .ttfmp-duplicate-section span {
     display: none; /*reset*/
     text-indent: -9999px;
@@ -382,37 +382,37 @@
 /*---------------------------------------------------------
  Section header buttons hover state (builder.css)
 -------------------------------------------------------- */
-.make_pb-section-remove:hover,
-.make_pb-section-configure:hover,
+.maera_pb-section-remove:hover,
+.maera_pb-section-configure:hover,
 .ttfmp-duplicate-section:hover {
     color: #222;
 }
-.make_pb-section-open .make_pb-section-remove:hover,
-.make_pb-section-open .make_pb-section-configure:hover,
-.make_pb-section-open .ttfmp-duplicate-section:hover {
+.maera_pb-section-open .maera_pb-section-remove:hover,
+.maera_pb-section-open .maera_pb-section-configure:hover,
+.maera_pb-section-open .ttfmp-duplicate-section:hover {
     color: #fff;
 }
 /*---------------------------------------------------------
  Section header icons (builder.css)
 -------------------------------------------------------- */
-.make_pb-section-remove:before,
-.make_pb-section-configure:before,
+.maera_pb-section-remove:before,
+.maera_pb-section-configure:before,
 .ttfmp-duplicate-section:before {
     font: 400 20px/40px dashicons;
     speak: none; /*reset*/
 }
-.make_pb-section-remove:before {
+.maera_pb-section-remove:before {
     content: "\f182";
 }
-.make_pb-section-configure:before {
+.maera_pb-section-configure:before {
     content: "\f111";
 }
 .ttfmp-duplicate-section:before {
     content: "\f105";
 }
 @media screen and ( max-width: 782px ) {
-    .make_pb-section-remove:before,
-    .make_pb-section-configure:before,
+    .maera_pb-section-remove:before,
+    .maera_pb-section-configure:before,
     .ttfmp-duplicate-section:before {
         line-height: 48px;
     }
@@ -420,7 +420,7 @@
 /*---------------------------------------------------------
  Media placeholder (builder.css)
 -------------------------------------------------------- */
-.make_pb-media-uploader-placeholder {
+.maera_pb-media-uploader-placeholder {
     position: relative;
     display: block;
     width: 100%;
@@ -437,7 +437,7 @@
 /*---------------------------------------------------------
  Media placeholder icon (builder.css)
 -------------------------------------------------------- */
-.make_pb-media-uploader-placeholder:before {
+.maera_pb-media-uploader-placeholder:before {
     content: "\f128";
     display: block;
     color: #d9d9d9;
@@ -447,10 +447,10 @@
 /*---------------------------------------------------------
  Media placeholder hover state (builder.css)
 -------------------------------------------------------- */
-.make_pb-media-uploader-placeholder:hover:before {
+.maera_pb-media-uploader-placeholder:hover:before {
     color: #c7c7c7;
 }
-.make_pb-media-uploader-placeholder img {
+.maera_pb-media-uploader-placeholder img {
     position: absolute;
     max-width: 100%;
     max-height: 228px;
@@ -466,25 +466,25 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.make_pb-section-body iframe {
+.maera_pb-section-body iframe {
     background: #fff !important;
 }
 /*---------------------------------------------------------
  Media placeholder if has image set (builder.css)
 -------------------------------------------------------- */
-.make_pb-has-image-set {
+.maera_pb-has-image-set {
     background-color: #fff;
 }
-.make_pb-has-image-set .make_pb-media-uploader-placeholder:before {
+.maera_pb-has-image-set .maera_pb-media-uploader-placeholder:before {
     content: none;
 }
-.make_pb-has-image-set:hover .make_pb-media-uploader-placeholder {
+.maera_pb-has-image-set:hover .maera_pb-media-uploader-placeholder {
     opacity: .8;
 }
 /*---------------------------------------------------------
  Overlay (builder.css)
 -------------------------------------------------------- */
-.make_pb-overlay {
+.maera_pb-overlay {
     display: none;
     z-index: 99999;
     position: fixed;
@@ -495,7 +495,7 @@
     background: url(images/background.png) top left repeat;
     background: rgba(0, 0, 0, 0.7) ;
 }
-.make_pb-overlay-wrapper {
+.maera_pb-overlay-wrapper {
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
@@ -507,12 +507,12 @@
     /* Fix webkit bug. @link https://github.com/mgcrea/angular-strap/issues/1234#issuecomment-61913920 */
     -webkit-transform: translate3d(0,0,0);
 }
-.make_pb-overlay-window-head {
+.maera_pb-overlay-window-head {
     padding: 0; /*reser*/
     min-height: 36px;
     background: #fcfcfc;
 }
-.make_pb-overlay-title {
+.maera_pb-overlay-title {
     width: 300px;
     margin: 0;
     padding: 0 36px 0 10px;
@@ -525,7 +525,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.make_pb-overlay-close {
+.maera_pb-overlay-close {
     display: block;
     position: absolute;
     top: 0; /*reset*/
@@ -539,104 +539,104 @@
     background-color: #1bc865;
     cursor: pointer;
 }
-.make_pb-configuration-overlay-input-wrap  .make_pb-uploader {
+.maera_pb-configuration-overlay-input-wrap  .maera_pb-uploader {
     width: 100%;
 }
-.make_pb-configuration-overlay .make_pb-overlay-wrapper {
+.maera_pb-configuration-overlay .maera_pb-overlay-wrapper {
     margin-left: -200px;
     width: 400px;
 }
-#make_pb-tinymce-overlay .make_pb-overlay-wrapper {
+#maera_pb-tinymce-overlay .maera_pb-overlay-wrapper {
     width: 800px !important;
     height: 500px !important;
     margin-left: -400px !important;
     margin-top: -250px !important;
 }
-#make_pb-tinymce-overlay .make_pb-overlay-body {
+#maera_pb-tinymce-overlay .maera_pb-overlay-body {
     overflow-y: hidden;
 }
-.make_pb-overlay-wrapper * {
+.maera_pb-overlay-wrapper * {
     -webkit-font-smoothing: subpixel-antialiased !important;
 }
-.make_pb-overlay-header {
+.maera_pb-overlay-header {
     border-bottom: 1px solid #dfdfdf;
 }
-.make_pb-overlay-header h2 {
+.maera_pb-overlay-header h2 {
     float: left;
 }
-.make_pb-overlay-header .make_pb-overlay-close {
+.maera_pb-overlay-header .maera_pb-overlay-close {
     float: right;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
-.make_pb-configuration-overlay-input-wrap {
+.maera_pb-configuration-overlay-input-wrap {
     padding: 20px 0 !important;
     border-bottom: 1px solid #efefef !important;
 }
-.make_pb-configuration-overlay-input-wrap {
+.maera_pb-configuration-overlay-input-wrap {
     zoom: 1;
 }
-.make_pb-configuration-overlay-input-wrap:before,
-.make_pb-configuration-overlay-input-wrap:after {
+.maera_pb-configuration-overlay-input-wrap:before,
+.maera_pb-configuration-overlay-input-wrap:after {
     display: table;
     content: "";
 }
-.make_pb-configuration-overlay-input-wrap:after {
+.maera_pb-configuration-overlay-input-wrap:after {
     clear: both;
 }
-.make_pb-configuration-overlay-input-wrap label {
+.maera_pb-configuration-overlay-input-wrap label {
     position: relative;
     top: 2px;
     float: left;
 }
-.make_pb-configuration-overlay-input-wrap select,
-.make_pb-configuration-overlay-input-wrap input {
+.maera_pb-configuration-overlay-input-wrap select,
+.maera_pb-configuration-overlay-input-wrap input {
     float: right;
 }
-.make_pb-configuration-overlay-input-wrap .wp-picker-container,
-.make_pb-configuration-overlay-input-wrap  .make_pb-uploader {
+.maera_pb-configuration-overlay-input-wrap .wp-picker-container,
+.maera_pb-configuration-overlay-input-wrap  .maera_pb-uploader {
     clear: both;
     float: left;
     width: 100%;
     margin-top: 20px;
 }
-.make_pb-configuration-overlay-input-wrap input[type=checkbox] {
+.maera_pb-configuration-overlay-input-wrap input[type=checkbox] {
     position: relative;
     top: 5px;
 }
-.make_pb-configuration-description {
+.maera_pb-configuration-description {
     float: left;
     margin-top: 20px;
     color: #666;
     font-style: italic;
 }
-.make_pb-configuration-overlay-input-wrap select,
-.make_pb-configuration-overlay-input-wrap input {
+.maera_pb-configuration-overlay-input-wrap select,
+.maera_pb-configuration-overlay-input-wrap input {
     margin-left: auto;
 }
-.make_pb-overlay-body {
+.maera_pb-overlay-body {
     padding: 20px !important;
     clear: both;
     overflow-y: scroll;
     max-height: 500px;
 }
-.make_pb-overlay-body .make_pb-configuration-overlay-input-wrap:last-of-type {
+.maera_pb-overlay-body .maera_pb-configuration-overlay-input-wrap:last-of-type {
     padding-bottom: 0 !important;
     border-bottom: 0 !important;
 }
-.make_pb-configuration-title {
+.maera_pb-configuration-title {
     width: 100%;
     height: 41px;
     padding: 0 8px;
     font-size: 19px;
 }
-.make_pb-configuration-overlay-input-wrap.make_pb-configuration-title-wrap {
+.maera_pb-configuration-overlay-input-wrap.maera_pb-configuration-title-wrap {
     padding-top: 0 !important; /*reset*/
     border-bottom: 0 !important; /*reset*/
 }
-.make_pb-configuration-overlay-input-wrap.make_pb-configuration-media-wrap {
+.maera_pb-configuration-overlay-input-wrap.maera_pb-configuration-media-wrap {
     display: block; /*reset*/
     clear: both;
     width: 100%;
@@ -647,38 +647,38 @@
 .wp-color-result.wp-picker-open:after {
     display: none;
 }
-.make_pb-configuration-overlay-input-wrap .wp-picker-container .button {
+.maera_pb-configuration-overlay-input-wrap .wp-picker-container .button {
     margin-left: 0; /*reset*/
     margin-right: 4px; /*reset*/
 }
-.make_pb-configuration-overlay-input-wrap .wp-picker-container .wp-picker-holder {
+.maera_pb-configuration-overlay-input-wrap .wp-picker-container .wp-picker-holder {
     margin-left: -8px;
 }
-.make_pb-configuration-overlay-input-wrap .wp-picker-container .iris-picker {
+.maera_pb-configuration-overlay-input-wrap .wp-picker-container .iris-picker {
     border: 0; /*reset*/
 }
 /*---------------------------------------------------------
  iFrame (builder.css)
 -------------------------------------------------------- */
-.make_pb-iframe-wrapper {
+.maera_pb-iframe-wrapper {
     position: relative;
     border: 1px solid #ddd;
 }
-.make_pb-iframe-wrapper iframe {
+.maera_pb-iframe-wrapper iframe {
     overflow: hidden;
     padding: 12px !important; /*12px+8px from body*/
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.make_pb-iframe-overlay {
+.maera_pb-iframe-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%; /* same as iframe */
     height: 300px; /* same as iframe */
 }
-.make_pb-iframe-overlay .edit-content-link {
+.maera_pb-iframe-overlay .edit-content-link {
     display: block;
     width: 100%;
     height: 100%;
@@ -686,17 +686,17 @@
 /*---------------------------------------------------------
  Media Modal (builder.css)
 -------------------------------------------------------- */
-.make_pb-remove-current-image {
+.maera_pb-remove-current-image {
     display: none;
 }
-.make_pb-builder-uploader .make_pb-remove-current-image {
+.maera_pb-builder-uploader .maera_pb-remove-current-image {
     display: block;
     float: left;
 }
-.make_pb-builder-uploader .make_pb-remove-current-image a.make_pb-remove-image-from-modal {
+.maera_pb-builder-uploader .maera_pb-remove-current-image a.maera_pb-remove-image-from-modal {
     color: #bc0b0b;
     text-decoration: none; /*reset*/
 }
-.make_pb-builder-uploader .make_pb-remove-current-image a.make_pb-remove-image-from-modal:hover {
+.maera_pb-builder-uploader .maera_pb-remove-current-image a.maera_pb-remove-image-from-modal:hover {
     color: red;
 }

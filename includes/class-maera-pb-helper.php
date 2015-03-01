@@ -1,6 +1,6 @@
 <?php
 
-class Make_PB_Helper {
+class Maera_PB_Helper {
 
 	/**
 	 * Convert an array with array keys that map to a multidimensional array to the array.
@@ -48,7 +48,7 @@ class Make_PB_Helper {
 	 */
 	function get_section_data( $post_id ) {
 		$ordered_data = array();
-		$ids          = get_post_meta( $post_id, '_make_pb-section-ids', true );
+		$ids          = get_post_meta( $post_id, '_maera_pb-section-ids', true );
 		$ids          = ( ! empty( $ids ) && is_array( $ids ) ) ? array_map( 'strval', $ids ) : $ids;
 		$post_meta    = get_post_meta( $post_id );
 
@@ -59,9 +59,9 @@ class Make_PB_Helper {
 		if ( is_array( $post_meta ) ) {
 			foreach ( $post_meta as $key => $value ) {
 				// Only consider builder values
-				if ( 0 === strpos( $key, '_make_pb:' ) ) {
+				if ( 0 === strpos( $key, '_maera_pb:' ) ) {
 					// Get the individual pieces
-					$temp_data[ str_replace( '_make_pb:', '', $key ) ] = $value[0];
+					$temp_data[ str_replace( '_maera_pb:', '', $key ) ] = $value[0];
 				}
 			}
 		}
@@ -86,7 +86,7 @@ class Make_PB_Helper {
 		 * @param array    $ordered_data    The array of section data.
 		 * @param int      $post_id         The post ID for the retrieved data.
 		 */
-		return apply_filters( 'make_get_section_data', $ordered_data, $post_id );
+		return apply_filters( 'maera_get_section_data', $ordered_data, $post_id );
 	}
 
 }

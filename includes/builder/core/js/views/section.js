@@ -6,7 +6,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 	oneApp.SectionView = Backbone.View.extend({
 		template: '',
-		className: 'make_pb-section make_pb-section-open',
+		className: 'maera_pb-section maera_pb-section-open',
 		$headerTitle: '',
 		$titleInput: '',
 		$titlePipe: '',
@@ -15,18 +15,18 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 		$scrollHandle: $('html, body'),
 
 		events: {
-			'click .make_pb-section-toggle': 'toggleSection',
-			'click .make_pb-section-remove': 'removeSection',
-			'keyup .make_pb-section-header-title-input': 'constructHeader',
-			'click .make_pb-media-uploader-add': 'initUploader',
+			'click .maera_pb-section-toggle': 'toggleSection',
+			'click .maera_pb-section-remove': 'removeSection',
+			'keyup .maera_pb-section-header-title-input': 'constructHeader',
+			'click .maera_pb-media-uploader-add': 'initUploader',
 			'click .edit-content-link': 'openTinyMCEOverlay',
-			'click .make_pb-overlay-open': 'openConfigurationOverlay',
-			'click .make_pb-overlay-close': 'closeConfigurationOverlay'
+			'click .maera_pb-overlay-open': 'openConfigurationOverlay',
+			'click .maera_pb-overlay-close': 'closeConfigurationOverlay'
 		},
 
 		initialize: function (options) {
 			this.model = options.model;
-			this.idAttr = 'make_pb-section-' + this.model.get('id');
+			this.idAttr = 'maera_pb-section-' + this.model.get('id');
 			this.serverRendered = ( options.serverRendered ) ? options.serverRendered : false;
 
 			// Allow custom init functions
@@ -37,12 +37,12 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 				interpolate: /\{\{\{([\s\S]+?)\}\}\}/g,
 				escape     : /\{\{([^\}]+?)\}\}(?!\})/g
 			};
-			this.template = _.template($('#tmpl-make_pb-' + this.model.get('sectionType')).html());
+			this.template = _.template($('#tmpl-maera_pb-' + this.model.get('sectionType')).html());
 		},
 
 		render: function () {
 			this.$el.html(this.template(this.model.toJSON()))
-				.addClass('make_pb-section-' + this.model.get('sectionType'))
+				.addClass('maera_pb-section-' + this.model.get('sectionType'))
 				.attr('id', this.idAttr)
 				.attr('data-id', this.model.get('id'))
 				.attr('data-section-type', this.model.get('sectionType'));
@@ -53,18 +53,18 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			evt.preventDefault();
 
 			var $this = $(evt.target),
-				$section = $this.parents('.make_pb-section'),
-				$sectionBody = $('.make_pb-section-body', $section),
-				$input = $('.make_pb-section-state', this.$el);
+				$section = $this.parents('.maera_pb-section'),
+				$sectionBody = $('.maera_pb-section-body', $section),
+				$input = $('.maera_pb-section-state', this.$el);
 
-			if ($section.hasClass('make_pb-section-open')) {
+			if ($section.hasClass('maera_pb-section-open')) {
 				$sectionBody.slideUp(oneApp.options.closeSpeed, function() {
-					$section.removeClass('make_pb-section-open');
+					$section.removeClass('maera_pb-section-open');
 					$input.val('closed');
 				});
 			} else {
 				$sectionBody.slideDown(oneApp.options.openSpeed, function() {
-					$section.addClass('make_pb-section-open');
+					$section.addClass('maera_pb-section-open');
 					$input.val('open');
 				});
 			}
@@ -74,7 +74,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			evt.preventDefault();
 
 			// Confirm the action
-			if (false === window.confirm(make_pbBuilderData.confirmString)) {
+			if (false === window.confirm(maera_pbBuilderData.confirmString)) {
 				return;
 			}
 
@@ -93,15 +93,15 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 		constructHeader: function (evt) {
 			if ('' === this.$headerTitle) {
-				this.$headerTitle = $('.make_pb-section-header-title', this.$el);
+				this.$headerTitle = $('.maera_pb-section-header-title', this.$el);
 			}
 
 			if ('' === this.$titleInput) {
-				this.$titleInput = $('.make_pb-section-header-title-input', this.$el);
+				this.$titleInput = $('.maera_pb-section-header-title-input', this.$el);
 			}
 
 			if ('' === this.$titlePipe) {
-				this.$titlePipe = $('.make_pb-section-header-pipe', this.$el);
+				this.$titlePipe = $('.maera_pb-section-header-pipe', this.$el);
 			}
 
 			var input = this.$titleInput.val();
@@ -111,9 +111,9 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 			// Hide or show the pipe depending on what content is available
 			if ('' === input) {
-				this.$titlePipe.addClass('make_pb-section-header-pipe-hidden');
+				this.$titlePipe.addClass('maera_pb-section-header-pipe-hidden');
 			} else {
-				this.$titlePipe.removeClass('make_pb-section-header-pipe-hidden');
+				this.$titlePipe.removeClass('maera_pb-section-header-pipe-hidden');
 			}
 		},
 
@@ -121,11 +121,11 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			evt.preventDefault();
 
 			var $this = $(evt.target),
-				$parent = $this.parents('.make_pb-uploader'),
-				$placeholder = $('.make_pb-media-uploader-placeholder', $parent),
-				$input = $('.make_pb-media-uploader-value', $parent),
-				$remove = $('.make_pb-media-uploader-remove', $parent),
-				$add = $('.make_pb-media-uploader-set-link', $parent),
+				$parent = $this.parents('.maera_pb-uploader'),
+				$placeholder = $('.maera_pb-media-uploader-placeholder', $parent),
+				$input = $('.maera_pb-media-uploader-value', $parent),
+				$remove = $('.maera_pb-media-uploader-remove', $parent),
+				$add = $('.maera_pb-media-uploader-set-link', $parent),
 				frame = frame || {},
 				props, image;
 
@@ -140,7 +140,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			// Create the media frame.
 			frame = wp.media.frames.frame = wp.media({
 				title: $this.data('title'),
-				className: 'media-frame make_pb-builder-uploader',
+				className: 'media-frame maera_pb-builder-uploader',
 				button: {
 					text: $this.data('buttonText')
 				},
@@ -163,7 +163,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 
 				// Show the image
 				$placeholder.css('background-image', 'url(' + attachment.url + ')');
-				$parent.addClass('make_pb-has-image-set');
+				$parent.addClass('maera_pb-has-image-set');
 
 				// Record the chosen value
 				$input.val(attachment.id);
@@ -187,7 +187,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 				iframeID = ($target.attr('data-iframe')) ? $target.attr('data-iframe') : '',
 				textAreaID = $target.attr('data-textarea');
 
-			oneApp.setMakeContentFromTextArea(iframeID, textAreaID);
+			oneApp.setMaeraContentFromTextArea(iframeID, textAreaID);
 		},
 
 		openConfigurationOverlay: function (evt) {
@@ -196,7 +196,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			var self = this,
 				$this = $(evt.target),
 				$overlay = $($this.attr('data-overlay')),
-				$wrapper = $('.make_pb-overlay-wrapper', $overlay);
+				$wrapper = $('.maera_pb-overlay-wrapper', $overlay);
 
 			$overlay.show(1, function(){
 				$('.wp-color-result', $overlay).click().off('click');
@@ -209,7 +209,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 		},
 
 		setSize: function($overlay, $wrapper) {
-			var $body = $('.make_pb-overlay-body', $wrapper),
+			var $body = $('.maera_pb-overlay-body', $wrapper),
 				bodyHeight = $body.height(),
 				wrapperHeight;
 
@@ -230,7 +230,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			evt.preventDefault();
 
 			var $this = $(evt.target),
-				$overlay = $this.parents('.make_pb-overlay');
+				$overlay = $this.parents('.maera_pb-overlay');
 
 			$overlay.hide();
 		}

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Make
+ * @package Maera
  */
 
 /**
@@ -8,6 +8,6 @@
  *
  * @since 1.2.3.
  */
-do_action( 'make_after_builder_stage' );
+do_action( 'maera_after_builder_stage' );
 ?>
 </div>

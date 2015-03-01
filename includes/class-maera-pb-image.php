@@ -1,6 +1,6 @@
 <?php
 
-class Make_PB_Image {
+class Maera_PB_Image {
 
 	/**
 	 * Get an image to display in page builder backend or front end template.
@@ -28,7 +28,7 @@ class Make_PB_Image {
 
 		}
 
-		return apply_filters( 'make_get_image', $return, $image_id, $size );
+		return apply_filters( 'maera_get_image', $return, $image_id, $size );
 
 	}
 
@@ -61,7 +61,7 @@ class Make_PB_Image {
 			}
 		}
 
-		return apply_filters( 'make_get_image_src', $src, $image_id, $size );
+		return apply_filters( 'maera_get_image_src', $src, $image_id, $size );
 
 	}
 
@@ -72,14 +72,14 @@ class Make_PB_Image {
 	 * @return array                 The image data, including 'src', 'alt', 'class', 'height', and 'width'.
 	 */
 	function get_placeholder_image( $image_id ) {
-		global $make_pb_placeholder_images;
+		global $maera_pb_placeholder_images;
 		$return = array();
 
-		if ( isset( $make_pb_placeholder_images[ $image_id ] ) ) {
-			$return = $make_pb_placeholder_images[ $image_id ];
+		if ( isset( $maera_pb_placeholder_images[ $image_id ] ) ) {
+			$return = $maera_pb_placeholder_images[ $image_id ];
 		}
 
-		return apply_filters( 'make_get_placeholder_image', $return, $image_id, $make_pb_placeholder_images );
+		return apply_filters( 'maera_get_placeholder_image', $return, $image_id, $maera_pb_placeholder_images );
 
 	}
 
@@ -91,8 +91,8 @@ class Make_PB_Image {
 	 * @return void
 	 */
 	function register_placeholder_image( $id, $data ) {
-		global $make_pb_placeholder_images;
-		$make_pb_placeholder_images[ $id ] = $data;
+		global $maera_pb_placeholder_images;
+		$maera_pb_placeholder_images[ $id ] = $data;
 	}
 
 }

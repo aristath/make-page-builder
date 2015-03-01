@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Make
+ * @package Maera
  */
 
 /**
@@ -8,22 +8,22 @@
  *
  * @since 1.0.0.
  */
-class Make_PB_Base {
+class Maera_PB_Base {
 	/**
-	 * The one instance of Make_PB_Base.
+	 * The one instance of Maera_PB_Base.
 	 *
 	 * @since 1.0.0.
 	 *
-	 * @var   Make_PB_Base
+	 * @var   Maera_PB_Base
 	 */
 	private static $instance;
 
 	/**
-	 * Instantiate or return the one Make_PB_Base instance.
+	 * Instantiate or return the one Maera_PB_Base instance.
 	 *
 	 * @since  1.0.0.
 	 *
-	 * @return Make_PB_Base
+	 * @return Maera_PB_Base
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -38,18 +38,18 @@ class Make_PB_Base {
 	 *
 	 * @since  1.0.0.
 	 *
-	 * @return Make_PB_Base
+	 * @return Maera_PB_Base
 	 */
 	public function __construct() {
 
 		// Add the core sections
-		require Make_PB::path() . '/includes/builder/sections/section-definitions.php';
+		require Maera_PB::path() . '/includes/builder/sections/section-definitions.php';
 
 		// Include the save routines
-		require Make_PB::path() . '/includes/save.php';
+		require Maera_PB::path() . '/includes/save.php';
 
 		// Include the front-end helpers
-		require Make_PB::path() . '/includes/builder/sections/section-front-end-helpers.php';
+		require Maera_PB::path() . '/includes/builder/sections/section-front-end-helpers.php';
 
 		// Set up actions
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 ); // Bias toward top of stack
@@ -71,8 +71,8 @@ class Make_PB_Base {
 		$post_types = get_post_types( '', 'names' );
 		foreach ( $post_types as $post_type ) {
 			add_meta_box(
-				'make_pb-builder',
-				__( 'Page Builder', 'make' ),
+				'maera_pb-builder',
+				__( 'Page Builder', 'maera' ),
 				array( $this, 'display_builder' ),
 				$post_type,
 				'normal',
@@ -90,24 +90,24 @@ class Make_PB_Base {
 	 * @return void
 	 */
 	public function display_builder( $post_local ) {
-		wp_nonce_field( 'save', 'make_pb-builder-nonce' );
+		wp_nonce_field( 'save', 'maera_pb-builder-nonce' );
 
 		// Get the current sections
-		global $make_pb_sections;
-		$make_pb_sections = get_post_meta( $post_local->ID, '_make_pb-sections', true );
-		$make_pb_sections = ( is_array( $make_pb_sections ) ) ? $make_pb_sections : array();
+		global $maera_pb_sections;
+		$maera_pb_sections = get_post_meta( $post_local->ID, '_maera_pb-sections', true );
+		$maera_pb_sections = ( is_array( $maera_pb_sections ) ) ? $maera_pb_sections : array();
 
 		// Load the boilerplate templates
-		Make_PB::get_template_part( 'includes/builder/core/templates/menu' );
-		Make_PB::get_template_part( 'includes/builder/core/templates/stage', 'header' );
+		Maera_PB::get_template_part( 'includes/builder/core/templates/menu' );
+		Maera_PB::get_template_part( 'includes/builder/core/templates/stage', 'header' );
 
-		$section_data        = Make_PB_Helper::get_section_data( $post_local->ID );
-		$registered_sections = Make_PB()->sections->get_sections();
+		$section_data        = Maera_PB_Helper::get_section_data( $post_local->ID );
+		$registered_sections = Maera_PB()->sections->get_sections();
 
 		// Print the current sections
 		foreach ( $section_data as $section ) {
 			/**
-			 * In Make 1.4.0, the blank section was deprecated. Any existing blank sections are converted to 1 column,
+			 * In Maera 1.4.0, the blank section was deprecated. Any existing blank sections are converted to 1 column,
 			 * text sections.
 			 */
 			if ( isset( $section['section-type'] ) && 'blank' === $section['section-type'] && isset( $registered_sections['text'] ) ) {
@@ -167,12 +167,12 @@ class Make_PB_Base {
 			}
 		}
 
-		Make_PB::get_template_part( 'includes/builder/core/templates/stage', 'footer' );
+		Maera_PB::get_template_part( 'includes/builder/core/templates/stage', 'footer' );
 
 		// Add the sort input
-		$section_order = get_post_meta( $post_local->ID, '_make_pb-section-ids', true );
+		$section_order = get_post_meta( $post_local->ID, '_maera_pb-section-ids', true );
 		$section_order = ( ! empty( $section_order ) ) ? implode( ',', $section_order ) : '';
-		echo '<input type="hidden" value="' . esc_attr( $section_order ) . '" name="make_pb-section-order" id="make_pb-section-order" />';
+		echo '<input type="hidden" value="' . esc_attr( $section_order ) . '" name="maera_pb-section-order" id="maera_pb-section-order" />';
 	}
 
 	/**
@@ -186,11 +186,11 @@ class Make_PB_Base {
 	function admin_body_class( $classes ) {
 		global $pagenow;
 
-		if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && make_pb_is_builder_active() ) ) {
-			$classes .= ' make_pb-builder-active';
-			$classes .= ' make-plus-disabled';
+		if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && maera_pb_is_builder_active() ) ) {
+			$classes .= ' maera_pb-builder-active';
+			$classes .= ' maera-plus-disabled';
 		} else {
-			$classes .= ' make_pb-default-active';
+			$classes .= ' maera_pb-default-active';
 		}
 
 		return $classes;
@@ -207,13 +207,13 @@ class Make_PB_Base {
 	 * @return string                     Either return the string or echo it.
 	 */
 	public function add_uploader( $section_name, $image_id = 0, $title = '' ) {
-		$image = Make_PB_Image::get_image_src( $image_id, 'large' );
-		$title = ( ! empty( $title ) ) ? $title : __( 'Set image', 'make' );
+		$image = Maera_PB_Image::get_image_src( $image_id, 'large' );
+		$title = ( ! empty( $title ) ) ? $title : __( 'Set image', 'maera' );
 		ob_start();
 		?>
-		<div class="make_pb-uploader<?php if ( ! empty( $image[0] ) ) : ?> make_pb-has-image-set<?php endif; ?>">
-			<div data-title="<?php echo esc_attr( $title ); ?>" class="make_pb-media-uploader-placeholder make_pb-media-uploader-add"<?php if ( ! empty( $image[0] ) ) : ?> style="background-image: url(<?php echo addcslashes( esc_url_raw( $image[0] ), '"' ); ?>);"<?php endif; ?>></div>
-			<input type="hidden" name="<?php echo esc_attr( $section_name ); ?>[image-id]" value="<?php echo make_pb_sanitize_image_id( $image_id ); ?>" class="make_pb-media-uploader-value" />
+		<div class="maera_pb-uploader<?php if ( ! empty( $image[0] ) ) : ?> maera_pb-has-image-set<?php endif; ?>">
+			<div data-title="<?php echo esc_attr( $title ); ?>" class="maera_pb-media-uploader-placeholder maera_pb-media-uploader-add"<?php if ( ! empty( $image[0] ) ) : ?> style="background-image: url(<?php echo addcslashes( esc_url_raw( $image[0] ), '"' ); ?>);"<?php endif; ?>></div>
+			<input type="hidden" name="<?php echo esc_attr( $section_name ); ?>[image-id]" value="<?php echo maera_pb_sanitize_image_id( $image_id ); ?>" class="maera_pb-media-uploader-value" />
 		</div>
 	<?php
 		$output = ob_get_clean();
@@ -232,16 +232,16 @@ class Make_PB_Base {
 	 * @return void
 	 */
 	public function add_frame( $id, $textarea_name, $content = '', $iframe = true ) {
-		global $make_pb_is_js_template;
-		$iframe_id   = 'make_pb-iframe-' . $id;
-		$textarea_id = 'make_pb-content-' . $id;
+		global $maera_pb_is_js_template;
+		$iframe_id   = 'maera_pb-iframe-' . $id;
+		$textarea_id = 'maera_pb-content-' . $id;
 	?>
 		<?php if ( true === $iframe ) : ?>
-		<div class="make_pb-iframe-wrapper">
-			<div class="make_pb-iframe-overlay">
+		<div class="maera_pb-iframe-wrapper">
+			<div class="maera_pb-iframe-overlay">
 				<a href="#" class="edit-content-link" data-textarea="<?php echo esc_attr( $textarea_id ); ?>" data-iframe="<?php echo esc_attr( $iframe_id ); ?>">
 					<span class="screen-reader-text">
-						<?php _e( 'Edit content', 'make' ); ?>
+						<?php _e( 'Edit content', 'maera' ); ?>
 					</span>
 				</a>
 			</div>
@@ -251,10 +251,10 @@ class Make_PB_Base {
 
 		<textarea id="<?php echo esc_attr( $textarea_id ); ?>" name="<?php echo esc_attr( $textarea_name ); ?>" style="display:none;"><?php echo esc_textarea( $content ); ?></textarea>
 
-		<?php if ( true !== $make_pb_is_js_template && true === $iframe ) : ?>
+		<?php if ( true !== $maera_pb_is_js_template && true === $iframe ) : ?>
 		<script type="text/javascript">
-			var ttfMakeFrames = ttfMakeFrames || [];
-			ttfMakeFrames.push('<?php echo esc_js( $id ); ?>');
+			var ttfMaeraFrames = ttfMaeraFrames || [];
+			ttfMaeraFrames.push('<?php echo esc_js( $id ); ?>');
 		</script>
 		<?php endif;
 	}
@@ -274,20 +274,20 @@ class Make_PB_Base {
 		}
 
 		// Globalize the data to provide access within the template
-		global $make_pb_section_data;
-		$make_pb_section_data = array(
+		global $maera_pb_section_data;
+		$maera_pb_section_data = array(
 			'data'    => $data,
 			'section' => $section,
 		);
 
 		// Include the template
-		Make_PB()->sections->load_template(
-			$make_pb_section_data['section']['builder_template'],
-			$make_pb_section_data['section']['path']
+		Maera_PB()->sections->load_template(
+			$maera_pb_section_data['section']['builder_template'],
+			$maera_pb_section_data['section']['path']
 		);
 
 		// Destroy the variable as a good citizen does
-		unset( $GLOBALS['make_pb_section_data'] );
+		unset( $GLOBALS['maera_pb_section_data'] );
 	}
 
 	/**
@@ -298,12 +298,12 @@ class Make_PB_Base {
 	 * @return void
 	 */
 	public function print_templates() {
-		global $hook_suffix, $typenow, $make_pb_is_js_template;
-		$make_pb_is_js_template = true;
+		global $hook_suffix, $typenow, $maera_pb_is_js_template;
+		$maera_pb_is_js_template = true;
 
 		// Print the templates
-		foreach ( Make_PB()->sections->get_sections() as $section ) : ?>
-			<script type="text/html" id="tmpl-make_pb-<?php echo esc_attr( $section['id'] ); ?>">
+		foreach ( Maera_PB()->sections->get_sections() as $section ) : ?>
+			<script type="text/html" id="tmpl-maera_pb-<?php echo esc_attr( $section['id'] ); ?>">
 			<?php
 			ob_start();
 			$this->load_section( $section, array() );
@@ -313,18 +313,18 @@ class Make_PB_Base {
 		</script>
 		<?php endforeach;
 
-		unset( $GLOBALS['make_pb_is_js_template'] );
+		unset( $GLOBALS['maera_pb_is_js_template'] );
 
 		// Load the overlay for TinyMCE
-		Make_PB::get_template_part( '/includes/builder/core/templates/overlay', 'tinymce' );
+		Maera_PB::get_template_part( '/includes/builder/core/templates/overlay', 'tinymce' );
 
 		// Print the template for removing images
 		?>
-			<script type="text/html" id="tmpl-make_pb-remove-image">
-				<div class="make_pb-remove-current-image">
-					<h3><?php _e( 'Current image', 'make' ); ?></h3>
-					<a href="#" class="make_pb-remove-image-from-modal">
-						<?php _e( 'Remove Current Image', 'make' ); ?>
+			<script type="text/html" id="tmpl-maera_pb-remove-image">
+				<div class="maera_pb-remove-current-image">
+					<h3><?php _e( 'Current image', 'maera' ); ?></h3>
+					<a href="#" class="maera_pb-remove-image-from-modal">
+						<?php _e( 'Remove Current Image', 'maera' ); ?>
 					</a>
 				</div>
 			</script>
@@ -350,7 +350,7 @@ class Make_PB_Base {
 	/**
 	 * Add the media buttons to the text editor.
 	 *
-	 * This is a copy and modification of the core "media_buttons" function. In order to make the media editor work
+	 * This is a copy and modification of the core "media_buttons" function. In order to maera the media editor work
 	 * better for smaller width screens, we need to wrap the button text in a span tag. By doing so, we can hide the
 	 * text in some situations.
 	 *
@@ -395,7 +395,7 @@ class Make_PB_Base {
 	 * @return array                 The combined data.
 	 */
 	public function get_section_data( $post_id ) {
-		return Make_PB_Helper::get_section_data( $post_id );
+		return Maera_PB_Helper::get_section_data( $post_id );
 	}
 
 	/**
@@ -411,24 +411,24 @@ class Make_PB_Base {
 	 * @return array            The converted array.
 	 */
 	function create_array_from_meta_keys( $arr ) {
-		return Make_PB_Helper::create_array_from_meta_keys( $arr );
+		return Maera_PB_Helper::create_array_from_meta_keys( $arr );
 	}
 
 }
 
 /**
- * Instantiate or return the one Make_PB_Base instance.
+ * Instantiate or return the one Maera_PB_Base instance.
  *
  * @since  1.0.0.
  *
- * @return Make_PB_Base
+ * @return Maera_PB_Base
  */
-function make_pb_get_builder_base() {
-	return Make_PB_Base::instance();
+function maera_pb_get_builder_base() {
+	return Maera_PB_Base::instance();
 }
 
 
 // Add the base immediately
 if ( is_admin() ) {
-	make_pb_get_builder_base();
+	maera_pb_get_builder_base();
 }
